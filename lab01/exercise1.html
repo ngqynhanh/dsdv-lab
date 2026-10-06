@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 1</title>
+</head>
+<body>
+    <h3 style="color: blue;">Name: Nguyen Quynh Anh</h3>
+    <svg id="initials" width="250" height="150"> 
+        <!-- LETTER N -->
+        <line x1="35" y1="5" x2="35" y2="100" stroke="#142528" stroke-width="8" stroke-linecap="round" />
+        <line x1="35" y1="5" x2="75" y2="100" stroke="#142528" stroke-width="8" stroke-linecap="round" />
+        <line x1="75" y1="5" x2="75" y2="100" stroke="#142528" stroke-width="8" stroke-linecap="round" />
+
+        <!-- LETTER Q -->
+        <polygon points="105,5 145,5 145,100 105,100" fill="none" stroke="#142528" stroke-width="8" stroke-linecap="round" stroke-linejoin="miter" />
+        <line x1="130" y1="85" x2="150" y2="105" stroke="#142528" stroke-width="8" stroke-linecap="round" />
+
+        <!-- LETTER A -->
+        <polyline points="175,100 175,5 215,5 215,100" fill="none" stroke="#142528" stroke-width="8" stroke-linecap="round" stroke-linejoin="miter" />
+        <line x1="175" y1="60" x2="215" y2="60" stroke="#142528" stroke-width="8" stroke-linecap="round" />
+    </svg>
+    <h4>Student ID: ITCSIU24005</h4>
+    <h4>Course title: Data Science and Data Visualization</h4>
+    <h4 style="font-style: italic; font-weight: normal">Lab 1 - Introduction to HTML, CSS, SVG, and Javascript</h4>
+    <p>This is all my own work. I did not copy the code from any other source.</p>
+
+    <svg id="histogram" width="300" height="250" style="border: 1px solid #ccc;">
+    </svg>
+
+    <script>
+    // Function to add an element to the SVG
+        function addEltToSVG(svg, name, atts)
+        {
+            var elt = document.createElementNS("http://www.w3.org/2000/svg", name);
+            if (atts === undefined) {
+                atts = {};
+            }
+            for (var k in atts) {
+                elt.setAttribute(k, atts[k]);
+            }
+            svg.appendChild(elt);
+            return elt;
+        }
+
+        // Function to draw a histogram
+        function drawHistogram(svg, data) {
+            var binCounts = [0, 0, 0, 0, 0, 0];
+            var binLabels = ["A-D", "E-H", "I-L", "M-P", "Q-U", "V-Z"];
+
+            var upperStr = data.toUpperCase();
+            for (var i = 0; i < upperStr.length; i++) {
+                var char = upperStr[i];
+                if (char >= 'A' && char <= 'D') {
+                    binCounts[0]++;
+                } else if (char >= 'E' && char <= 'H') {
+                    binCounts[1]++;
+                } else if (char >= 'I' && char <= 'L') {
+                    binCounts[2]++;
+                } else if (char >= 'M' && char <= 'P') {
+                    binCounts[3]++;
+                } else if (char >= 'Q' && char <= 'U') {
+                    binCounts[4]++;
+                } else if (char >= 'V' && char <= 'Z') {
+                    binCounts[5]++;
+                }
+            }
+
+            var svgHeight = 200; 
+            var barWidth = 50;
+
+            // draw the bars
+            for (var i = 0; i < binCounts.length; i++) {
+                var count = binCounts[i];
+                var barHeight = count * 50;
+                addEltToSVG(svg, "rect", {
+                    "x": i * (barWidth),
+                    "y": svgHeight - barHeight,
+                    "width": barWidth,
+                    "height": barHeight,
+                    "fill": "steelblue",    
+                    "stroke": "black",    
+                    "stroke-width": 1
+                });
+            }
+
+            for (var i = 0; i < binLabels.length; i++) {
+                addEltToSVG(svg, "text", {
+                    "x": i * barWidth + barWidth / 2,
+                    "y": svgHeight +20,
+                    "text-anchor": "middle",
+                    "font-size": "12px",
+                    "fill": "black"
+                }).textContent = binLabels[i];
+            }
+        }
+
+        var svgElement = document.getElementById("histogram");
+            drawHistogram(svgElement, "Quynh Anh");
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT096IU - Lab 02 Homework</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 24px; }
+        section { margin-bottom: 40px; }
+        .controls { margin-bottom: 12px; }
+        button { padding: 6px 14px; font-size: 13px; cursor: pointer; }
+    </style>
+    <script src="script_hw.js" defer></script>
+</head>
+<body>
+    <h1>Student Performance Dashboard</h1>
+
+    <section>
+        <h2>Part A: Dynamic Bar Chart (H1 & H2)</h2>
+        <div class="controls">
+            <button id="btn-randomize">Regenerate Random Data</button>
+            <button id="btn-small">Load Small Dataset (7 items)</button>
+            <button id="btn-large">Load Large Dataset (40 items)</button>
+        </div>
+        <svg id="bar-chart"></svg>
+    </section>
+
+    <section>
+        <h2>Part B: Midterm vs Final Exam Scatterplot (H3)</h2>
+        <svg id="scatterplot"></svg>
+    </section>
+
+    <section>
+        <h2>Part C: Histogram</h2>
+        <svg id="histogram"></svg>
+    </section>
+</body>
+</html>

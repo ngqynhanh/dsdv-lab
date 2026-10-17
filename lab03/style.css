@@ -1,0 +1,22 @@
+body { font-family: Times New Roman, serif; margin: 24px; color: #222; }
+main { max-width: 900px; }
+h1 { font-size: 28px; }
+h2 { font-size: 20px; }
+p { line-height: 1.5; }
+.chart-layout { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+#scatterplot { display: block; flex: 0 0 450px; }
+aside { max-width: 350px; }
+#density-legend { list-style: none; padding: 0; }
+#density-legend li { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+.swatch { width: 14px; height: 14px; border: 1px solid #555; }
+.axis text { font-size: 11px; }
+.axis-title { font-size: 12px; }
+.grid line { stroke: #ddd; }
+.grid path { display: none; }
+.source, .small { font-size: 13px; }
+.error { color: #b00020; }
+#province-tooltip { position: fixed; z-index: 10; pointer-events: none; white-space: pre-line; background: white; color: #222; border: 1px solid #555; padding: 8px 10px; font: 14px/1.5 Arial, sans-serif; max-width: calc(100vw - 32px); }
+
+#legend { list-style: none; padding: 0; }
+#legend li { margin: 8px 0; }
+

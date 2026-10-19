@@ -6,7 +6,6 @@
   <title>Lab 3</title>
   <link rel="stylesheet" href="style.css">
   <script src="d3.v7.min.js" defer></script>
-  <script src="homework-data.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -15,7 +14,7 @@
       <p class="eyebrow">International University · Data Science and Data Visualization</p>
       <h1>Lab 3</h1>
       <h2>Lab 3 — D3.js: Scales, Axes, and Visual Encoding</h2>
-      <p>Pham Nhu Nguyen Trung — ITCSIU24091<br>Nguyen Quynh Anh — ITCSIU24005</p>
+      <p>Phạm Như Nguyên Trung — ITCSIU24091<br>Nguyễn Quỳnh Anh — ITCSIU24005</p>
       <p class="declaration">This is all my own work. I did not copy the code from any other source.</p>
     </header>
     <section class="card" aria-labelledby="chart-title">
@@ -55,16 +54,17 @@
       <p><a href="index.html">Source CSV</a> · <a href="index.html?test=1">Small test dataset</a> · <a href="index.html?test=1&amp;bug=area">Reproduce Bug C</a></p>
       <p id="verification-summary"></p>
       <ul id="verification-results"></ul>
-      <p>Step-by-step documentation: <a href="SECTIONS-9-10.md">SECTIONS-9-10.md</a></p>
-      <h2>AI assistance and group verification</h2>
-      <p>AI helped write this separate example, explain the highlighting logic and run tests.
-      <section>
-      <h2>Independent Group Verification</h2>
-
+      <p>Scale choices, density rule and verification note: <a href="README.md">README.md</a></p>
+      <h3>Homework test cases (source CSV)</h3>
+      <ul id="homework-tests"></ul>
+    </section>
+    <section aria-labelledby="ai-title">
+      <h2 id="ai-title">AI assistance and group verification</h2>
+      <p>AI helped write the code, explain the highlighting logic and run tests. The group independently verified the results below against the CSV and the browser.</p>
       <ul style="list-style: none; padding-left: 0;">
         <li>
           <label><input type="checkbox" checked disabled>
-            Opened homework.html directly and confirmed that 63 circles were loaded.
+            Opened index.html over a local web server and confirmed that 63 circles were loaded.
           </label>
         </li>
         <li>
@@ -97,7 +97,6 @@
           </label>
         </li>
       </ul>
-    </section>
     </section>
   </main>
 </body>

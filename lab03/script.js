@@ -17,9 +17,7 @@ if (typeof d3 === "undefined") {
 } else {
 	const csvUrl = testMode
 		? "data:text/csv;charset=utf-8," + encodeURIComponent(TEST_CSV)
-		: location.protocol === "file:"
-			? "data:text/csv;charset=utf-8," + encodeURIComponent(window.PROVINCE_CSV)
-			: CSV_URL
+		: CSV_URL
 	d3.csv(csvUrl).then(buildChart).catch(showError)
 }
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 4</title>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Data Science and Data Visualization</h1>
+    <h2>Lab 4 — D3.js: Transition, Update, Enter &amp; Exit</h2>
+    <p class="authors">Group XX — Student A (ID: ITDSIU00000000) · Student B (ID: ITDSIU00000000)</p>
+    <p class="integrity">“This is all my own work. I did not copy the code from any other source.”
+      <em>(AI-permitted lab: AI-assisted parts are identified in NOTES.md.)</em></p>
+  </header>
+
+  <section class="controls" aria-label="Chart controls">
+    <button id="add-btn" type="button">Add province</button>
+    <button id="remove-btn" type="button">Remove province</button>
+    <button id="undo-btn" type="button">Undo remove</button>
+    <label for="sort-select">Sort:</label>
+    <select id="sort-select">
+      <option value="source">Original source order</option>
+      <option value="name">Province name A–Z</option>
+      <option value="grdp-desc">GRDP high–low</option>
+      <option value="grdp-asc">GRDP low–high</option>
+    </select>
+    <span id="count" aria-live="polite"></span>
+  </section>
+  <p id="message" role="status" aria-live="polite"></p>
+
+  <svg id="chart" role="img" aria-label="Horizontal bar chart of provincial GRDP"></svg>
+
+  <footer>
+    <p id="source-note">
+      Source: <a href="https://tungth.github.io/data/vn-provinces-data.csv">https://tungth.github.io/data/vn-provinces-data.csv</a>
+      (course dataset). Plotted column: <code>GRDP-VND</code> (decimal comma parsed). The file does not state the
+      unit or reference year; see NOTES.md. Not current administrative boundaries or current-year statistics.
+    </p>
+    <p id="load-note"></p>
+  </footer>
+
+  <script src="chart.js"></script>
+</body>
+</html>

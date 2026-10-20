@@ -1,0 +1,17 @@
+body { font: 15px/1.4 Arial, sans-serif; margin: 24px; color: #203650; max-width: 1000px; }
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 17px; margin: 4px 0 8px; font-weight: normal; }
+.authors, .integrity { margin: 2px 0; font-size: 13px; }
+.controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 14px 0 4px; }
+button, select { padding: 7px 14px; font: inherit; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+#count { margin-left: 10px; font-weight: bold; }
+#message { min-height: 1.4em; margin: 4px 0; color: #9c4a00; }
+svg { background: #f5f8fc; border: 1px solid #c9d7e6; display: block; }
+.bar { fill: #4F81BD; }
+.bar.moving { fill: #F79646; }
+.name-label { font-size: 12px; fill: #263e57; text-anchor: end; dominant-baseline: middle; }
+.value-label { font-size: 12px; fill: #263e57; dominant-baseline: middle; }
+.axis-title { font-size: 13px; fill: #263e57; text-anchor: middle; }
+footer { font-size: 12px; color: #4a5d73; max-width: 900px; }
+#load-note { color: #9c4a00; }

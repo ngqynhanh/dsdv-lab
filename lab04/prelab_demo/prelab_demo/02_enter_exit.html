@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>02 - Enter and Exit</title>
+		<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+		<style>
+			body {
+				font:
+					16px Arial,
+					sans-serif;
+				margin: 32px;
+				color: #203650;
+			}
+			button {
+				padding: 9px 15px;
+			}
+			svg {
+				background: #f5f8fc;
+				border: 1px solid #c9d7e6;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Demo 2: Enter + Update + Exit</h2>
+		<p>
+			Observe what happens to DOM elements when the dataset grows and shrinks.
+		</p>
+		<button id="add">Add item</button> <button id="remove">Remove item</button
+		><span id="status"></span>
+		<svg id="chart" width="700" height="320"></svg>
+		<script>
+			const pool = [
+				{ id: "apple", value: 95 },
+				{ id: "banana", value: 130 },
+				{ id: "cherry", value: 70 },
+				{ id: "date", value: 165 },
+				{ id: "elderberry", value: 105 },
+			]
+			let active = pool.slice(0, 3)
+			const svg = d3
+				.select("#chart")
+				.append("g")
+				.attr("transform", "translate(35,25)")
+			function render() {
+				const bars = svg.selectAll("rect.item").data(active, (d) => d.id)
+				bars.join(
+					(enter) =>
+						enter
+							.append("rect")
+							.attr("class", "item")
+							.attr("x", 0)
+							.attr("y", (d, i) => i * 52)
+							.attr("width", 0)
+							.attr("height", 32)
+							.attr("fill", "#9BBB59")
+							.call((s) =>
+								s
+									.transition()
+									.duration(550)
+									.attr("width", (d) => d.value * 3),
+							),
+					(update) =>
+						update.call((s) =>
+							s
+								.transition()
+								.duration(550)
+								.attr("y", (d, i) => i * 52)
+								.attr("width", (d) => d.value * 3),
+						),
+					(exit) =>
+						exit.call((s) =>
+							s
+								.transition()
+								.duration(550)
+								.attr("width", 0)
+								.style("opacity", 0)
+								.remove(),
+						),
+				)
+				svg
+					.selectAll("text.label")
+					.data(active, (d) => d.id)
+					.join(
+						(enter) =>
+							enter
+								.append("text")
+								.attr("class", "label")
+								.attr("x", 5)
+								.attr("y", (d, i) => i * 52 + 22)
+								.attr("fill", "#16263d")
+								.text((d) => d.id),
+						(update) => update.attr("y", (d, i) => i * 52 + 22),
+						(exit) => exit.remove(),
+					)
+				d3.select("#status").text(
+					`  Data rows now: ${active.length} (observe rect count after animation)`,
+				)
+			}
+			d3.select("#add").on("click", () => {
+				if (active.length < pool.length) {
+					active = [...active, pool[active.length]]
+					render()
+				}
+			})
+			d3.select("#remove").on("click", () => {
+				if (active.length > 0) {
+					active = active.slice(0, -1)
+					render()
+				}
+			})
+			render()
+		</script>
+	</body>
+</html>

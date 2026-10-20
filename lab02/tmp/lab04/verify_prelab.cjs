@@ -1,0 +1,21 @@
+const {chromium}=require('C:/Users/ASUS/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {pathToFileURL}=require('url');const assert=require('assert/strict');const fs=require('fs');const path=require('path');
+const http=require('http');
+const server=http.createServer((req,res)=>{try{const file=path.join(path.resolve('../lab04/lab04-d3'),req.url==='/'?'index.html':decodeURIComponent(req.url));res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.css')?'text/css':file.endsWith('.csv')?'text/csv':'text/html');res.end(fs.readFileSync(file));}catch{res.statusCode=404;res.end();}});
+(async()=>{await new Promise(r=>server.listen(8765,'127.0.0.1',r));const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));const root=path.resolve('../lab04/lab04-d3');
+const ready=()=>page.waitForFunction(()=>typeof busy!=='undefined'&&!busy&&active.length>0);
+const click=async id=>{await page.click('#'+id);await ready()};
+const ids=()=>page.evaluate(()=>active.map(d=>d.id));
+await page.goto('http://127.0.0.1:8765/');await ready();assert.equal(await page.locator('rect.bar').count(),20);const initial=await ids();
+await click('add');assert.equal(await page.locator('rect.bar').count(),21);await click('remove');assert.deepEqual(await ids(),initial);
+await page.evaluate(()=>window.nodes=new Map([...document.querySelectorAll('rect.bar')].map(n=>[n.dataset.id,n])));
+await page.selectOption('#sort-select','grdp');await ready();assert(await page.evaluate(()=>[...document.querySelectorAll('rect.bar')].every(n=>nodes.get(n.dataset.id)===n)));assert.deepEqual(await ids(),initial);
+await click('remove');await click('undo');assert.deepEqual(await ids(),initial);assert(await page.isDisabled('#undo'));
+await click('remove');await click('add');assert.deepEqual(await ids(),initial);assert(await page.isDisabled('#undo'));
+await page.evaluate(()=>{document.querySelector('#add').click();document.querySelector('#add').click()});await ready();assert.equal(await page.locator('rect.bar').count(),21);await click('remove');
+// Fast boundary pass uses the same file with only duration reduced.
+await page.route('**/chart.js',r=>r.fulfill({contentType:'application/javascript',body:fs.readFileSync(path.join(root,'chart.js'),'utf8').replace('const duration = 700;','const duration = 1;')}));
+await page.reload();await ready();for(let i=0;i<70;i++){await page.evaluate(()=>document.querySelector('#add').click());await ready()};assert.equal(await page.locator('rect.bar').count(),63);assert(await page.isDisabled('#add'));
+for(let i=0;i<70;i++){await page.evaluate(()=>document.querySelector('#remove').click());await ready()};assert.equal(await page.locator('rect.bar').count(),1);assert(await page.isDisabled('#remove'));
+assert(await page.evaluate(()=>{const r=document.querySelector('rect.bar');return x.domain()[0]===0&&Math.abs(+r.getAttribute('width')-x(active[0].value))<.001&&Math.abs(+document.querySelector('.value-label').getAttribute('x')-x(active[0].value)-7)<.001}));assert.deepEqual(errors,[]);
+console.log('PASS: HTTP CSV, join pattern, 20->21->20, sort preserves DOM identity, Undo, Remove/Add, rapid clicks, 1-63 boundaries, scale and label positions.');await browser.close();server.close()})().catch(e=>{console.error(e);server.close();process.exit(1)});

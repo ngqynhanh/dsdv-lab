@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Lab 4</title>
+		<link rel="stylesheet" href="style.css" />
+		<script defer src="d3.v7.min.js"></script>
+		<script defer src="chart.js"></script>
+	</head>
+	<body>
+		<main>
+			<header>
+				<p class="eyebrow">
+					International University · Data Science and Data Visualization
+				</p>
+				<h1>Lab 4 — D3.js: Transition, Update, Enter &amp; Exit</h1>
+				<p>
+					Phạm Như Nguyên Trung — ITCSIU24091<br />Nguyễn Quỳnh Anh —
+					ITCSIU24005
+				</p>
+				<p class="declaration">
+					This is all my own work. I did not copy the code from any other
+					source.
+				</p>
+				<p class="small">
+					Có sử dụng AI hỗ trợ triển khai và kiểm thử; xem
+					<a href="NOTES.md">NOTES.md</a>. Nhóm cần đọc, hiểu và tự chịu trách
+					nhiệm về bài nộp.
+				</p>
+			</header>
+			<section class="card">
+				<div class="heading">
+					<div>
+						<p class="eyebrow">Dữ liệu tỉnh/thành Việt Nam</p>
+						<h2>Chỉ số GRDP trong dữ liệu thực hành</h2>
+					</div>
+					<span id="count">Đang tải…</span>
+				</div>
+				<p class="small">
+					Thêm theo thứ tự nguồn; xóa tỉnh được thêm gần nhất, dù biểu đồ đang
+					sắp xếp.
+				</p>
+				<div class="controls">
+					<button id="add" disabled>+ Add province</button>
+					<button id="remove" disabled>− Remove province</button>
+					<button id="undo" disabled>↶ Undo Remove</button>
+					<label for="sort-select">Sắp xếp</label>
+					<select id="sort-select" disabled>
+						<option value="source">Thứ tự nguồn</option>
+						<option value="name">Tên tỉnh A–Z</option>
+						<option value="grdp">GRDP cao–thấp</option>
+					</select>
+				</div>
+				<p id="status" role="status" aria-live="polite">Đang đọc dữ liệu…</p>
+				<div class="chart-scroll">
+					<svg
+						id="chart"
+						width="1040"
+						role="img"
+						aria-labelledby="chart-title chart-desc"
+					>
+						<title id="chart-title">Biểu đồ thanh ngang GRDP</title>
+						<desc id="chart-desc">
+							Chiều dài thanh thể hiện GRDP-VND với trục bắt đầu từ 0. Nhãn bên
+							phải hiển thị giá trị chính xác. Thanh màu cam trong khi chuyển
+							động.
+						</desc>
+					</svg>
+				</div>
+				<p class="small">
+					Trục dùng trường <strong>GRDP-VND</strong>. CSV không ghi đơn vị chi
+					tiết hoặc năm tham chiếu, nên không khẳng định đây là tổng GRDP hay
+					GRDP/người. Không coi các tỉnh/thành và giá trị này là dữ liệu hiện
+					hành.
+				</p>
+				<p class="small">
+					Nguồn:
+					<a href="https://tungth.github.io/data/vn-provinces-data.csv"
+						>tungth.github.io/data/vn-provinces-data.csv</a
+					>. Bản CSV gốc được lưu kèm để chạy offline; tải ngày 20/10/2026.
+				</p>
+			</section>
+		</main>
+	</body>
+</html>

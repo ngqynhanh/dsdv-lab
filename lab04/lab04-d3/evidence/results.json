@@ -1,0 +1,12 @@
+[
+  "V1 PASS: 20 unique bars, 20 province labels, 20 numeric labels.",
+  "V2 PASS: 20 -> 21 -> 20; initial membership restored; exiting DOM node removed.",
+  "V3 PASS: descending sort preserves the same DOM nodes and membership, changes visual order, no duplicates.",
+  "ADAPT PASS: Remove->Undo, Remove->Undo->Undo, Sort->Remove->Undo; prior membership positions restored and second Undo disabled.",
+  "Rapid clicks PASS: one action accepted; subsequent actions ignored while transition is busy.",
+  "V4 PASS: upper bound 63, lower bound 1; repeated out-of-range actions have no effect.",
+  "V5 PASS: domain [0,160] -> [0,35]; single bar width 765.069 matches value/domain*780; label 34.33.",
+  "D4 observed: label x=7, expected bar width + 7=174.35875; numeric labels misplaced inside bars.",
+  "D4 fix/retest PASS: restored value-label transition; all label x positions equal bar width + 7.",
+  "No browser JavaScript errors."
+]

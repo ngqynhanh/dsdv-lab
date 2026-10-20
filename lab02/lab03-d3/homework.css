@@ -1,0 +1,12 @@
+body { font-family: "Times New Roman", serif; margin: 24px; max-width: 950px; }
+p { line-height: 1.5; }
+h2 { font-size: 20px; }
+select { padding: 4px; }
+.layout { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+svg { flex: 0 0 450px; }
+aside { max-width: 340px; }
+#legend { list-style: none; padding: 0; }
+#legend li { margin: 8px 0; }
+.swatch { display: inline-block; width: 14px; height: 14px; margin-right: 8px; border: 1px solid #555; }
+.axis-title { font-size: 12px; }
+.error { color: #b00020; }

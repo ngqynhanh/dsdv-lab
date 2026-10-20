@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>01 - Update values</title>
+		<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+		<style>
+			body {
+				font:
+					16px Arial,
+					sans-serif;
+				margin: 32px;
+				color: #203650;
+			}
+			button {
+				padding: 9px 15px;
+			}
+			svg {
+				background: #f5f8fc;
+				border: 1px solid #c9d7e6;
+			}
+			.axis {
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Demo 1: Update existing bars</h2>
+		<p>Predict: Will the number of rectangles change after clicking?</p>
+		<button id="change">Change values</button> <button id="reset">Reset</button>
+		<p id="status"></p>
+		<svg id="chart" width="690" height="260"></svg>
+		<script>
+			const original = [
+				{ id: "A", value: 30 },
+				{ id: "B", value: 55 },
+				{ id: "C", value: 80 },
+			]
+			const changed = [
+				{ id: "A", value: 85 },
+				{ id: "B", value: 20 },
+				{ id: "C", value: 48 },
+			]
+			const svg = d3.select("#chart")
+			const x = d3.scaleLinear().domain([0, 100]).range([0, 480])
+			const y = d3
+				.scaleBand()
+				.domain(original.map((d) => d.id))
+				.range([0, 160])
+				.padding(0.2)
+			const plot = svg.append("g").attr("transform", "translate(65,30)")
+			plot
+				.append("g")
+				.attr("class", "x-axis")
+				.attr("transform", "translate(0,160)")
+				.call(d3.axisBottom(x))
+			plot.append("g").attr("class", "y-axis").call(d3.axisLeft(y))
+			function update(data) {
+				plot
+					.selectAll("rect.bar")
+					.data(data, (d) => d.id)
+					.join("rect")
+					.attr("class", "bar")
+					.attr("x", 0)
+					.attr("y", (d) => y(d.id))
+					.attr("height", y.bandwidth())
+					.attr("fill", "#4F81BD")
+					.transition()
+					.duration(700)
+					.attr("width", (d) => x(d.value))
+				d3.select("#status").text(
+					`Records: ${data.length} | Rectangles: ${plot.selectAll("rect.bar").size()}`,
+				)
+			}
+			d3.select("#change").on("click", () => update(changed))
+			d3.select("#reset").on("click", () => update(original))
+			update(original)
+		</script>
+	</body>
+</html>

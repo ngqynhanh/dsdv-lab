@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>03 - Sort with stable keys</title>
+		<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+		<style>
+			body {
+				font:
+					16px Arial,
+					sans-serif;
+				margin: 32px;
+				color: #203650;
+			}
+			button,
+			select {
+				padding: 9px 15px;
+			}
+			svg {
+				background: #f5f8fc;
+				border: 1px solid #c9d7e6;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Demo 3: Stable keys preserve identity when sorting</h2>
+		<p>Predict: Do bars move, or do they disappear and reappear?</p>
+		<label for="sort">Sort:</label>
+		<select id="sort">
+			<option value="name">Name (A–Z)</option>
+			<option value="value">Value (high–low)</option>
+		</select>
+		<svg id="chart" width="760" height="320"></svg>
+		<p id="status"></p>
+		<script>
+			const data = [
+				{ id: "pear", value: 42 },
+				{ id: "mango", value: 82 },
+				{ id: "kiwi", value: 58 },
+				{ id: "plum", value: 66 },
+			]
+			const g = d3
+				.select("#chart")
+				.append("g")
+				.attr("transform", "translate(110,25)")
+			const x = d3.scaleLinear().domain([0, 100]).range([0, 460])
+			const y = d3.scaleBand().range([0, 250]).padding(0.16)
+			function render(sortMode) {
+				const sorted = [...data].sort(
+					sortMode === "name"
+						? (a, b) => d3.ascending(a.id, b.id)
+						: (a, b) => d3.descending(a.value, b.value),
+				)
+				y.domain(sorted.map((d) => d.id))
+				g.selectAll("rect.bar")
+					.data(sorted, (d) => d.id)
+					.join(
+						(enter) =>
+							enter
+								.append("rect")
+								.attr("class", "bar")
+								.attr("fill", "#4F81BD")
+								.attr("height", y.bandwidth())
+								.attr("x", 0)
+								.attr("width", (d) => x(d.value))
+								.attr("y", (d) => y(d.id)),
+						(update) => update,
+						(exit) => exit.remove(),
+					)
+					.transition()
+					.duration(750)
+					.attr("y", (d) => y(d.id))
+					.on("start", function () {
+						d3.select(this).attr("fill", "#F79646")
+					})
+					.on("end", function () {
+						d3.select(this).attr("fill", "#4F81BD")
+					})
+				g.selectAll("text.name")
+					.data(sorted, (d) => d.id)
+					.join("text")
+					.attr("class", "name")
+					.attr("text-anchor", "end")
+					.attr("x", -10)
+					.attr("fill", "#263e57")
+					.text((d) => d.id)
+					.transition()
+					.duration(750)
+					.attr("y", (d) => y(d.id) + y.bandwidth() / 2 + 5)
+				d3.select("#status").text(
+					`Stable keys: ${sorted.map((d) => d.id).join(", ")}`,
+				)
+			}
+			d3.select("#sort").on("change", function () {
+				render(this.value)
+			})
+			render("name")
+		</script>
+	</body>
+</html>

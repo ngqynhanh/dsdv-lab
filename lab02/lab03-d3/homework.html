@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 3 — Density highlighting example</title>
+  <link rel="stylesheet" href="homework.css">
+  <script src="d3.v7.min.js" defer></script>
+  <script src="homework-data.js" defer></script>
+  <script src="homework.js" defer></script>
+</head>
+<body>
+  <h1>Lab 3 — Density highlighting</h1>
+  <p><a href="index.html">Back to the original Lab 3 page</a></p>
+  <p>Data Science and Data Visualization</p>
+  <p>Pham Nhu Nguyen Trung — ITCSIU24091<br>Nguyen Quynh Anh — ITCSIU24005</p>
+  <p>Learning example for Section 14. Select a density band to highlight matching provinces.</p>
+  <label for="density-category">Population density (people/km²):</label>
+  <select id="density-category" disabled></select>
+  <p id="status" role="status">Loading data…</p>
+  <div class="layout">
+    <svg id="chart" width="450" height="900" role="img" aria-labelledby="chart-title chart-desc">
+      <title id="chart-title">Population and GRDP per person by province</title>
+      <desc id="chart-desc">Population increases rightward and GRDP increases upward. Circle area represents land area and color represents density. A selected density band is emphasized with a dark outline; other marks are faded.</desc>
+    </svg>
+    <aside>
+      <h2>Density legend</h2>
+      <ul id="legend"></ul>
+      <p>Fixed design thresholds: 100, 500 and 1,000 people/km². Exact boundary values enter the higher band.</p>
+      <p>Highlighted circles have a dark outline. Other circles remain visible but faded. Selecting “All provinces” restores the overview.</p>
+      <h2>Limitation</h2>
+      <p>Overlapping circles can still conceal provinces, especially where many selected provinces cluster. Fading other categories helps but does not separate overlapping marks.</p>
+    </aside>
+  </div>
+  <p>Source: <a href="https://tungth.github.io/data/vn-provinces-data.csv">supplied province CSV</a>. Population: thousand people; GRDP: million VND/person/year; area: km²; density: people/km². Source values are preserved.</p>
+  <h2>AI assistance and group verification</h2>
+  <p>AI helped write this separate example, explain the highlighting logic and run tests. Independent group verification has not yet been recorded. Follow the checklist in <a href="HOMEWORK-DENSITY.md">HOMEWORK-DENSITY.md</a> and record what your group actually checked.</p>
+</body>
+</html>

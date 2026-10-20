@@ -1,0 +1,34 @@
+const {chromium} = require('C:/Users/ASUS/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs = require('fs'), http = require('http'), path = require('path'), assert = require('assert/strict');
+const root=path.resolve('lab04-d3');
+const server=http.createServer((req,res)=>{const file=path.join(root,decodeURIComponent(req.url.split('?')[0])==='/'?'index.html':decodeURIComponent(req.url.split('?')[0])); try{res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.css')?'text/css':file.endsWith('.csv')?'text/csv':'text/html');res.end(fs.readFileSync(file));}catch{res.statusCode=404;res.end();}});
+(async()=>{
+ await new Promise(r=>server.listen(8764,'127.0.0.1',r));
+ const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+ const page=await browser.newPage({viewport:{width:1220,height:1100}}); const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const observations=[];
+ const snap=()=>page.evaluate(()=>lab4.snapshot());
+ const act=(a,v)=>page.evaluate(([a,v])=>lab4.act(a,v),[a,v]);
+ const inspect=()=>page.evaluate(()=>{const s=lab4.snapshot();const rows=[...document.querySelectorAll('g.row')];return {count:rows.length,unique:new Set(rows.map(r=>r.dataset.id)).size,names:rows.map(r=>r.querySelector('.province-label').textContent),labels:rows.map(r=>r.querySelector('.value-label').textContent),widths:rows.map(r=>+r.querySelector('.bar').getAttribute('width')),positions:rows.map(r=>r.getAttribute('transform')),highlight:document.querySelectorAll('.changing').length};});
+ await page.goto('http://127.0.0.1:8764');await page.waitForFunction(()=>window.lab4&&!lab4.snapshot().busy&&lab4.snapshot().active.length===20);
+ const initial=(await snap()).active.map(d=>d.id);let dom=await inspect();assert.equal(dom.count,20);assert.equal(dom.unique,20);assert.equal(dom.labels.length,20); observations.push('V1 PASS: 20 unique bars, 20 province labels, 20 numeric labels.');
+ await page.evaluate(()=>window.originalNodes=new Map([...document.querySelectorAll('g.row')].map(n=>[n.dataset.id,n])));
+ await act('add');assert.equal((await inspect()).count,21);await act('remove');assert.deepEqual((await snap()).active.map(d=>d.id),initial);assert.equal((await inspect()).count,20); observations.push('V2 PASS: 20 -> 21 -> 20; initial membership restored; exiting DOM node removed.');
+ await act('sort','grdp');assert(await page.evaluate(()=>[...document.querySelectorAll('g.row')].every(n=>originalNodes.get(n.dataset.id)===n)));let s=await snap();assert.deepEqual(s.active.map(d=>d.id),initial);assert(s.visible.every((d,i,a)=>!i||a[i-1].value>=d.value));observations.push('V3 PASS: descending sort preserves the same DOM nodes and membership, changes visual order, no duplicates.');
+ await act('sort','name');s=await snap();assert(s.visible.every((d,i,a)=>!i||a[i-1].name.localeCompare(d.name,'vi')<=0));
+ for(const sorted of ['source','grdp']){await act('sort',sorted);const before=(await snap()).active;await act('remove');assert.equal((await snap()).undo,before.at(-1).id);await act('undo');assert.deepEqual((await snap()).active,before);await act('undo');assert.deepEqual((await snap()).active,before);assert(await page.locator('#undo').isDisabled());}observations.push('ADAPT PASS: Remove->Undo, Remove->Undo->Undo, Sort->Remove->Undo; prior membership positions restored and second Undo disabled.');
+ await page.evaluate(()=>Promise.all([lab4.act('add'),lab4.act('add'),lab4.act('remove')]));assert.equal((await snap()).active.length,21);await act('remove');observations.push('Rapid clicks PASS: one action accepted; subsequent actions ignored while transition is busy.');
+ await act('sort','source');await page.screenshot({path:'tmp/lab04/chart.png',fullPage:true});
+ // Speed up only the boundary test pass; all tests above use the shipped 700 ms.
+ await page.route('**/chart.js',async route=>route.fulfill({contentType:'application/javascript',body:fs.readFileSync(path.join(root,'chart.js'),'utf8').replace('const DURATION = 700;','const DURATION = 1;')}));
+ await page.reload();await page.waitForFunction(()=>window.lab4&&!lab4.snapshot().busy&&lab4.snapshot().active.length===20);
+ for(let i=0;i<70;i++)await act('add');s=await snap();assert.equal(s.active.length,s.allRecords.length);assert(await page.locator('#add').isDisabled());assert.equal((await inspect()).unique,s.allRecords.length);
+ const fullDomain=s.domain;for(let i=0;i<70;i++)await act('remove');s=await snap();assert.equal(s.active.length,1);assert(await page.locator('#remove').isDisabled());assert.equal((await inspect()).count,1);observations.push(`V4 PASS: upper bound ${s.allRecords.length}, lower bound 1; repeated out-of-range actions have no effect.`);
+ assert.notDeepEqual(s.domain,fullDomain);assert.equal(s.domain[0],0);dom=await inspect();assert(Math.abs(dom.widths[0]-s.visible[0].value/s.domain[1]*780)<.001);assert.equal(dom.labels[0],s.visible[0].value.toFixed(2));observations.push(`V5 PASS: domain ${JSON.stringify(fullDomain)} -> ${JSON.stringify(s.domain)}; single bar width ${dom.widths[0].toFixed(3)} matches value/domain*780; label ${dom.labels[0]}.`);
+ // Intentionally inject D4 into a browser response only: stale labels after sorting.
+ await page.unroute('**/chart.js');await page.route('**/chart.js',route=>route.fulfill({contentType:'application/javascript',body:fs.readFileSync(path.join(root,'chart.js'),'utf8').replace('const DURATION = 700;','const DURATION = 1;').replace('.attr("x", d => x(d.value) + 7).attr("y", y.bandwidth() / 2);','.attr("x", 7).attr("y", y.bandwidth() / 2);')}));
+ await page.reload();await page.waitForFunction(()=>window.lab4&&!lab4.snapshot().busy&&lab4.snapshot().active.length===20);
+ const bug=await page.evaluate(()=>{const row=document.querySelector('g.row');return {bar:+row.querySelector('.bar').getAttribute('width'),labelX:+row.querySelector('.value-label').getAttribute('x')};});assert.notEqual(bug.labelX,bug.bar+7);observations.push(`D4 observed: label x=${bug.labelX}, expected bar width + 7=${bug.bar+7}; numeric labels misplaced inside bars.`);
+ await page.unroute('**/chart.js');await page.reload();await page.waitForFunction(()=>window.lab4&&!lab4.snapshot().busy&&lab4.snapshot().active.length===20);assert(await page.evaluate(()=>[...document.querySelectorAll('g.row')].every(r=>Math.abs(+r.querySelector('.value-label').getAttribute('x')-(+r.querySelector('.bar').getAttribute('width')+7))<.001)));observations.push('D4 fix/retest PASS: restored value-label transition; all label x positions equal bar width + 7.');
+ assert.deepEqual(errors,[]);observations.push('No browser JavaScript errors.');fs.writeFileSync('tmp/lab04/results.json',JSON.stringify(observations,null,2));console.log(observations.join('\n'));await browser.close();server.close();
+})().catch(e=>{console.error(e);server.close();process.exit(1)});

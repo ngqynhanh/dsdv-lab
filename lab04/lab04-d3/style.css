@@ -1,0 +1,30 @@
+:root { font-family: "Segoe UI", Arial, sans-serif; color: #172b40; background: #f1f5f9; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 1160px; margin: 36px auto; padding: 0 24px; }
+h1 { font-size: 28px; max-width: 850px; line-height: 1.25; }
+h2 { margin: 6px 0 14px; font-size: 23px; }
+p { line-height: 1.6; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #52677e; }
+.declaration, .small { font-size: 13px; color: #52677e; }
+.card { margin-top: 24px; padding: 26px; background: white; border: 1px solid #dce5ee; border-radius: 16px; }
+.heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+#count { white-space: nowrap; border-radius: 24px; padding: 10px 16px; background: #e8f4f3; color: #086e66; font-weight: 700; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+button, select { font: inherit; padding: 10px 14px; border: 1px solid #b8c9d9; border-radius: 7px; background: white; color: #183a55; }
+#add { background: #126b71; color: white; border-color: #126b71; }
+button:not(:disabled) { cursor: pointer; }
+button:disabled, select:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, select:focus-visible { outline: 3px solid #df9500; outline-offset: 3px; }
+label { font-size: 13px; margin-left: 8px; }
+#status { min-height: 25px; font-size: 13px; color: #52677e; }
+.chart-scroll { overflow-x: auto; }
+svg { display: block; }
+.bar { fill: #20858c; }
+.bar.changing { fill: #dd941e; }
+.province-label, .value-label { font-size: 12px; fill: #203b53; }
+.axis { color: #52677e; font-size: 11px; }
+.axis .tick line { stroke: #e3eaf0; }
+.axis-title { font-size: 13px; fill: #52677e; }
+a { color: #096d7b; }
+@media (max-width: 650px) { main { padding: 0 12px; margin: 20px auto; } .card { padding: 16px; } .heading { align-items: flex-start; flex-direction: column; gap: 0; } }

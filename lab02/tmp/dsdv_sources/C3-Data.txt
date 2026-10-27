@@ -1,0 +1,339 @@
+
+=== PAGE 1 ===
+DATA
+1
+
+=== PAGE 2 ===
+TERMS
+Dataset types: to be visualized
+Data types: fundamental units
+2
+
+
+=== PAGE 3 ===
+STRUCTURE
+Structured
+- Know data types, 
+semantics
+Unstructured
+- No predefined data model
+- Text, interspersed with facts 
+(dates, times, locations)
+- Video, images
+Translate into structured data
+- Natural Language 
+Processing, text mining
+- Object recognition, tracking
+3
+
+
+=== PAGE 4 ===
+TEXT EXAMPLE: PHRASE NET
+Pattern in text: “X’s Y” in novels
+4
+[van Ham, InfoVis 2009]
+
+=== PAGE 5 ===
+DATA SEMANTICS
+Basil, 7, S, Pear
+What does it mean?
+Semantics: real world meaning
+Name? city? Fruit? Height? Age? Day of month?
+→ Metadata
+5
+
+
+=== PAGE 6 ===
+DATA TYPES
+Structural or mathematical interpretation of data
+Item, link, attribute, position, grid
+Different from data types in programming !
+6
+
+=== PAGE 7 ===
+ITEMS & ATTRIBUTES
+Item: individual entity, discrete
+e.g., Patient, Car, Stock, city
+“independent variable”
+Attribute: measured, observed, logged property
+e.g., Patient: height, blood pressure
+Car: horsepower, make
+“dependent variable”
+7
+
+
+=== PAGE 8 ===
+OTHER DATA TYPES
+Links
+- Express relationship between two items
+- Friendship on Facebook
+Positions
+- Spatial data -> location in 2D or 3D
+- Pixels in photo, Voxels in MRI scan, latitude / longtitude
+Grids (Not grids in MS Excel)
+- Sampling strategy for continuous data
+- How many Voxels in MRI scan, positions of weather stations in a city
+8
+
+=== PAGE 9 ===
+DATASET TYPES
+9
+
+
+=== PAGE 10 ===
+TABLES
+Flat table
+- one item per row
+- Each column is attribute
+- Unique (implicit) key
+- No duplicates
+Multidimensional table
+- Indexing based on multiple keys
+10
+
+=== PAGE 11 ===
+MULTIDIMENSIONAL TABLES
+Multiple keys
+- Item, Store location, 
+Customer, Period
+Attribute
+- Quantity
+11
+Item Store 
+location
+Customer Quantity
+Paper HCM SCSE 400
+Pencil HCM OOAD 50
+Paper Hanoi OOAD 100
+Pencil Hanoi SCSE 20
+
+=== PAGE 12 ===
+VISUALIZE TABLES
+12
+https://bl.ocks.org/jasondavies/1341281
+
+=== PAGE 13 ===
+COLLECTIONS
+How we groups items
+Sets
+- Unique items, unordered
+List
+- Ordered, duplicates allowed
+Clusters
+- Groups of similar items
+13
+https://caleydo.org/tools/lineup/
+
+
+=== PAGE 14 ===
+GRAPHS/NETWORKS
+Set of nodes, set of edges
+Connecting these vertices
+14
+
+
+=== PAGE 15 ===
+TREES
+A tree is a graph with no cycles
+15
+
+
+=== PAGE 16 ===
+SPECIAL GRAPHS
+A bipartite graph
+- Vertices can be partitioned 
+into two independent sets
+An articulation point
+- Is a vertex which if deleted 
+would break up a connected graph
+16
+
+
+=== PAGE 17 ===
+VISUALIZING GRAPHS
+17
+Node-Link diagram
+https://observablehq.com/@d3/force-directed-graph
+Matrix
+https://bost.ocks.org/mike/miserables/
+
+=== PAGE 18 ===
+VISUALIZING GRAPHS
+18
+Treemap (Implicit Tree Visualization)
+https://atlas.cid.harvard.edu/explore/?tradeDirection=import&year=2012&
+product=726&country=undefined&redirected=true
+
+=== PAGE 19 ===
+FIELDS
+Sets of attributes values associated with cells
+Cell contains data from continuous domain
+- Temperature, pressure, wind velocity
+Measured or simulated
+Sampling & Interpolation
+- Signal processing & stats
+19
+https://www.giss.nasa.gov/research/features/200711_temptracker/page2.html
+
+=== PAGE 20 ===
+FIELD EXAMPLES: AIR QUALITY
+20https://www.iqair.com/earth?nav
+Air visual
+
+=== PAGE 21 ===
+FIELDS: GRID TYPES
+Uniform grid
+Geometry & topology 
+can be computed
+Rectilinear Grid
+Nonuniform sampling
+Structured grid
+Allow curvilinear grids
+Unstructured grid
+full flexibility, store position 
+and connection
+21
+https://en.wikipedia.org/wiki/Regular_grid
+
+=== PAGE 22 ===
+VISUALIZING FIELDS
+22
+
+=== PAGE 23 ===
+INFOVIS
+VS 
+SCIVIS
+READING IN CLASS
+23
+
+=== PAGE 24 ===
+ACADEMIC SUBFIELDS
+24
+
+=== PAGE 25 ===
+INFOVISVS SCIVIS
+25
+
+
+=== PAGE 26 ===
+GEOMETRY
+Shape of items
+Explicit spatial positions
+Points, lines, curves, surfaces, regions, volumnes
+Important in Computer Graphics, CAD
+Not a core visualization topic
+26
+
+
+=== PAGE 27 ===
+ATTRIBUTE TYPES
+Categorical (nominal)
+- Compare equality
+Ordered
+- Ordinal
+- Great/Less than defined
+Quantitative
+- Arithmetic possible
+- e.g., length, weight
+27
+
+
+=== PAGE 28 ===
+QUANTITATIVE: INTERVAL
+May have equal differences 
+between successive points on the scale 
+But the position of zero is arbitrary
+Does zero mean none?
+- Dates; Location;
+Cannot compare directly
+(Fahrenheit vs Celsius)
+Only differences can be compared
+(but ratios)
+28
+
+
+=== PAGE 29 ===
+QUANTITATIVE: RATIO
+The relative magnitudes of scores and the differences between them 
+matter. The position of zero is fixed
+Zero: there is nothing of the measured entity observed
+Measurements: length, mass, age, weight, speed
+Can measure ratios & proportions
+e.g., Can say 2 times faster than the other
+29
+
+=== PAGE 30 ===
+DATA TYPES
+Nominal (categories, labels)
+Operations: =, ≠
+Ordinal (ordered)
+Operations: =, ≠, >, <
+Interval (location of zero arbitrary)
+Operations: =, ≠, >, <, +, - (distance)
+Ratio (zero fixed)
+Operations: =, ≠, >, <, +, -, ×, ÷ (proportions)
+30
+
+=== PAGE 31 ===
+QUIZ
+What type of variable (nominal, ordinal, interval, or ratio) are the 
+following:
+1. Marathon race times
+2. Major
+3. Product rating
+4. IQ score
+5. Product name
+31
+
+=== PAGE 32 ===
+SEQUENTIAL & DIVERGING DATA
+Sequential
+- Homogeneous from min to max
+Diverging
+- Two or multiple sequences that meet
+- Elevation dataset: above sea level
+& below sea level
+- Temperature of water: below or above
+freezing / boiling
+32
+
+
+=== PAGE 33 ===
+OTHER STRUCTURE
+Cyclic data
+- Time (hours, week, month, year)
+Aggregation
+- Might be patterns on multiple levels
+33
+Respiratory disease cases.
+Left: 25 day pattern
+Right: 28 day pattern
+[Tominski 2008]
+
+=== PAGE 34 ===
+DATA VS CONCEPTUAL MODEL
+Data model: low-level description of the data
+Set with operations
+Conceptual model: mental construction
+Includes semantics, support reasoning
+34
+
+
+=== PAGE 35 ===
+DATA VS CONCEPTUAL MODEL
+From data model
+19.5, 29.0, -1 (floats)
+Using conceptual model
+Temperature
+To data type
+Continuous to 4 significant digits (Q)
+Hot, warm, cold (O)
+Burned vs Not burned (N)
+35
+
+=== PAGE 36 ===
+COMBINATIONS, DERIVED DATA
+Networks can have attributes
+Attributes have hierarchies
+Data types can be transformed
+36

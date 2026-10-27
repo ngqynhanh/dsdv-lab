@@ -1,0 +1,370 @@
+"""English edition with the same topics, exercises, solutions, and code."""
+from pathlib import Path
+import json
+
+base=Path.cwd()
+source=(base/'tmp/dsdv_sources/build_study.py').read_text(encoding='utf-8')
+exec(source.split('# Original teaching figures')[0])
+original=json.loads((base/'tmp/dsdv_sources/pages.json').read_text(encoding='utf-8'))
+pages=[]
+def page(title,*blocks):pages.append((title,list(blocks)))
+def P(t):return ('p',t)
+def H(t):return ('h',t)
+def B(t):return ('bullet',t)
+def T(headers,rows,widths):return ('table',(headers,rows,widths))
+def F(name,caption,width=6.8):return ('figure',(name,caption,width))
+def C(t):return ('code',t)
+def code_from(page_number):return next(v for k,v in original[page_number-1][1] if k=='code')
+
+page('DSDV Midterm Study Guide',
+P('Data Science and Data Visualization  IT138IU'),
+P('An English study and practice guide. Learn to analyze a visualization, justify design choices, and write D3 code for bar charts that meet the examination requirements.'),
+H('How to use this guide'),
+B('Pass 1: study the core concepts and answer framework on pages 3 to 11. Explain each concept using your own example.'),
+B('Pass 2: review the worked analyses of the three past papers on pages 12 to 16. Sketch your redesign before reading the suggested approach.'),
+B('Pass 3: rewrite the code on pages 17 to 21, then attempt the exercises and two mock examinations on pages 22 to 26.'),
+B('Pass 4: mark your work using pages 27 to 30 and review the checklist on page 31.'),
+H('Contents'),
+T(['Section','Pages'],[['Exam patterns and scope','2'],['C1 to C5 concepts and answer framework','3 to 11'],['Worked analyses of past papers','12 to 16'],['D3 concepts and reference code','17 to 21'],['Exercises and two mock examinations','22 to 26'],['Answers and self marking rubrics','27 to 30'],['Final checklist and references','31 to 32']],[5.5,1.3]),
+P('The exercises and marking rubrics were written for self study. The suggested answers to past papers are reference solutions, not official marking schemes.'))
+
+page('Exam Patterns and Study Priorities',
+T(['Paper filename label','Observed structure'],[
+['2023 HK1','90 minutes, 100 points. Methylation chart analysis and redesign 35; classroom visualization design 35; D3 horizontal COVID bar chart 30.'],
+['2026 HK1','90 minutes, 100 points. Three visual limitations 30; aircraft seating chart analysis 40; D3 vertical cars bar chart 30.'],
+['2026 HK2','90 minutes, 100 points. Three visual limitations 30; analysis of age at leaving home in Europe 40; D3 vertical cars bar chart 30.']],[1.3,5.5]),
+P('These labels identify the supplied files; they do not establish the academic year or examination date. Both papers labelled 2026 use the same D3 task: select the ten cars with the highest Horsepower and display their Acceleration.'),
+H('What you should be able to do'),
+B('Identify dataset types, items, links, and attributes. Distinguish nominal, ordinal, interval, and ratio data using their meaning.'),
+B('State exactly which attribute is mapped to which visual channel on which mark.'),
+B('Explain a perceptual limitation using a definition, a concrete example, and a design implication.'),
+B('Critique with evidence, then draw a redesign with axes, scales, units, labels, and a legend when needed.'),
+B('Use D3 to load, parse, filter, sort, select the top k records, define scales, draw axes and bars, and add value labels.'),
+P('Past papers indicate useful skills to practice; they do not guarantee the content or weighting of a future examination. The supplied slides are in a folder labelled outdated. Check the current scope announced by your lecturer.'))
+
+page('C1 The Purpose of Visualization',
+H('Visualization and insight'),
+P('Visualization transforms data into a graphical representation, often with interaction, for exploration, confirmation, or presentation. Insight means recognizing a meaningful structure, trend, cluster, outlier, or relationship that supports further questions or action.'),
+T(['Purpose','Question','Example'],[['Exploration','What is worth investigating?','Explore customer clusters in a scatterplot.'],['Confirmation','Does the evidence support a hypothesis?','Compare score distributions in two classes.'],['Presentation','What should the audience understand?','Emphasize a change in revenue.']],[1.4,2.1,3.3]),
+H('Why use both statistics and charts'),
+P('Datasets can have similar means, variances, and correlations but very different shapes: curves, outliers, or clusters. Anscombe\u2019s quartet illustrates why summary statistics alone are insufficient. A visualization does not by itself establish causation.'),
+H('The roles of people and computers'),
+P('Computers calculate, filter, and render large datasets precisely. People recognize patterns, interpret them using contextual knowledge, and decide which question to ask next. Design must account for limits in attention, memory, and visual comparison.'),
+H('When a number or automation may be enough'),
+P('A well defined question requiring one value, such as the total number of students, may be answered directly with a number. When responses must be immediate and frequent, automated processing may be appropriate; visualization can still support monitoring and checking.'),
+P('Study source: C1, PDF pages 4 to 7, 13 to 21, and 31.'))
+
+page('C3 Attribute Types',
+P('Data types in visualization describe meaning and valid comparisons. They differ from programming types such as string, int, and float. Jersey numbers 10 and 20 are labels; the player wearing 20 does not have twice the value of the player wearing 10.'),
+T(['Type','Valid interpretation','Examples and cautions'],[
+['Nominal N','Same or different','Major, country, group ID, seat ID. A numeric label can still be nominal.'],
+['Ordinal O','Ordered categories','Poor, average, good; rank A B C. Equal spacing is not assumed.'],
+['Interval Q','Meaningful differences','Celsius temperature and calendar years. Zero is conventional, so ratios of values are not directly meaningful.'],
+['Ratio Q','Meaningful differences and ratios','Mass, length, case counts, age, and race duration. Zero represents absence of the measured quantity.']],[1.25,1.7,3.85]),
+H('Common examination traps'),
+B('GPA is quantitative: order and score differences can be discussed. In this context, GPA 80 does not mean twice the ability of GPA 40. If a measurement scale is required, state an interval-like interpretation of scores.'),
+B('A seat number is nominal when it is only an identifier. The row and column obtained from a seating plan represent spatial position, not a numerical score for the seat.'),
+B('A 1 to 5 star rating is usually ordinal. Any assumption of equal spacing should be stated when calculating an average.'),
+B('Calendar dates are temporal and interval when considering elapsed differences. An elapsed duration is ratio. Time of day also has a cyclic structure.'),
+P('Study source: C3, PDF pages 5 to 8 and 27 to 36. If the question asks only for categorical, ordinal, and quantitative types, answer at that level first, then add interval or ratio where useful.'))
+
+page('C3 Dataset Structure and Semantics',
+T(['Dataset','Units and relationships','Example'],[['Table','Each row is an item; columns are attributes.','Students, GPA, major, and seat.'],['Network','Nodes are items; edges are links.','Students and group membership relationships.'],['Tree','A hierarchy without cycles.','University, faculty, then class. An undirected tree is normally connected.'],['Field','Values sampled over a continuous domain.','Temperature at spatial locations.'],['Geometry','Shapes and positions have given meaning.','Boundaries, surfaces, volumes, or seating plans.']],[1.15,2.95,2.7]),
+H('State the unit of observation'),
+P('In an organ by indicator matrix, an observation is an organ and indicator pair with a methylation percentage. The same data can be stored as a long table with Organ, Indicator, and Percentage columns or as a matrix. State the interpretation you use.'),
+H('An identifier is not a magnitude'),
+P('A student ID identifies an item. In the 2023 COVID task, each row needs a Province/State and Country/Region label. If you instead show country totals, aggregate the rows and explicitly state that the unit of observation has changed.'),
+H('Additional structures'),
+P('A set is unordered and contains unique elements; a list is ordered and may contain duplicates; a cluster groups similar items. Sequential data progresses from low to high. Diverging data has a meaningful central reference, such as deviation from zero. Cyclic data wraps around, as hours of the day do.'),
+P('Semantics guides design: the number 20 could be a temperature, a count of people, or a room ID. Each meaning implies different scales and channels. Metadata should describe units, time, definitions, and collection methods.'),
+P('Study source: C3, PDF pages 9 to 22, 26, and 32 to 36.'))
+
+page('C2 Vision Attention and Memory',
+T(['Limitation or phenomenon','Example','Design implication'],[
+['Change blindness','A changed point is hard to notice when successive views are interrupted.','Show states side by side or highlight the changed region.'],
+['Inattentional blindness','Focusing on a counting task causes another visible object to be missed.','Reduce competing demands and emphasize important alerts.'],
+['Context dependent color','Identical RGB patches can appear lighter or darker on different backgrounds.','Use consistent backgrounds and a clear ordered scale.'],
+['Weak absolute judgments','It is difficult to estimate precisely how many times larger a circle is.','Prefer position on a common scale or aligned length.'],
+['Limited color discrimination','Some viewers have difficulty distinguishing red and green.','Also encode information through shape, labels, or line style.']],[1.45,2.65,2.7]),
+H('Popout and preattentive processing'),
+P('A mark with one distinctive feature, such as hue or orientation, can be detected rapidly before focused attention. An orange dot among gray dots is an example. A red circle among blue circles and red squares has no unique single feature; finding this conjunction target generally requires a slower search.'),
+H('Perception and cognition'),
+P('Perception receives and interprets sensory signals. Cognition applies knowledge to reasoning, problem solving, and decisions. Experience, expectations, and goals influence perception. The eye does not record the whole scene like a camera: vision involves fixations and saccades.'),
+P('Exam answer model: Change blindness is difficulty detecting changes across separate views. For example, a point changes after a blank frame. Therefore, I would show the states side by side and highlight the changed point.'),
+P('Study sources: C2 Color, PDF pages 3 to 4, 20 to 21, and 41 to 49; C2 Popout, PDF pages 2, 11, and 17 to 28.'))
+
+page('C2 Color and Color Scales',
+T(['Component','Meaning','Use'],[['Hue','Color identity, such as blue, orange, or purple.','Distinguish nominal groups.'],['Saturation','The intensity or purity of a color.','May encode magnitude when the progression is clear.'],['Value and lightness','Brightness or lightness in the relevant model.','A light to dark sequence can encode ordered values.']],[1.4,2.65,2.75]),
+P('HSV Value, perceptual lightness, and luminance are not identical. Name the channel you intend to use instead of describing every color change as hue.'),
+T(['Colormap','Use when','Example'],[['Categorical','Groups have no inherent order.','IT CS DS majors, using distinct hues.'],['Sequential','Values progress in one direction.','Case counts from zero upward, using light to dark.'],['Diverging','A central reference is meaningful.','Deviation from zero, with a neutral center and two sides.'],['Cyclic','Values wrap around.','Time of day, without a false jump at the endpoint.']],[1.35,2.65,2.8]),
+H('Common mistakes'),
+B('Rainbow scales create uneven perceived order and boundaries. They are generally a poor default for reading continuous magnitude.'),
+B('Too many competing colors weaken highlighting. Use a small set of distinct colors for a few groups; consider direct labels or separate panels for many groups.'),
+B('Do not rely only on red and green for important states. Add shape, text, or line style as redundant encoding.'),
+B('A diverging scale without a meaningful midpoint may imply a false division.'),
+P('RGB uses additive light mixing. CMY/CMYK uses subtractive ink mixing. A color production model is different from a rule for choosing a data colormap.'),
+P('Study source: C2 Color, PDF pages 28 to 40 and 41 to 55.'))
+
+page('C2 Gestalt Principles and Grouping',
+F('gestalt.png','Original illustration of four visual grouping mechanisms.'),
+T(['Principle','Meaning and application'],[['Proximity','Nearby elements are perceived as a group. Use spacing to separate bar groups or panels.'],['Similarity','Elements sharing color or shape are perceived as related. Use consistent hue for the same major.'],['Connectedness','A line creates a direct relationship. Use connections to show network links.'],['Common region','Elements inside the same boundary are perceived as a group. Enclose a meaningful cluster.'],['Continuity','The eye tends to follow a continuous path. This supports line chart reading; avoid confusing crossings.'],['Closure','The eye completes incomplete contours. Closure is distinct from grouping items inside a closed region.'],['Symmetry and figure ground','Symmetry supports recognition; contrast separates a subject from its background. Keep backgrounds quiet.']],[1.55,5.25]),
+P('Grouping cues can conflict. Placing two majors close together while using the same color for a different grouping may imply contradictory relationships. Decide which relationship matters, then choose proximity, similarity, or connection accordingly.'),
+P('Study source: C2 Popout, PDF pages 29 to 58.'))
+
+page('C4 Marks Channels and Encoding',
+P('A mark is a geometric element representing an item or link: point, line, area, and occasionally volume. A channel is a visual property varied according to data: position, length, area, hue, lightness, shape, or orientation. Color is a channel, not a mark.'),
+T(['Chart','Marks','Typical mapping'],[['Bar chart','Rectangular bars, or line marks in a simplified model.','Category to position; value to length and endpoint position.'],['Scatterplot','Points.','Two quantities to x and y; group to hue or shape.'],['Heatmap','Rectangular cells.','Two categorical attributes to rows and columns; value to lightness.'],['Node link diagram','Points and lines.','Items to nodes; relationships to connections.'],['Bubble chart','Circular point marks.','Value to circle area, rather than linearly to radius.']],[1.25,2.0,3.55]),
+H('Expressiveness'),
+P('An encoding should convey the information present in the data accurately. Nominal categories have no inherent order: assigning increasing sizes to major IDs can imply a false ranking. Unordered discrete hues do not clearly express the magnitude of scores.'),
+H('Effectiveness'),
+P('Important attributes should use effective, noticeable channels. For quantitative comparison, prefer position on a common scale, followed by unaligned positions, length, angle, and area. Depth, luminance, and volume are generally less accurate for this task. Rankings depend on the task; they are not universal rules for every dataset.'),
+P('Redundant encoding maps one attribute to multiple channels, such as major to both hue and shape. Separability concerns whether viewers can read channels independently. Avoid combinations that interfere with or conceal one another.'),
+P('Study source: C4, PDF pages 3 to 15, 19 to 29, and 43 to 48.'))
+
+page('C5 Chart Critique and Redesign',
+T(['Problem','Consequence','Possible correction'],[['Truncated bar axis','Bar lengths exaggerate differences.','Use a zero baseline, or a clearly labelled dotplot for a zoomed view.'],['Unnecessary 3D','Occlusion and perspective distort comparisons.','Use 2D or small multiples.'],['Several similar pie charts','Angles and unaligned segments are difficult to compare.','Use aligned bars or a dotplot.'],['Missing labels and units','Values cannot be interpreted.','State axes, units, time, and source.'],['Only a mean is shown','Spread, outliers, and multiple modes are hidden.','Add raw points, a boxplot, or a violin plot as appropriate.'],['Animation for comparisons','The viewer must remember previous frames.','Use small multiples with consistent scales and ordering.']],[1.6,2.3,2.9]),
+H('Graphical integrity and lie factor'),
+P('The displayed magnitude should correspond to the data magnitude. Under the usual relative change definition, the lie factor is the percentage change shown in the graphic divided by the percentage change in the data. State the baseline and how you measure each effect.'),
+P('For example, 100 to 110 is a 10% increase. If bars begin at 90, visible lengths change from 10 to 20, a 100% increase. The lie factor is 10. This division is undefined when the data effect is zero. Do not mix size ratios with percentage increases.'),
+H('Apply guidelines in context'),
+P('Bar charts normally require zero because length encodes magnitude. Line charts and dotplots may use clearly labelled narrower domains to reveal variation. Increasing the data ink ratio does not mean removing useful axes, labels, or context.'),
+P('Caution about C5 page 31: the median is not restricted to normally distributed data. A confidence interval for a mean describes uncertainty in the estimated mean, not a region containing most observations. Show the distribution or raw data to communicate distributional shape. See page 32 for the statistics reference.'),
+P('Study source: C5, PDF pages 9 to 31, 34 to 43, and 49 to 73.'))
+
+page('How to Answer Chart Analysis Questions',
+H('Step 1 State the goal'),
+P('Use a sentence with an object and a comparison: The goal is to compare methylation percentages across organs and indicators to find pairs with high values. Avoid vague statements such as to visualize the data.'),
+H('Step 2 Identify the data'),
+P('State the item or unit of observation, list attributes and their types, and record units and time. When a diagram uses real positions, distinguish the identifier from the spatial position.'),
+H('Step 3 Describe the existing encoding'),
+P('Use this pattern: Each ... mark represents ...; the ... channel encodes ... . For example, each circle represents a country; text gives its name and age; hue encodes an age band. The approximate geographic layout does not rank ages.'),
+H('Step 4 Explain a problem and its impact'),
+P('Connect each criticism to the task: depth causes occlusion, making bars in the back difficult to compare; unordered hues make it difficult to determine which country has a higher mean age.'),
+H('Step 5 Draw and justify a redesign'),
+P('Include marks, axes, ticks, labels, units, and a legend when needed. State the new mapping, explain how it supports the task, and acknowledge a tradeoff. A ranked dotplot compares ages well but reduces geographic context; a small map can be added if location matters.'),
+H('Reusable answer framework'),
+P('The goal is to compare ... . Each item represents ... . The attributes are ... . The author uses ... marks and maps ... to ... . This makes ... difficult because ... . I would redesign it as ... . In the new design, ... encodes ... . This improves ... because ... .'),
+P('Check your answer: describe the original first and propose the new design afterward. Saying the chart is bad or a bar chart is better is insufficient without a specific mapping and reason.'))
+
+page('2023 Paper Methylation Chart Analysis',
+P('Original question: PDF page 2, Question 1, 35 points: data 10, encoding 5, problems 10, and redesign 10. The chart uses many 3D columns to show methylation percentages by organ and indicator.'),
+H('Suggested answer'),
+B('Data: a multidimensional organ by indicator table. Each pair is an observation. Organ and indicator are nominal; methylation percentage is quantitative ratio, ranging from 0 to 100%.'),
+B('Marks and channels: columns or cylindrical forms; two positions on the base plane encode organ and indicator; height encodes percentage. Do not infer color meaning from the scan without a legible legend.'),
+B('Problems: front columns hide back columns; perspective makes heights difficult to compare; labels are small and angled; the grid is heavy; finding a particular pair is difficult; columns lack an easily read shared comparison baseline.'),
+B('Redesign: use a heatmap to reveal patterns in the matrix. Rows encode organs, columns encode indicators, and lightness encodes percentage from 0 to 100. Add numeric labels when feasible. Use a separate bar chart or dotplot for precise comparison within an indicator.'),
+F('heatmap.png','Redesign illustration using invented values, not values transcribed from the scan.'),
+P('Justification: a heatmap eliminates occlusion and supports scanning rows and columns. Its tradeoff is lower precision for small differences in color than in position. Numeric labels or a secondary view address this. Distinguish missing values from 0%.'))
+
+page('2023 Paper Classroom Visualization Design',
+P('Original question: PDF pages 2 to 3, Question 2, 35 points. Show GPA, major, group ID, seat number, and links between every pair of group members using the given classroom arrangement.'),
+T(['Attribute','Type','Suggested encoding'],[['Seat','Nominal ID with derived position','Preserve the seating plan using x and y position.'],['GPA','Quantitative','Mini bar length on a fixed 0 to 100 scale.'],['Major','Nominal','Hue; add IT CS DS labels for grayscale use.'],['Group ID','Nominal','G1 to G6 labels and links between group members.'],['Student index','Nominal identifier','Index label inside the seat.']],[1.15,1.7,3.95]),
+F('classroom.png','The 20 students and seat positions come from the 2023 paper. Small corner numbers are seats; the number before G is the student index.'),
+P('The plan has five rows of eight seats, divided into two blocks of four. A force layout would lose the actual seating positions. Link every pair in each group: four members require six edges; three require three. The supplied data has 24 edges in total.'),
+P('Use thin links beneath nodes and label group IDs to reduce crossing ambiguity. An interactive version can highlight one group. A spanning tree or group hub alone does not show every direct pairwise link when the question requires all such links.'))
+
+page('2026 HK1 Paper Vision and Aircraft Seats',
+H('Question 1 Three visual limitations 30 points'),
+P('Choose three distinct limitations. Give an explanation, example, and design implication for each. One valid set is change blindness, limited color discrimination, and inaccurate area judgments. Use the model on page 6 instead of listing names alone.'),
+H('Question 2 Seating chart analysis 40 points'),
+P('Original question on PDF page 2: goal 5, data and types 15, marks and channels 10, redesign 10. The chart aims to show the probability of close contact with an infected person by aircraft seat and to indicate certain roles.'),
+B('Items: seats, or people at seats under a one-person-per-seat assumption; state your choice. Attributes include row, seat ID, spatial position, probability as quantitative ratio from 0 to 100%, and nominal role such as infected person or crew where shown in the legend.'),
+B('Marks: seat rectangles and glyphs/text for status or role. Position preserves rows and sides of the aisle; a color/lightness scale maps probability. The scan does not establish every original hue reliably.'),
+B('Problems: small seats and text; difficult legend lookup; possible confusion between empty seats, low probabilities, and special states. A scale without clear order hinders magnitude comparison. Make only criticisms supported by the image, or state conditions where the original colors are unclear.'),
+H('Suggested redesign'),
+P('Preserve the seat map because proximity to the infected person matters. Use sequential lightness for probability, X for the infected person, and C or another explained symbol for crew. Label rows, seat columns, aisle, and the aircraft front. Use a separate pattern or symbol for missing data rather than treating it as 0%.'),
+P('Sketch a legend with 0%, 25%, 50%, 75%, and 100%, plus a sample seat row to establish the mapping. This preserves spatial context. A probability-ranked bar chart could be an additional view when ranking is the task.'))
+
+page('2026 HK2 Paper Age at Leaving Home',
+P('Original question on PDF page 2: data 15, marks/channels 10, and a drawn and justified redesign 15. Values are the mean age at leaving the parental household by country in 2022. EU 27 is an aggregate, not a separate country.'),
+T(['Component','Analysis'],[['Items','Countries; distinguish the EU 27 aggregate if included.'],['Attributes','Country is nominal; mean age is quantitative ratio in years; derived age band is ordinal; 2022 is temporal metadata.'],['Marks and channels','Approximately equal circles; text for country and age; hue/lightness for age bands; positions suggest geographic layout.'],['Problems','Binning colors loses comparison detail; layout is not ranked by age; some text may have weak contrast; circle size does not help compare age.']],[1.4,5.4]),
+F('dotplot.png','A subset of clearly readable values illustrates a sorted dotplot. This is not the complete dataset.'),
+P('Redesign: use a horizontal dotplot with countries on y and mean age on a shared x scale. Sort in increasing order and label to one decimal place. With the full dataset, show EU 27 separately as a 26.4 year reference line. Do not calculate the EU mean as a simple unweighted average of country means.'),
+P('Justification: position on a common scale supports more precise comparison than hue. Color may highlight a particular group; a different color for every country is unnecessary. A clearly labelled narrow x domain is acceptable because the dotplot encodes value through position.'))
+
+page('Past Paper Coding Requirements and Pitfalls',
+H('Cars in both papers labelled 2026'),
+P('Sort by Horsepower in descending order and take ten records, but encode Acceleration as bar height. Use Name as the x label. Do not sort by Acceleration or use Horsepower as the plotted height.'),
+P('The task awards 5 points for visualization and 5 each for R1 to R5: fixed SVG and margins/scales, two axes and an axis title, Name labels, top 10 processing, and value labels. Check every requirement, rather than stopping when a chart appears.'),
+H('COVID CSV in the 2023 paper'),
+P('Keep Province/State and Country/Region as the row key/label. Select the correct date column, retain nonzero case counts, and draw horizontal bars using a linear x scale and band y scale, axes, and bar values. Country totals require a different aggregation task.'),
+H('Two pitfalls in the old hints'),
+B('d3.csv supports a row converter; d3.json does not support an equivalent row conversion argument. Load JSON, then use map(convertRow). The sample on page 4 of the cars papers also illustrates map after loading.'),
+B('A date key must exactly match its CSV header. The requested 03/03/2023 may appear as 3/3/23. The final hint also mentions 03/03/2022. Follow the date specified in the question and check the header instead of copying an inconsistent hint.'),
+H('Cars data semantics'),
+P('In the Vega-style cars dataset, Acceleration describes acceleration time in seconds despite its field name. Retain the field name and state units only after checking metadata; do not automatically label it m/s². Name can repeat in real data, so use a separate internal key while displaying Name on the axis.'),
+P('The reference code uses D3 v7. Practice datasets may be simplified. In an examination, the main aim is to demonstrate the correct processing sequence and encoding.'))
+
+page('D3 Workflow and Bar Geometry',
+T(['Step','Purpose','Functions or syntax'],[['Load','Fetch data asynchronously.','await d3.json or d3.csv'],['Parse','Convert numbers; preserve missing values.','map, row converter, Number'],['Filter','Remove rows missing required fields.','filter, Number.isFinite'],['Sort and slice','Select top k by the required field.','sort followed by slice'],['Layout','Define fixed SVG and inner plotting area.','margins, translate'],['Scales','Map data to coordinates.','scaleBand, scaleLinear'],['Draw','Bind records to marks.','data, join, attr'],['Annotate','Add meaningful axes and labels.','axisBottom, axisLeft, text']],[1.1,2.6,3.1]),
+H('Vertical bars'),
+P('Use scaleBand for categories on x and scaleLinear from zero to the maximum on y. SVG y coordinates increase downward, so the y range is [innerHeight, 0]. A bar starts at y(value); its height is innerHeight minus y(value); its width is x.bandwidth().'),
+H('Horizontal bars'),
+P('Use scaleLinear on x with domain from zero to the maximum and range [0, innerWidth]; use scaleBand on y. The bar starts at x = 0, its width is x(value), its y position is y(key), and its height is y.bandwidth().'),
+H('Check before binding data'),
+B('Do not accidentally coerce null or an empty string to zero. Handle missing values according to their meaning.'),
+B('Numeric sorting needs a comparator, for example (a,b) => b.Horsepower - a.Horsepower. Default string sorting can give the wrong order.'),
+B('If no valid records remain, display a message and stop instead of creating a scale with an undefined domain.'),
+P('The following code is split across pages for handwriting practice. To run it, concatenate each pair of code sections in order into one HTML file.'))
+
+page('D3 Cars Reference Code Part One',C(code_from(18)),
+P('Each key is the original row index, preventing repeated Name values from collapsing into one category. Missing Acceleration values are removed before selecting ten records. State any different missing-data policy required by the question.'))
+page('D3 Cars Reference Code Part Two',C(code_from(19)),
+H('Requirement check'),
+P('The SVG is 800 by 500 with margin translation; x is band and y is linear; both axes exist; ticks display Name; selection uses the top ten Horsepower values; bar height and numeric labels use Acceleration. A large bottom margin accommodates long names.'),
+P('Using Name directly in the domain is shorter when uniqueness is guaranteed by the question. In real data, a separate key preserves the same requirement to display Name.'))
+
+page('D3 COVID Reference Code Part One',C(code_from(20)),
+P('The code finds the requested date by parsing headers rather than assuming a particular header string. It does not aggregate provinces into countries because the original task requests row labels.'))
+page('D3 COVID Reference Code Part Two',C(code_from(21)),
+H('Limits with the complete dataset'),
+P('This is an examination code framework with fixed SVG size, scales, axes, labels, a filter, and bar values. Hundreds of rows and large value differences make labels crowded and some values too wide for their bars. Do not silently remove rows or take the top ten without permission from the task.'),
+P('A real product needs an agreed policy for pagination, scrolling, group selection, or height based on row count. For short bars, move values outside and change text color. If the task explicitly requires all values inside bars, explain this readability conflict.'),
+P('Serve the HTML and data folder through HTTP. Opening with file:// can cause fetch restrictions. The D3 library is loaded from a CDN and needs a network connection; use a local D3 copy for fully offline use.'))
+
+page('Practice Classification and Explanation',
+H('Exercise 1 Attribute types'),
+P('For each item, state N, O, interval, or ratio and give one sentence of justification. a Student ID; b major; c first second and third place; d Celsius temperature; e age; f 100 m race duration; g case count; h calendar year; i 1 to 5 star rating; j seat number; k blood group; l distance travelled.'),
+H('Exercise 2 Choose a channel'),
+P('a Compare scores precisely across 12 classes. b Distinguish 3 majors in a scatterplot. c Find high temperature regions in a matrix. d Show positive and negative deviations from a target. State the mark, channel, and reason.'),
+H('Exercise 3 Visual limitations'),
+P('Write three short answers using phenomenon, example, and implication. Choose from change blindness, color vision deficiency, area judgment, and inattentional blindness. Use a different example for each answer.'),
+H('Exercise 4 True or false'),
+P('Mark each statement true or false and correct false statements. a Every integer is quantitative. b Hue has a natural order for precise magnitude reading. c SVG y increases downward. d Vertical bar height equals y(value). e JSON fields can be converted using map after loading. f Selecting the top ten Horsepower values means height must show Horsepower. g Every chart must start its axis at zero. h A confidence interval for a mean contains 95% of observations.'),
+H('Exercise 5 Geometric reasoning'),
+P('a Values 4 and 16 are encoded as circle areas. What should the radius ratio be? b A y scale has domain [0,100] and range [300,0]. For value 40, find y, bar height, and the y coordinate of a label 6 px above the bar. c Values increase from 50 to 60 while bars start at 40. Calculate the lie factor using percentage changes.'),
+P('Allow about 30 minutes. Explain your reasoning before checking the answers on page 27.'))
+
+page('Practice Chart Critique and D3',
+H('Exercise 6 Analyze the figure'),
+F('critique.png','Practice figure using invented scores; the bar axis begins at 70.'),
+P('a State the goal, items, and types. b Identify marks and channels. c Calculate the actual increase from IT to DS and the increase in visible bar length. d Draw two suitable corrections. e State what cannot be inferred about score distributions from these three means.'),
+H('Exercise 7 Correct the code'),C(code_from(23)),
+P('Identify at least four errors or mismatches with the task of selecting the top ten Horsepower cars and displaying Acceleration. Correct them in 5 to 10 lines. Assume numerical fields have been parsed and max is the maximum Acceleration.'),
+H('Exercise 8 Design for multiple attributes'),
+P('There are 15 students with ID, GPA, major, group, and actual desk position. Sketch a sample with 6 students showing every attribute and all within-group relationships. State the mapping and one way to reduce clutter while preserving desk positions.'),
+P('Answers are on page 28.'))
+
+page('Mock Examination A Theory and Analysis',
+P('90 minutes  100 points  Complete all three questions on pages 24 and 25. Suggested timing: 20 minutes, 35 minutes, 30 minutes, and 5 minutes for checking.'),
+H('Question 1 Visual limitations 30 points'),
+P('List three limitations of the human visual system. For each limitation, explain it, give one example, and describe its implication for visualization design.'),
+H('Question 2 Analysis and redesign 40 points'),
+P('A report compares the mean time needed by four classes to complete a lab task. The original visualization is a 3D pie chart: one slice per class, angle/size based on time, a distinct color per class, and numeric labels.'),
+T(['Class','Mean duration in minutes'],[['A','42'],['B','38'],['C','47'],['D','40']],[2.0,4.8]),
+P('a State the visualization goal, 5 points. b Identify items, attributes, and types, 15 points. c Analyze the original marks and channels, 10 points. d Explain problems and draw a redesign with mappings and justification, 10 points.'),
+H('Drawing requirements'),
+P('Show all four class labels and values, units in minutes, and a readable scale. Your design should support finding the fastest class and comparing differences. If a dotplot uses a narrow axis, make its domain and ticks explicit.'),
+P('Attempt the question before reading the self marking guide on page 29.'))
+
+page('Mock Examination A D3',
+H('Question 3 D3 Cars 30 points'),
+P('Create an HTML page titled Midterm Challenge. Load cars.json. Each row has Name, Horsepower, Acceleration, and Origin. Draw a vertical bar chart of Acceleration for the ten cars with the highest Horsepower.'),
+T(['Requirement','Points'],[['Correct bar chart and plotted attribute','5'],['SVG 800 by 500, margins, scaleBand, and scaleLinear','5'],['Both axes, ticks, and y axis title','5'],['Name labels for the bars','5'],['Parse numbers, remove necessary missing values, sort by descending Horsepower, then take ten','5'],['Acceleration value above each bar','5']],[5.9,.9]),
+H('Small dataset for checking logic'),
+T(['Name','Horsepower','Acceleration'],[['A','90','14'],['B','150','11'],['C','120','13'],['D','200','10'],['E','null','12'],['F','180','15']],[2.8,2,2]),
+P('With this small dataset, top ten returns all five valid records in the order D, F, B, C, A. The heights are 10, 15, 11, 13, and 14. This is a logic check, not a replacement for cars.json in the task.'),
+H('Check before submitting'),
+B('Sort and slice in the correct order; compare numbers rather than strings; do not turn null into zero.'),
+B('Reverse the y range; compute height as h minus y(value); prevent value labels from joining axis text.'),
+B('Every bar must have a Name tick and an Acceleration value above it.'),
+P('Full reference code is on pages 18 to 19. The self marking guide is on page 29.'))
+
+page('Mock Examination B Design and Horizontal Bars',
+P('90 minutes  100 points  Suggested timing: 30 minutes, 30 minutes, 25 minutes, and 5 minutes for checking.'),
+H('Question 1 Chart analysis 35 points'),
+P('A dataset with Region, Month, and Revenue is shown as 3D cylindrical columns on a base plane with Region and Month axes. Height encodes Revenue, and each month has a different color.'),
+T(['Region','Jan','Feb','Mar'],[['North','120','150','130'],['Central','80','90','100'],['South','160','140','180']],[2.3,1.5,1.5,1.5]),
+P('Units are million VND. a Data and types, 10 points. b Marks and channels, 5 points. c Problems, 10 points. d Draw and justify a redesign, 10 points. State whether your priority is comparing levels or following trends.'),
+H('Question 2 Classroom design 35 points'),
+T(['ID','GPA','Major','Group','Seat'],[['S1','80','IT','G1','1'],['S2','65','CS','G1','2'],['S3','90','DS','G2','3'],['S4','75','IT','G2','4'],['S5','85','CS','G2','5'],['S6','70','DS','G1','6']],[1.2,1.1,1.5,1.5,1.5]),
+P('There are two rows: front row 1 2 3 and back row 4 5 6. Preserve positions; display GPA, major, and group ID; link every pair in the same group. Marks: positions 5; GPA 10; major 10; groups and links 10.'),
+H('Question 3 D3 horizontal bars 30 points'),
+P('Load cases.csv with Province, Country, and Cases. Write HTML with title Midterm. Parse Cases and keep Cases > 0. Use Province / Country labels, SVG 900 by 600 with margins, a linear x scale, a band y scale, axes, an axis title, and values at bar ends. Award 5 points each for loading/parsing/filtering, SVG/scales, axes/title, row labels, bars, and values.'),
+P('Answers and mappings are on page 30.'))
+
+page('Answers to Exercises One to Five',
+H('Exercise 1'),
+P('a N; b N; c O; d interval; e ratio; f ratio; g ratio; h interval; i O; j N; k N; l ratio. Identifiers express identity; ranks express order; Celsius and calendar years have conventional zeros; age, counts, distance, and duration have meaningful zero quantities.'),
+H('Exercise 2'),
+P('a Bar chart or dotplot using length/position on a common scale for comparison. b Points with hue or shape for nominal groups and a legend. c Heatmap cells with increasing lightness/darkness for temperature, preserving the relevant spatial or row/column context. d A diverging scale with a neutral zero and two opposing sides, rather than random categorical hues.'),
+H('Exercise 3'),
+P('Example answers: change blindness makes animation frames hard to compare, so use small multiples; red/green confusion can obscure good/bad states, so add icons and labels; area judgments make bubbles with values 40 and 60 hard to compare, so use a dotplot on a common scale. Each answer needs a phenomenon, specific example, and design decision.'),
+H('Exercise 4'),
+P('a False: jersey and seat IDs are nominal. b False: hue primarily distinguishes identity. c True. d False: height equals h minus y(value). e True. f False: the ranking variable can differ from the plotted variable; the task plots Acceleration. g False: this depends on the mark and task; bar length normally requires zero. h False: a CI for a mean describes uncertainty in the mean, not an interval containing 95% of observations.'),
+H('Exercise 5'),
+P('a Four times the area requires twice the radius. Making radius directly proportional to value squares the area effect and distorts the encoding.'),
+P('b y(40) = 180 px; bar height = 120 px; label y = 174 px. These are coordinates within the translated plotting group, before adding SVG margins.'),
+P('c Data increases by 20%; visible length increases from 10 to 20, or 100%; the lie factor is 5. State that both effects use percentage changes from their initial values.'))
+
+page('Answers to Exercises Six to Eight',
+H('Exercise 6'),
+P('Items are IT, CS, and DS departments/majors. Department is nominal; mean satisfaction is quantitative on a 0 to 100 score scale, without implying ratios of ability or feelings. Marks are rectangles; x position encodes department; visible bar length encodes score minus the 70 baseline; hue redundantly encodes department; text gives values.'),
+P('IT to DS increases by 6 points, or 6/78, approximately 7.69%. Visible length increases from 8 to 14, or 75%; the lie factor is about 9.75. Correction 1: bars on a 0 to 100 scale. Correction 2: a clearly labelled dotplot from 70 to 90, ordered 78, 82, 84. Means alone do not establish spread, sample size, or statistical significance.'),
+H('Exercise 7'),C(code_from(28)),
+P('The four main errors are slicing too early, sorting ascending rather than descending, failing to reverse the y range, and using the wrong height formula. To preserve raw, use [...raw].sort(...). Real data must also be parsed and checked for missing values before this code.'),
+H('Exercise 8'),
+P('Preserve desk coordinates. Use student ID labels, mini bar length for GPA, hue plus major labels for major, and group labels plus links for group. A fully connected group with n members needs n times (n minus 1) divided by 2 edges. Thin links beneath nodes and group highlighting reduce clutter while preserving the plan.'),
+P('Alternative answers can be valid if all attributes are represented, nominal data does not acquire false order, and the tradeoff is justified. Many simultaneous colors and sizes are not necessary.'))
+
+page('Mock Examination A Suggested Answers',
+H('Question 1 Self marking 30 points'),
+P('Award up to 10 points per limitation: explanation 3, correct example 3, and a connected design implication 4. Use change blindness, color vision deficiency, and area judgment on page 6 as examples. Three unexplained names are not a complete answer.'),
+H('Question 2 Self marking 40 points'),
+P('Goal 5: compare the four mean task durations and identify the fastest class. Data 15: each item is a class; class is nominal; duration is quantitative ratio in minutes. The mean is an aggregate, not the completion time of every student.'),
+P('Encoding 10: pie slices are area marks; angle/area encodes duration, hue encodes class, and text encodes class and values. Depth adds perspective but does not encode a useful data variable.'),
+P('Redesign 10: horizontal bars sorted B 38, D 40, A 42, C 47, with a zero baseline and units in minutes; a common-scale dotplot is also suitable. Mean durations are not parts of a meaningful whole, and 3D distorts perception. Aligned position/length supports direct comparison. B is fastest; C is 9 minutes slower than B.'),
+H('Question 3 Self marking 30 points'),
+P('Use the code on pages 18 and 19. Check the six 5 point criteria on page 25. Give credit for correctly implemented parts; merely naming a function is insufficient.'),
+T(['Error to detect','Check'],[['Wrong attribute','Both height and numeric labels must use Acceleration.'],['Wrong top k','The small dataset order must be D F B C A.'],['Wrong geometry','y decreases as value increases; height increases as value increases.'],['Missing or repeated labels','Use separate domain keys and tickFormat to display Name.']],[2.0,4.8]),
+P('This is a self marking guide for the mock examination. Ask a study partner to interpret your redesign before you explain it to check whether it communicates clearly.'))
+
+page('Mock Examination B Suggested Answers',
+H('Question 1 35 points'),
+P('Data 10: each Region and Month pair is an observation; Region is nominal, Month is temporal/ordinal across the three months, and Revenue is quantitative ratio in million VND. Encoding 5: cylindrical columns; x and depth positions for Region/Month; height for Revenue; hue for Month.'),
+P('Problems 10: occlusion, perspective distortion, and poor alignment across rows; month colors do less to reveal trends than an ordered time axis. Redesign 10: use grouped bars with a shared zero baseline to compare levels: x encodes Region, within-group bars encode Month, height encodes Revenue. Alternatively, use Jan Feb Mar on x and one line per Region with a shared y scale to compare trends. Include the drawing and a legend for the three regions if using lines.'),
+H('Question 2 35 points'),
+P('Two correctly arranged rows, 1 2 3 and 4 5 6, earn 5. GPA encoded as length on a fixed scale earns 10; major via hue and labels earns 10; group labels and all links earn 10. G1 contains S1 S2 S6; G2 contains S3 S4 S5. Each three-person group has three edges, for six total.'),
+H('Question 3 30 points'),
+P('Adapt the COVID code on pages 20 to 21: set W to 900 and H to 600, remove date detection, and use the loader below. Place value labels outside short bars for readability.'),C(code_from(30)),
+P('Award six criteria times 5 as specified in the question. Horizontal bar geometry is x = 0, y = y(key), width = x(value), and height = y.bandwidth(). Handle an empty dataset, and preserve both Province and Country in row labels.'))
+
+page('Final Review Checklist',
+H('Ten questions to ask yourself'),
+B('What is the item, and what unit does each row or mark represent?'),
+B('Have I classified nominal, ordinal, and quantitative data by meaning rather than by number or string storage?'),
+B('Does each attribute have an explicit mapping to a visual channel?'),
+B('Does the encoding satisfy expressiveness and effectiveness for the task?'),
+B('Does each perceptual limitation have an example and a design implication?'),
+B('Does the redesign include a drawing, scale, units, labels, legend, and justification?'),
+B('Are missing values, zeros, and special states clearly distinguished?'),
+B('Have D3 fields been parsed before sorting and filtering?'),
+B('Which field controls ranking, and which field is plotted? Have they been swapped?'),
+B('For vertical bars, is the y range reversed and height equal to h minus y(value)?'),
+H('Suggested three session study plan'),
+T(['Session','Material','What you should do independently'],[['1','Pages 3 to 11 and Exercises 1 to 5','Classify data and explain concepts without notes.'],['2','Pages 12 to 21 and Exercises 6 to 8','Redesign a figure and write vertical/horizontal bar code.'],['3','Both mock examinations, 90 minutes each','Mark mistakes and rewrite the weakest part.']],[.8,2.8,3.2]),
+H('Key terms to use accurately'),
+P('Items are entities; attributes are properties; encoding maps data to visual form; marks are geometric elements; channels are visual properties. A common scale supports comparison, occlusion hides marks, a baseline anchors lengths, salience attracts attention, and clutter makes reading difficult. Small multiples show several comparable views. A justification explains why a design supports its task.'))
+
+page('Study Sources and Cross References',
+P('The numbers below are PDF page numbers counted from 1, not the numbers printed on slides. The C2 Popout file begins with printed slide numbers around 60, so the two numbering systems differ.'),
+T(['Supplied source','Main reference locations'],[['C1-Data Science and Visualization.pdf','Definitions 4 to 7; visualization choices 13 to 21; human capabilities 31.'],['C2-Perception-Color.pdf','Perception 3 to 4; vision 20 to 21; HSV 28; colormaps 35 to 40; relative color 49.'],['C2-Perception-Popout-Change blindness-gestalt.pdf','Popout 2 and 11; change blindness 19 to 28; Gestalt 29 to 58.'],['C3-Data.pdf','Data and dataset types 5 to 22; attribute scales 27 to 36.'],['C4-Marks-Channels.pdf','Marks and channels 3 to 15; channel accuracy 19 to 48.'],['C5-Design guideline.pdf','Integrity 9 to 31; alternatives 34 to 43; design 49 to 73.'],['it138iu_2023_HK1_midterm.pdf','Questions 1 and 2 on pages 2 to 3; D3 on pages 3 to 4.'],['it138iu_2026_HK1_midterm.pdf','Limitations and analysis on page 2; cars on pages 2 to 4.'],['it138iu_2026_HK2_midterm.pdf','Limitations and analysis on page 2; cars on pages 2 to 4.']],[3.5,3.3]),
+H('Additional technical and statistical references'),
+P('D3 fetch and parsing: https://d3js.org/d3-fetch'),
+P('Band scales: https://d3js.org/d3-scale/band'),
+P('Data join: https://d3js.org/d3-selection/joining'),
+P('Confidence limits for the mean: NIST Engineering Statistics Handbook, Section 1.3.5.2, https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm'),
+P('The Gestalt, heatmap, and practice score figures were drawn for this guide. The classroom uses data and positions from the 2023 paper. The dotplot uses a subset of values readable in the HK2 paper. Redesigns are suggested solutions for learning.'))
+
+assert len(pages)==len(original)==32
+# Preserve the exact tested reference code, including all identifiers and URLs.
+for n in [18,19,20,21,23,28,30]:
+ assert next(v for k,v in pages[n-1][1] if k=='code')==code_from(n)
+(base/'tmp/dsdv_sources/pages_en.json').write_text(json.dumps(pages,ensure_ascii=False,indent=2),encoding='utf-8')
+render='styles={'+source.split('styles={',1)[1]
+render=render.replace('DSDV_On_tap_va_luyen_de','DSDV_Midterm_Study_Guide_EN')
+render=render.replace('DSDV  IT138IU  Ôn tập và luyện đề','DSDV  IT138IU  Study Guide and Practice')
+render=render.replace('Ôn tập giữa kỳ DSDV','DSDV Midterm Study Guide')
+render=render.replace('Lý thuyết và bài tập giữa kỳ IT138IU','IT138IU Midterm Concepts and Practice')
+render=render.replace('Tài liệu tự học','Self study guide')
+exec(render)

@@ -1,0 +1,32 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const src = fs.readFileSync('D:/Documents/# Documents/# UNI/Year 3 -  Sem 1/Data Science and Data Visualization/Lab/lab05/script.js','utf8');
+const ctx={}; vm.createContext(ctx);
+vm.runInContext(fs.readFileSync('tmp/lab05-notes/d3.min.js','utf8'),ctx);
+vm.runInContext('const DATE="4/5/20";'+src.slice(src.indexOf('function rowConverter'),src.indexOf('d3.csv(URL)')),ctx);
+const rows=JSON.parse(fs.readFileSync('tmp/lab05-notes/rows.json','utf8'));
+const valid=rows.map(ctx.rowConverter).filter(Boolean);
+ctx.data=valid;ctx.innerW=690;ctx.innerH=600;
+vm.runInContext(src.slice(src.indexOf('    const x ='),src.indexOf('    g.append("g")'))+'\nglobalThis.scales={center:x(0),north:y(45),south:y(-45),zeroRadius:radius(0),maxRadius:radius(d3.max(data,d=>d.value))};',ctx);
+const base={'Country/Region':'Test','Province/State':'','Lat':'10','Long':'20','4/5/20':'0'};
+const cases=[['zero',{}],['blank latitude',{Lat:''}],['blank cases',{'4/5/20':''}],['not numeric',{Lat:'not-a-number'}],['latitude range',{Lat:'91'}],['longitude range',{Long:'181'}],['negative cases',{'4/5/20':'-1'}],['nonfinite',{Lat:'Infinity'}]];
+const tests=cases.map(([name,overrides])=>({name,accepted:ctx.rowConverter({...base,...overrides})!==null}));
+const excluded=rows.filter(r=>ctx.rowConverter(r)===null).map(r=>({country:r['Country/Region'],province:r['Province/State'],lat:r.Lat,long:r.Long,value:r['4/5/20']}));
+const report={counts:{loaded:rows.length,valid:valid.length,excluded:excluded.length,zeroCases:valid.filter(d=>d.value===0).length},excluded,examples:valid.slice(0,3),scales:ctx.scales,validationTests:tests};
+// Execute the actual hover functions against small selection stubs (not a browser).
+const tooltipState={},statusState={};
+const selection=(state)=>({html(v){state.html=v;return this;},style(k,v){state[k]=v;return this;},text(v){state.text=v;return this;},attr(k,v){state[k]=v;return this;}});
+ctx.d3.select=(target)=>selection(target==='#tooltip'?tooltipState:target==='#status'?statusState:target);
+ctx.window={innerWidth:1024};
+vm.runInContext(src.slice(src.indexOf('const tooltip ='),src.indexOf('function rowConverter')),ctx);
+report.hoverTests=valid.slice(0,3).map(d=>{
+ const target={};const event={currentTarget:target,clientX:400,clientY:300};
+ ctx.showTooltip(event,d);
+ const shown=tooltipState.display==='block'&&tooltipState.html.includes(d.country)&&tooltipState.html.includes(d.value.toLocaleString());
+ ctx.moveTooltip({...event,clientX:420});
+ const moved=tooltipState.left==='435px';
+ ctx.hideTooltip(event);
+ return {country:d.country,shown,moved,hidden:tooltipState.display==='none',strokeReset:target.stroke==='#fff'};
+});
+fs.writeFileSync('tmp/lab05-notes/checks.json',JSON.stringify(report,null,2));
+console.log(JSON.stringify(report,null,2));

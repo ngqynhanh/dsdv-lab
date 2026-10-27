@@ -1,0 +1,465 @@
+
+=== PAGE 1 ===
+PERCEPTION
+1
+
+=== PAGE 2 ===
+PERCEPTION 
+-
+COGNITION
+2
+Is there something wrong?
+
+=== PAGE 3 ===
+PERCEPTION
+Perception
+•
+Identification and interpretation of sensory information
+•
+From the physical stimulus to recognizing information
+•
+Shaped by learning, memory, expectation
+Cognition
+•
+The processing of information, applying knowledge
+Hear someone speak: Perception
+Understand the language and the words: Cognition
+3
+
+=== PAGE 4 ===
+PERCEPTION VS. COGNITION
+PERCEPTION
+Eye, optical nerve, visual 
+cortex
+Basic perception
+First processing
+Not conscious
+Reflexes
+COGNITION
+Recognizing objects
+Relations between objects
+Conclusion drawing
+Problem solving
+Learning, …
+4
+
+=== PAGE 5 ===
+PERCEPTION 
+-
+COGNITION
+5
+
+=== PAGE 6 ===
+WHAT IS THERE 
+VS 
+WHAT DO WE SEE
+6
+
+=== PAGE 7 ===
+Emergence Images
+7
+
+=== PAGE 8 ===
+http://graphics.stanford.edu/~niloy/research/emergence/emergence_image_siga_09.html
+8
+
+=== PAGE 9 ===
+OUR PERCEPTION IS BASED ON PRIORS
+We have a model of the world
+We try to fit what we see into this model
+9
+
+=== PAGE 10 ===
+10
+
+=== PAGE 11 ===
+11
+
+=== PAGE 12 ===
+12
+
+
+=== PAGE 13 ===
+13
+
+
+=== PAGE 14 ===
+WHO DO YOU SEE?
+14
+
+=== PAGE 15 ===
+OUR EYE
+15
+
+=== PAGE 16 ===
+HUMAN VISUAL SYSTEM
+Cone cells: for color 
+vision. 
+-
+Dense in the 
+center. Fovea has 
+only cone cells
+Rods cells: for 
+black/white
+16
+
+=== PAGE 17 ===
+COLOR VISION
+17
+3 types of cone 
+with different 
+sensitivity to 
+light:
+-
+Red (63%)
+-
+Green (31%)
+-
+Blue (6%)
+
+=== PAGE 18 ===
+VISUAL ACUITY
+18
+Visual acuity
+
+=== PAGE 19 ===
+19
+
+=== PAGE 20 ===
+HUMAN VISUAL SYSTEM
+Not 
+similar to
+a camera
+Vision works as sequence of 
+•
+Fixation
+: maintaining gaze on 
+single location (200
+-
+600 
+ms
+)
+•
+Saccades: 
+moving between 
+different locations (20
+-
+100 
+ms
+)
+20
+
+=== PAGE 21 ===
+HUMAN VISUAL SYSTEM
+No general purpose vision
+What we see depends on our goals and expectations
+Relative judgements: strong
+Absolute judgments: weak
+Ames Room
+21
+
+
+=== PAGE 22 ===
+AMES ROOM
+22
+
+=== PAGE 23 ===
+COLOR
+23
+
+=== PAGE 24 ===
+COLOR BASICS
+The electromagnetic spectrum
+-
+Visible part: 390 
+–
+750 nm
+-
+Spectral colors: evoked by a single wavelength 
+(
+red, orange, yellow, green, blue, and violet
+)
+-
+Other colors: unsaturated colors: mix of multiple wavelengths
+(
+purple, magenta, … and white
+) 
+24
+
+
+=== PAGE 25 ===
+DISPERSING LIGHT WITH PRISM
+25
+
+=== PAGE 26 ===
+COLOR != WAVELENGTH
+color = wavelength + energy
+26
+
+
+=== PAGE 27 ===
+COLOR
+Color is irrelevant to much of normal vision. 
+Does not help to perceive 
+-
+layout of objects
+-
+how they are moving
+-
+what shape they are
+Color breaks camouflage
+Tells about material properties (e.g. quality of food)
+27
+
+
+=== PAGE 28 ===
+DIMENSIONS OF COLOR
+HSV model
+Hue
+color value expressed as a number 
+from 0 to 360
+Saturation
+•
+the purity of a color
+•
+pigments: no white/black is added
+•
+light: what is the ratio of dominant 
+wavelength to others
+Value
+Lightness or darkness of a color
+the intensity of light
+Other color models: RGB, HSL, …
+28
+
+
+=== PAGE 29 ===
+COLOR IN REAL LIFE
+29
+
+=== PAGE 30 ===
+PAINT MIXING
+Physical mixing of opaque paints
+Primary: red, yellow, blue
+Secondary (mixed): green, orange, purple
+Subtractive model
+-
+absorb wavelength
+30
+
+
+=== PAGE 31 ===
+INK MIXING
+Subtractive mix of transparent inks
+Primary: cyan, magenta, yellow
+Secondary: RGB
+Approx. black = C+M+Y
+True black = C+M+Y+K
+Subtractive model
+31
+
+
+=== PAGE 32 ===
+LIGHT MIXING
+Additive mix of colored lights
+Primary: Red, Green, Blue
+Secondary: Cyan, Magenta, Yellow
+Additive model
+32
+
+
+=== PAGE 33 ===
+COLOR GAMUT
+33
+The curve shows all visible 
+colors
+Polygon: Set of all colors 
+that can be produced by a 
+device
+Primaries are arbitrary
+
+
+=== PAGE 34 ===
+COLOR IN 
+VISUALIZATION
+34
+
+=== PAGE 35 ===
+COLORMAP
+Specifies a mapping between color and values
+•
+Categorical vs ordered
+•
+Sequential vs diverging
+•
+Segmented vs continuous
+•
+Univariate vs bivariate
+Expressiveness
+Match colormap to attribute characteristics
+35
+
+=== PAGE 36 ===
+APPLICATION: LABELLING
+36
+Carefully designed color scheme for 12 colors [
+colorbrewer
+] 
+
+=== PAGE 37 ===
+COLOR FOR QUALITATIVE DATA 
+37
+Color labeling (nominal information coding)
+recommended: about 6, no more than 10 
+
+=== PAGE 38 ===
+COLOR FOR QUANTITATIVE DATA
+use 
+value
+saturation
+works but not as good
+don‘t use 
+hue
+!
+Danger: rainbow color map
+38
+
+
+=== PAGE 39 ===
+39
+
+=== PAGE 40 ===
+TO BIN OR NOT TO BIN?
+What is faster? 
+What is more accurate?
+Continuous was faster 
+Binned was often 
+more accurate
+40
+Evaluating the Impact of Binning 2D Scalar Fields
+Lace Padilla, P. Samuel Quinan, 
+Miriah
+Meyer, Sarah 
+Creem
+-
+Regehr
+Proceedings of InfoVis16 
+
+=== PAGE 41 ===
+COLOR 
+BLINDNESS
+41
+
+=== PAGE 42 ===
+NOTION
+10% of males, 1% of females
+Most common: red
+-
+green weakness / blindness
+Reason: lack of medium or long wavelength 
+receptors, or altered spectral sensitivity (most 
+common: green shift)
+42
+Normal
+Deuteranopia (no green receptors)
+Protanopia (no red receptors)
+
+=== PAGE 43 ===
+COLOR BLINDNESS TEST
+43
+
+
+=== PAGE 44 ===
+44
+NYT, Feb 12, 2012
+
+=== PAGE 45 ===
+SIMULATE COLOR VISION DEFICIENCIES
+45
+https://www.color
+-
+blindness.com/coblis
+-
+color
+-
+blindness
+-
+simulator/
+
+=== PAGE 46 ===
+COLOR BLINDNESS CHECKING
+46
+NY Times Zoning Maps: http://nyti.ms/2XVAuie
+
+=== PAGE 47 ===
+47
+
+=== PAGE 48 ===
+COLOR IS 
+RELATIVE
+48
+
+=== PAGE 49 ===
+SIMULTANEOUS BRIGHTNESS CONTRAST 
+49
+The perceived brightness
+of an object is relative to
+it‘s background
+
+=== PAGE 50 ===
+50
+
+
+=== PAGE 51 ===
+FOR MORE DEMO
+http://purveslab.net/see
+-
+for
+-
+yourself/
+51
+
+
+=== PAGE 52 ===
+BLACK AND BLUE OR WHITE AND GOLD 
+https://imgur.com/hxJjUQB
+52
+
+
+=== PAGE 53 ===
+INTERACTION OF COLOR
+53
+
+=== PAGE 54 ===
+INTERACTION OF COLOR
+54
+
+=== PAGE 55 ===
+INTERACTION OF COLOR
+55
+[Wong 2010]
+
+=== PAGE 56 ===
+56
+
+
+=== PAGE 57 ===
+I love this graph because it shows that 
+while the number of people dying from 
+communicable diseases is still far too 
+high, those numbers continue to come 
+down [..] But there remains much to do 
+to cut down the deaths in that yellow 
+block even more dramatically.[…]
+Bill Gate
+57
+
+=== PAGE 58 ===
+EVALUATE THE GRAPH
+how well does the graph above tell 
+this story?
+58
+
+=== PAGE 59 ===
+59
+Redesigned by Perceptual Edge

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>Midterm</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<body><h1>Confirmed cases on 3 March 2023</h1>
+<div id="chart"></div><script>
+async function main() {
+  const raw = await d3.csv("covid_global.csv");
+  const parse = d3.timeParse("%m/%d/%y");
+  const target = new Date(2023, 2, 3);
+  const dateKey = raw.columns.find(k => {
+    const dt = parse(k);
+    return dt && +dt === +target;
+  });
+  if (!dateKey) throw new Error("Date column missing");
+  const data = raw.map((d, i) => ({
+    key: String(i),
+    label: [d["Province/State"], d["Country/Region"]]
+      .filter(Boolean).join(" / "),
+    value: d[dateKey]?.trim() ? +d[dateKey] : NaN
+  })).filter(d => Number.isFinite(d.value) && d.value > 0);
+  if (!data.length) throw new Error("No non-zero rows");
+  const W = 1000, H = 650;
+  const m = {top: 40, right: 95, bottom: 55, left: 260};
+  const w = W - m.left - m.right;
+  const h = H - m.top - m.bottom;
+  const svg = d3.select("#chart").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${m.left},${m.top})`);
+  const label = new Map(data.map(d => [d.key, d.label]));
+  const x = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d.value)]).nice()
+    .range([0, w]);
+  const y = d3.scaleBand().domain(data.map(d => d.key))
+    .range([0, h]).padding(0.15);
+  g.append("g").attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).ticks(6));
+  g.append("g")
+    .call(d3.axisLeft(y).tickFormat(k => label.get(k)));
+  svg.append("text").attr("x", m.left + w / 2)
+    .attr("y", H - 10).attr("text-anchor", "middle")
+    .text("Confirmed cases");
+  g.selectAll("rect.bar").data(data, d => d.key)
+    .join("rect").attr("class", "bar")
+    .attr("x", 0).attr("y", d => y(d.key))
+    .attr("width", d => x(d.value))
+    .attr("height", y.bandwidth())
+    .attr("fill", "#2166ac");
+  g.selectAll("text.value").data(data, d => d.key)
+    .join("text").attr("class", "value")
+    .attr("x", d => Math.max(0, x(d.value) - 4))
+    .attr("y", d => y(d.key) + y.bandwidth() / 2)
+    .attr("dy", ".35em").attr("text-anchor", "end")
+    .attr("fill", "white").attr("font-size", 10)
+    .text(d => d3.format(",")(d.value));
+}
+main().catch(error => {
+  console.error(error);
+  d3.select("#chart").text(error.message);
+});
+</script></body></html>

@@ -1,0 +1,378 @@
+
+=== PAGE 1 ===
+DATA SCIENCE AND 
+VISUALIZATION
+Trần Thanh Tùng
+tttung@hcmiu.edu.vn
+
+=== PAGE 2 ===
+MOTIVATION
+The purpose of computing is insight, not numbers.
+…. of visualization is insight, not pictures
+
+=== PAGE 3 ===
+DEFINITION
+Visualization
+1. Formation of mental visual images
+2. The act or process of interpreting in visual 
+terms or of putting into visible form
+
+=== PAGE 4 ===
+DEFINITION
+Visualization is the process that 
+Transforms (abstract) data into 
+interactive graphical representation for the purpose of
+exploration, confirmation, or presentation.
+
+=== PAGE 5 ===
+GOOD DATA VISUALIZATION
+Makes data accessible
+Combines strengths of humans and computers
+Enables insight
+communicates
+
+=== PAGE 6 ===
+VISUALIZATION
+“Visualization is really about external 
+cognition, that is, how resources outside 
+the mind can be used to boost the 
+cognitive capabilities of the mind.”
+Stuart Card
+one of the pioneers of applying human factors 
+in human–computer interaction
+
+=== PAGE 7 ===
+WHY VISUALIZE?
+• To inform humans: communication
+• When questions are not well defined: exploration
+o What is the structure of positive comments in social network?
+o What is the movement pattern of customer in a supermarket?
+o Which drug can help patient X ?
+
+=== PAGE 8 ===
+PURPOSE OF VISUALIZATION
+
+
+=== PAGE 9 ===
+COMMUNICATION
+https://www.nytimes.com/interactive/2014/10/19/upshot/peyton-manning-breaks-touchdown-
+passing-record.html?abt=0002&abg=1&smid=tw-upshotnyt
+
+=== PAGE 10 ===
+EXAMPLE OF EXPLORATION
+Tool to 
+explore 
+Genomic 
+Stratifications 
+in Cancer
+
+=== PAGE 11 ===
+WHY GRAPHICS?
+Figures  
+• Are richer;  provide more info with 
+less clutter and in less space
+• Provide the gestalt effect: give an 
+overview, make structure more 
+visible
+• Are more accessible, easier to 
+understand, faster to grasp, more 
+comprehensible, more memorable, 
+more fun, and less formal
+
+
+=== PAGE 12 ===
+TEXTUAL VS IMAGE
+
+
+=== PAGE 13 ===
+WHEN NOT TO VISUALIZE? 
+WHEN TO AUTOMATE?
+Well defined question on well-defined dataset
+• What is the current unemployment rate?
+• Which city has the biggest contribution to the GDP of a country?
+No human intervention possible/necessary
+• Decision needed in minimal time
+• High frequency stock market trading: which stock to buy/sell?
+• Manufacturing: is bottle broken?
+• Impractical for human to be involved
+• Automatic data products
+
+=== PAGE 14 ===
+COMPUTER VS HUMAN
+
+
+=== PAGE 15 ===
+WHY USE COMPUTER?
+• Interaction
+“drill down” into data
+• Integration
+Integrate with algorithms
+Make visualization part of a data 
+analysis pipeline
+[Sunburst by John Stasko, Implementation in Caleydo by Christian Partl] 
+https://observablehq.com/@d3/zoomable-sunburst
+
+=== PAGE 16 ===
+WHY USE COMPUTER?
+• Efficiency
+Re-use charts / methods for different datasets
+• Quality
+Precise data driven rendering
+• Storytelling
+• Use time
+
+=== PAGE 17 ===
+TELL STORIES
+
+
+=== PAGE 18 ===
+WHY NOT JUST USE STATISTICS
+For all four datasets
+
+=== PAGE 19 ===
+ANSCOMBE’S QUARTET
+
+
+=== PAGE 20 ===
+Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through
+Simulated Annealing, CHI 2017, Justin Matejka, George Fitzmaurice 
+
+
+=== PAGE 21 ===
+VISUALIZATION = HUMAN DATA INTERACTION
+
+=== PAGE 22 ===
+DATA
+
+=== PAGE 23 ===
+VISUALIZATION IN DATA SCIENCE
+
+
+=== PAGE 24 ===
+BIG DATA
+• Big Data
+2017: 2.5 exabytes (quintillion bytes)of data per day, 
+largely unstructured
+2020: expected to reach 44 zettabytes
+• 90% of the data created in last two years
+1 million TB
+1000 billion 
+TB
+
+=== PAGE 25 ===
+SOURCE OF DATA
+
+
+=== PAGE 26 ===
+BIG DATA IN SCIENCE
+• Big data is transforming science 
+and engineering
+• Internet of things
+• Sensor
+• Camera
+• In chemistry
+• In medicine
+• In smart building/smart city
+
+
+=== PAGE 27 ===
+GET A SENSE OF BIG DATA
+• Example: CERN Large Hadron Collider Data
+CERN has publicly released over 300TB of data: CERN Open Data Portal
+How much is that?
+• A DVD-R holds 4.7 GB. You'd need 63,830 of them to hold 300 TB.
+• It takes Pandora about a day and a half to burn through a gig of mobile data. So
+if the CERN data was an album, you could stream it in just over 1,230 years.
+• At 350 MB per hour for 4K video streaming, so if the CERN data was a 4K
+movie it'd probably be about 857,142 hours, or about 98 years long.
+• But it ain't no thing compared to what the National Security Agency works with.
+Going by 2013 figures the agency released, the NSA's various activities "touch"
+300 TB of data every 15 minutes or so
+(Popular Mechanics Article 
+
+=== PAGE 28 ===
+BIG DATA IN DATA CENTER
+• NSA Utah Data Center (Bluffdale, Utah)
+Storage Capacity?
+estimates vary, but Forbes
+magazine estimates 12
+exabytes (12,000 petabytes
+or 12 million terabytes) 
+
+
+=== PAGE 29 ===
+“The ability to take data—to be able to
+understand it, to process it, to extract value
+from it, to visualize it, to communicate it—
+that’s going to be a hugely important skill in the
+next decades, … because now we really do
+have essentially free and ubiquitous data.”
+Hal Varian, Google’s Chief Economist
+The McKinsey Quarterly, Jan 2009 
+
+=== PAGE 30 ===
+HUMAN
+In human-data interaction
+
+=== PAGE 31 ===
+WHY HUMAN?
+• Leveraging human capabilities
+Pattern discovery: clusters, outliers, trends
+Contextual knowledge: expectations for datasets, explanations for patterns
+Action: humans learn and take action 
+But humans have limitation, we have to design for them.
+
+=== PAGE 32 ===
+CAN BE DRAWN BUT 
+CAN WE READ?
+
+
+=== PAGE 33 ===
+LIMITS OF COGNITION
+
+
+=== PAGE 34 ===
+HISTORY OF VISUALIZATION
+
+=== PAGE 35 ===
+ROCK AND CAVE
+The History of Visual 
+Communication
+
+=== PAGE 36 ===
+RECORD
+Konya town map, Turkey, c. 6200 BC Anaximander of Miletus, c. 550 BC 
+
+=== PAGE 37 ===
+RECORD
+
+
+=== PAGE 38 ===
+RECORD
+Eadweard J. Muybridge, 1878. 
+A Galloping horse
+https://en.wikipedia.org/wiki/Eadweard_Muybridge
+
+=== PAGE 39 ===
+ANALYZE – TIME SERIES
+Planetary Movement Diagram, c. 950 
+ Halley’s Wind Map, 1686 
+
+
+=== PAGE 40 ===
+ANALYZE
+
+
+=== PAGE 41 ===
+FIND PATTERN
+John Snow, 1854
+Cholera outbreak
+Spread by airbone ?
+Map to show it is 
+waterbone
+
+
+=== PAGE 42 ===
+COMMUNICATE
+https://www.masswerk.at/minard/ - Napoleon march - C.J. Minard, 1869
+
+=== PAGE 43 ===
+http://infowetrust.com/scroll/ 
+
+=== PAGE 44 ===
+COMMUNICATE
+
+
+=== PAGE 45 ===
+SUBWAY
+MAP
+
+
+=== PAGE 46 ===
+INTERACT
+Ivan Sutherland, 
+1963
+
+=== PAGE 47 ===
+MODERN EXAMPLES
+https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen
+Hans Rosling, TED 2006 
+
+=== PAGE 48 ===
+COURSE 
+OBJECTIVES
+How to efficiently visualize data
+Evaluate and critique visualization designs
+Apply fundamental principles & 
+techniques
+Design visual data analysis solutions
+Implement interactive data visualizations
+(Web development skills)
+
+=== PAGE 49 ===
+TEXTBOOK
+
+
+=== PAGE 50 ===
+COURSE SCHEDULE
+1. Introduction
+2. Perception
+3. Data abstraction, data types
+4. Marks and channels
+5. Design guidelines
+6. Visualizing Interaction
+7. Views, focus and context
+8. Tabular Data
+9. Storytelling with visualization
+10. Visualizing networks and trees
+11. Visualizing multivariate networks
+12. Tasks Analysis, Designing and 
+Evaluating Visualizations
+13. Maps
+14. Text visualization
+15. Filtering and aggregation
+
+=== PAGE 51 ===
+GRADING
+• Lab/Assignments/Quiz: 40%
+• Midterm exam: 30%
+• Final exam: 30%
+
+=== PAGE 52 ===
+PROJECT
+• Design and implement a web-
+based interactive visualization 
+to answer questions you have about 
+some topic of your own choosing
+• Task
+1. Acquire data
+2. Design a visualization
+3. Implement it
+4. Evaluate the result
+• Team: 3-4 students
+• To SUBMIT
+1. A project proposal
+(by 16/03/2020)
+2. A functional project prototype  
+(The week after the midterm exam)
+3. A final project submission 
+(The week before the final exam)
+
+=== PAGE 53 ===
+PROJECT PROPOSAL
+• Project title, link to github repo
+• Background and motivation
+• Objectives: the primary 
+questions to answer
+• Data: where and how to 
+collect
+• Data processing: 
+• Visualization design: 3 
+alternative prototype designs 
+• Must-have features
+• Optional features
+• Project schedule
+TO SUBMIT:
+3-4 pages of text, 5-6 pages of 
+sketches of the prototype 
+design

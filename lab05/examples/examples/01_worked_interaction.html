@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Pre-Lab 05 — Study Space Explorer</title>
+		<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				color: #17364f;
+				margin: 26px;
+				background: #f4f8fc;
+			}
+			main {
+				max-width: 980px;
+				margin: auto;
+				background: #fff;
+				padding: 22px 28px;
+				border-radius: 12px;
+				box-shadow: 0 4px 20px #cddae855;
+			}
+			h1 {
+				margin: 0 0 8px;
+			}
+			p {
+				color: #516679;
+			}
+			svg {
+				max-width: 100%;
+				height: auto;
+				border: 1px solid #e3edf5;
+				background: #fbfdff;
+			}
+			.axis path,
+			.axis line {
+				stroke: #8299aa;
+			}
+			.axis text {
+				font-size: 12px;
+			}
+			.spot {
+				cursor: crosshair;
+				stroke: #fff;
+				stroke-width: 2;
+			}
+			.spot:focus {
+				stroke: #ffb74d;
+				stroke-width: 4;
+				outline: none;
+			}
+			.tooltip {
+				position: fixed;
+				pointer-events: none;
+				display: none;
+				background: #17364f;
+				color: white;
+				border-radius: 8px;
+				padding: 10px 13px;
+				font-size: 14px;
+				box-shadow: 0 3px 9px #22334555;
+				z-index: 10;
+				line-height: 1.5;
+			}
+			.hint {
+				background: #e7f1fa;
+				padding: 10px 15px;
+				border-left: 4px solid #1d6a9c;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>Study Space Explorer</h1>
+			<p>
+				Fictional campus study rooms. Move over a circle to inspect its data;
+				try keyboard Tab + Enter.
+			</p>
+			<div class="hint">
+				No permanent labels: show the room name and occupancy
+				<strong>only when a point is selected</strong>.
+			</div>
+			<div
+				id="chart"
+				aria-label="Interactive scatterplot of fictional study spaces"
+			></div>
+			<p id="status" role="status">Move over a circle.</p>
+			<p>
+				<small
+					>Practice data only — this is NOT the COVID-19 lab solution.</small
+				>
+			</p>
+		</main>
+		<div id="tooltip" class="tooltip" role="tooltip"></div>
+		<script>
+			// A — MODEL: A small, fictional dataset, with position and quantity fields.
+			const spaces = [
+				{ id: "R1", name: "Library West", x: 12, y: 70, visitors: 12 },
+				{ id: "R2", name: "Media Room", x: 34, y: 37, visitors: 55 },
+				{ id: "R3", name: "Quiet Study", x: 83, y: 83, visitors: 8 },
+				{ id: "R4", name: "Engineering Hub", x: 73, y: 51, visitors: 44 },
+				{ id: "R5", name: "Student Commons", x: 89, y: 26, visitors: 60 },
+			]
+
+			// B — CANVAS + SCALES: data coordinates -> screen pixels.
+			const width = 900,
+				height = 480,
+				margin = { top: 35, right: 40, bottom: 60, left: 70 }
+			const plotWidth = width - margin.left - margin.right
+			const plotHeight = height - margin.top - margin.bottom
+			const svg = d3
+				.select("#chart")
+				.append("svg")
+				.attr("viewBox", `0 0 ${width} ${height}`)
+			const plot = svg
+				.append("g")
+				.attr("transform", `translate(${margin.left},${margin.top})`)
+
+      // why is Y range reversed? answer: because SVG y=0 is at the top, so we want higher data values to map to lower pixel values
+			const xScale = d3.scaleLinear().domain([0, 100]).range([0, plotWidth])
+			const yScale = d3.scaleLinear().domain([0, 100]).range([plotHeight, 0])
+			const size = d3.scaleSqrt().domain([0, 60]).range([5, 29])
+			plot
+				.append("g")
+				.attr("class", "axis")
+				.attr("transform", `translate(0,${plotHeight})`)
+				.call(d3.axisBottom(xScale))
+			plot.append("g").attr("class", "axis").call(d3.axisLeft(yScale))
+			svg
+				.append("text")
+				.attr("x", width / 2)
+				.attr("y", height - 13)
+				.attr("text-anchor", "middle")
+				.text("Campus east-west coordinate (fictional)")
+			svg
+				.append("text")
+				.attr("transform", `translate(19,${height / 2}) rotate(-90)`)
+				.attr("text-anchor", "middle")
+				.text("Campus north-south coordinate (fictional)")
+
+			// C — TOOLTIP: show, move, hide. Event is the pointer action; d is the data object.
+			const tooltip = d3.select("#tooltip")
+			const status = d3.select("#status")
+			function content(d) {
+				return `<strong>${d.name}</strong><br>Room ID: ${d.id}<br>Visitors: ${d.visitors}`
+			}
+      // why do we need all three functions? answer: showTooltip displays the tooltip and highlights the circle, moveTooltip updates the position of the tooltip as the pointer moves, and hideTooltip hides the tooltip and resets the circle's appearance when the pointer leaves.
+			function showTooltip(event, d) {
+				tooltip.html(content(d)).style("display", "block")
+				status.text(`${d.name}: ${d.visitors} visitors`)
+				d3.select(event.currentTarget)
+					.attr("stroke", "#eea638")
+					.attr("stroke-width", 4)
+				moveTooltip(event)
+			}
+			function moveTooltip(event) {
+				// Page-based coordinates for a position:fixed tooltip (clientX, clientY).
+				tooltip
+					.style(
+						"left",
+						`${Math.min(event.clientX + 15, window.innerWidth - 240)}px`,
+					)
+					.style("top", `${Math.max(10, event.clientY - 50)}px`)
+			}
+			function hideTooltip(event) {
+				tooltip.style("display", "none")
+				d3.select(event.currentTarget)
+					.attr("stroke", "#fff")
+					.attr("stroke-width", 2)
+				status.text("Move over a circle.")
+			}
+
+			// D — MARKS: one circle per row. Each circle listens to pointer events.
+      // what controls circle position vs size? answer: xScale, yScale, size
+      // what are event and d? answer: event is the pointer event object, d is the data object for the circle being interacted with
+			plot
+				.selectAll("circle.spot")
+				.data(spaces, (d) => d.id)
+				.join("circle")
+				.attr("class", "spot")
+				.attr("tabindex", 0)
+				.attr("role", "button")
+				.attr("aria-label", (d) => `${d.name}, ${d.visitors} visitors`)
+				.attr("cx", (d) => xScale(d.x))
+				.attr("cy", (d) => yScale(d.y))
+				.attr("r", (d) => size(d.visitors))
+				.attr("fill", "#287aa8")
+				.attr("fill-opacity", 0.65)
+				.on("pointerenter", showTooltip)
+				.on("pointermove", moveTooltip)
+				.on("pointerleave", hideTooltip)
+				.on("focus", function (event, d) {
+					status.text(`${d.name}: ${d.visitors} visitors (keyboard)`)
+					d3.select(this).attr("stroke", "#eea638")
+				})
+				.on("blur", function () {
+					status.text("Move over a circle.")
+					d3.select(this).attr("stroke", "#fff")
+				})
+
+			// E — CHECK: expected result = 5 points.
+			console.log("Expected points:", spaces.length)
+			console.log("Actual points:", plot.selectAll("circle.spot").size())
+		</script>
+	</body>
+</html>

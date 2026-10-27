@@ -1,0 +1,416 @@
+
+=== PAGE 1 ===
+DESIGN 
+GUIDELINE
+1
+
+=== PAGE 2 ===
+PRINCIPLES
+#1: The visualization 
+should show all of the 
+data and only the data
+2
+
+=== PAGE 3 ===
+PRINCIPLES
+#2: Use the best 
+visual channel 
+available for the most 
+important aspect of 
+the data
+3
+
+=== PAGE 4 ===
+MATERIALS
+4
+
+=== PAGE 5 ===
+MATERIALS
+Edward Tufte
+Author of fundamental books on visualization
+5https://en.wikipedia.org/wiki/Edward_Tufte
+
+
+=== PAGE 6 ===
+THE VISUAL DISPLAY OF QUANTITATIVE 
+INFORMATION
+Graphical excellence is the well-
+designed presentation of interesting 
+data – a matter of substance, of 
+statistics, and of design
+Edward Tufte
+6
+
+=== PAGE 7 ===
+MORE GUIDELINES
+- Graphical excellence consists of complex ideas 
+communicated with clarity, precision, and 
+efficiency.
+- Graphical excellence is that which gives to the 
+viewer the greatest number of ideas in the shortest 
+time with the least ink in the smallest space.
+And many more in The Visual Display of 
+Quantitative Information
+7
+
+=== PAGE 8 ===
+8
+
+=== PAGE 9 ===
+TUFTE’S INTEGRITY PRINCIPLES
+Show data variation, not design variation
+Clear, detailed, and thorough labeling and appropriate
+scales 
+Size of the graphic effect should be directly proportional
+to the numerical quantities (“lie factor”)
+9
+
+=== PAGE 10 ===
+THE LIE FACTOR
+Size of effect shown in graphic
+Size of effect in data
+10
+
+
+=== PAGE 11 ===
+LIE FACTOR - GRAPHICAL INTEGRITY 
+Magnitude in 
+data must  
+correspond to
+magnitude of 
+mark
+Effect in Data: factor 1.14
+Effect in Graphic: factor 5
+Lie Factor: 5/1.14 = 4.38
+11
+
+=== PAGE 12 ===
+SCALE DISTORTIONS
+12
+
+=== PAGE 13 ===
+WHAT’S WRONG?
+13
+
+
+=== PAGE 14 ===
+WHAT’S WRONG?
+14
+
+
+=== PAGE 15 ===
+15
+
+=== PAGE 16 ===
+START AT 0?
+16
+
+=== PAGE 17 ===
+Use a baseline that shows the data, 
+not the zero-point
+Think about: what is a meaningful 
+baseline?
+17
+
+=== PAGE 18 ===
+SCALE AT 0
+18
+
+=== PAGE 19 ===
+FRAMING
+Vis can be used to lie
+as language or statistics
+When showing something, make sure that you’re faithful to the 
+data 
+19
+
+=== PAGE 20 ===
+GLOBAL WARMING?
+20The Daily Mail, UK, Jan 2012
+
+=== PAGE 21 ===
+21
+
+=== PAGE 22 ===
+GLOBAL WARNING – FRAME THE DATA
+22
+
+=== PAGE 23 ===
+WHAT’S WRONG
+23
+
+=== PAGE 24 ===
+SCALE DISTORTIONS IN TEMPORAL DATA
+24
+
+=== PAGE 25 ===
+SCALE DISTORTIONS IN TEMPORAL DATA
+25
+
+=== PAGE 26 ===
+WHAT’S WRONG?
+26
+
+=== PAGE 27 ===
+BIASES
+27
+Height of the Bar 
+encodes mean of a 
+distribution
+Which value is more 
+likely to belong to the 
+distribution?
+A or B?
+
+=== PAGE 28 ===
+BIASES
+We can plot the data faithfully, but still perceive 
+it wrongly!
+28
+
+=== PAGE 29 ===
+Mean of a distribution with a bar
+29
+
+
+=== PAGE 30 ===
+WITHIN THE BAR BIAS
+30
+Experimental Conditions
+Christopher S. Pentoney & Dale E. Berger 
+(2016) Confidence Intervals and the Within-
+the-Bar Bias, The American Statistician, 70:2, 
+215-22 
+Results
+
+=== PAGE 31 ===
+CAREFUL WHEN DESIGNING AGGREGATED 
+CHARTS
+31
+Should use median and confidence interval 
+only when the data is normal distribution
+
+=== PAGE 32 ===
+WHAT’S THE TRENDLINE
+32
+
+
+=== PAGE 33 ===
+REGRESSION BY EYE
+33
+We’re good at spotting trends But the wrong vis technique can deceive us
+http://idl.cs.washington.edu/files/2017-RegressionByEye-CHI.pdf
+
+=== PAGE 34 ===
+DEATH TO PIE CHARTS
+34
+Share of coverage
+on TechCrunch
+www.storytellingwithdata.com/2011/07/death-to-pie-charts.html 
+Cole Nussbaume
+
+=== PAGE 35 ===
+REDESIGN
+35
+
+
+=== PAGE 36 ===
+CAN YOU SPOT THE DIFFERENCES?
+36
+
+=== PAGE 37 ===
+A GOOD PIE CHART?
+37
+
+=== PAGE 38 ===
+BAD EXAMPLE AGAIN
+38
+
+=== PAGE 39 ===
+SO, WHAT TO USE INSTEAD
+39http://www.storytellingwithdata.com/blog/2014/06/alternatives-to-pies
+
+=== PAGE 40 ===
+ALTERNATIVE #1. NUMBER DIRECTLY
+40
+
+=== PAGE 41 ===
+ALTERNATIVE #2: SIMPLE BAR GRAPH
+41
+
+=== PAGE 42 ===
+ALTERNATIVE #3: 100% STACKED 
+HORIZONTAL BAR GRAPH
+42
+
+=== PAGE 43 ===
+ALTERNATIVE #4: SLOPEGRAPH
+43
+
+=== PAGE 44 ===
+DESIGN 
+CRITIQUE/
+REDESIGN
+44
+
+=== PAGE 45 ===
+45
+
+=== PAGE 46 ===
+46
+
+=== PAGE 47 ===
+47
+
+=== PAGE 48 ===
+VISUALIZATION 
+DESIGN 
+PRINCIPLES
+48
+
+=== PAGE 49 ===
+MAXIMIZE DATA-INK RATIO
+49
+
+=== PAGE 50 ===
+MAXIMIZE DATA-INK RATIO
+50
+
+=== PAGE 51 ===
+AVOID CHART JUNK
+Extraneous visual elements that distract from the message
+51
+ongoing, Tim Brey
+
+=== PAGE 52 ===
+AVOID CHART JUNK
+52
+
+=== PAGE 53 ===
+AVOID CHART JUNK
+53
+
+=== PAGE 54 ===
+AVOID CHART JUNK
+54
+
+=== PAGE 55 ===
+AVOID CHART JUNK
+55
+
+=== PAGE 56 ===
+AVOID CHART JUNK
+56
+
+=== PAGE 57 ===
+WHICH IS BETTER?
+57Bateman et al. 2010
+
+=== PAGE 58 ===
+WHICH IS BETTER?
+58
+
+
+=== PAGE 59 ===
+59
+
+=== PAGE 60 ===
+EXPERIMENTAL RESULTS
+1. No difference for interpretation accuracy
+2. No difference in recall accuracy after a five-
+minute gap
+3. Significantly better recall for Holmes charts of 
+both the chart topic and the details (categories and 
+trend) after long-term gap (2-3 weeks).
+4. Participants saw value messages in the 
+Holmes charts significantly more often than in the 
+plain charts.
+5. Participants found the Holmes charts more 
+attractive, most enjoyed them, and found that 
+they were easiest and fastest to remember.
+60
+
+=== PAGE 61 ===
+USE CHART JUNK? IT DEPENDS!
+PROS
+Persuasion
+Memorability
+Engagement
+CONS
+Biased analysis
+Trustworthiness
+Interpretability
+Space efficiency
+Effort
+61
+
+=== PAGE 62 ===
+ALIGNMENT MATTERS
+62
+http://www.visualisingdata.com/2016/08/little-visualisation-design-part-21/
+https://twitter.com/infowetrust/status/760521739092627457
+
+=== PAGE 63 ===
+NO UNJUSTIFIED 3D
+Depth judgment is bad
+N = 0.67
+Occlusion
+Perspective distortion
+Color: Lighting / 
+Shadows / 
+Shading
+Title text illegible
+63
+
+
+=== PAGE 64 ===
+64
+DON’T
+
+
+=== PAGE 65 ===
+DON’T
+65
+
+=== PAGE 66 ===
+3D DESIGN ALTERNATIVE
+66
+http://interactions.acm.org/archive/view/july-august-2018/the-good-the-
+bad-and-the-biased
+
+=== PAGE 67 ===
+3D DESIGN 
+ALTERNATIVE
+67
+http://interactions.acm.org/archive/view/july-august-2018/the-good-the-bad-and-the-biased
+
+=== PAGE 68 ===
+EYES BEAT MEMORY
+Don’t make people memory, show them
+68
+http://www.randalolson.com/2015/08/23/small-multiples-vs-animated-gifs-for-showing-changes-
+in-fertility-rates-over-time/
+
+=== PAGE 69 ===
+What can we do 
+differently?
+69
+
+=== PAGE 70 ===
+EYES BEAT MEMORY: SMALL MULTIPLES
+70
+A lot of charts
+Do we need all of 
+them?
+
+=== PAGE 71 ===
+EYES BEAT MEMORY: SMALL MULTIPLES
+71
+
+=== PAGE 72 ===
+SIMPLIFY
+72
+
+=== PAGE 73 ===
+SMALL MULTIPLE DESIGN ALTERNATIVES 
+73http://interactions.acm.org/archive/view/july-august-2018/the-good-the-bad-and-the-biased

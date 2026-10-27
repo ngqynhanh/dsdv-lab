@@ -1,0 +1,416 @@
+
+=== PAGE 1 ===
+SciVis, InfoVis – bridging the community divide?!
+Daniel Weiskopf
+weiskopf@cs.sfu.ca
+Simon Fraser University
+gruvi.cs.sfu.ca
+Kwan-Liu Ma
+ma@cs.ucdavis.edu
+UC Davis
+www.cs.ucdavis.edu
+Jarke J. van Wijk
+vanwijk@win.tue.nl
+Techn. Univ. Eindhoven
+www.win.tue.nl
+Robert Kosara
+rkosara@uncc.edu
+UNC Charlotte
+www.viscenter.uncc.edu
+Helwig Hauser (moderator), Hauser@VRVis.at
+VRVis Research Center, www.VRVis.at
+1 I NTRODUCTION
+Scientiﬁc Visualization (SciVis) and Information Visualization (In-
+foVis) are well-established and often used terms in the research ﬁeld
+of visualization. But instead of intuitively illustrating two research
+ﬁelds – with disjunctive goals, challenges, and approaches , which
+they are not –, this terminology of SciVis vs. InfoVis rather repre-
+sents a manifested community divide: there are SciVis researchers
+and there are InfoVis researchers(and there are only a few who ap-
+pear on both sides), there are SciVis conferences/journals and there
+are InfoVis conferences/journals, etc.
+In this panel, we boil up a discussion about the pros and cons
+of this community divide, we identify the good reasons for st ay-
+ing apart from each other (yes, there seem to be some of these. . . )
+as well as the good reasons for getting together a bit more. We
+also delineate to what extent this divide is due to historic, social,
+and organizational reasons (as compared to signiﬁcant and inherent
+differences between the ﬁelds of InfoVis and SciVis).
+It is important for us to outline opportunities for beneﬁtting from
+each other (information visualization of scientiﬁc data as well as
+SciVis goodies for InfoVis). Considering future research challenges
+for both SciVis and InfoVis, e.g., in the context of visual analytics,
+we call for the educated “Think big!” and propose to consider vi-
+sualization research as one joint ﬁeld, hosting disjunctive parts, but
+also offering opportunities for promising and challenging joint ac-
+tivities, not at the least in the context of joint applications.
+2 P OSITION STATEMENTS
+In the following, the panelists and the moderator contribut e their
+points of view on the panel subject.
+2.1 Breadth vs. Depth, and the Usefulness of Interdisciplin arity
+(Daniel Weiskopf)
+As discussed earlier (e.g. in the IEEE Visualization Panel 2 004 on
+InfoVis and SciVis [5]), InfoVis and SciVis are historically distinct
+ﬁelds, with largely different groups of researchers. Conte nt-wise
+InfoVis and SciVis can be distinguished according to the data with
+which they deal. SciVis is typically applied to data with an intrinsic
+spatial layout (e.g., a ﬂow simulation in 3D space), whereasInfoVis
+deals with data that has no pre-deﬁned spatialization (e.g., graphs of
+web links). Similarly, SciVis data tends to be continuous, w hereas
+InfoVis data tends to be discrete in nature.
+The different problem settings and required background kno wl-
+edge are good reasons to keep SciVis and InfoVis separate. In
+general, there is a trend in all areas of research toward more spe-
+cialization because more advanced research questions require more
+in-depth knowledge and methodologies. This generic observ ation
+is also true for both SciVis and InfoVis, which have matured as re-
+search ﬁelds. Researchers need to have a thorough backgroun d in
+their respective areas, which is hard to achieve for the grea tly dif-
+fering types of methodologies typically employed in InfoVi s and
+SciVis. Similarly, the issue of expertise affects the organ izational
+form: the chairs, program committees, and reviewers of conf er-
+ences or workshops should be experts, which is easier to achi eve
+for narrower topic areas. Likewise, a specialized conferen ce tends
+to be more appealing to an expert audience.
+On the other hand, InfoVis and SciVis share many goals and basic
+principles, e.g., visual perception and interaction model s. There-
+fore, a strong interaction between both ﬁelds can be product ive;
+and, this interaction is already happening as illustrated b y re-
+searchers that actively publish in both communities. It sho uld be
+pointed out that visualization, in general, has started as an interdis-
+ciplinary endeavor, and it still is. Therefore, it is more th an natural
+to maintain “interdisciplinary” links between InfoVis and SciVis.
+However, the advantages of interdisciplinary research may be even
+more pronounced for collaborations with outside ﬁelds. For exam-
+ple, feature extraction in 3D unsteady ﬂow might beneﬁt mostfrom
+joint work with CFD engineers [10]; or color design issues an d vi-
+sual attention for interactive multi-variate data visuali zation might
+be investigated together with perceptual psychologists. T herefore,
+the “Think big!” should especially address the outreach to o utside
+ﬁelds.
+The current model of the separation in InfoVis and SciVis and
+the co-location of the IEEE Infovis Symposium and the IEEE Visu-
+alization Conference can be considered a good solution for the time
+being: it allows for separate organizational forms for Info Vis and
+SciVis and, at the same time, it facilitates interdisciplinary commu-
+nication and discussion between both communities. Further more,
+additional co-located workshops provide enough ﬂexibilit y to ac-
+commodate new trends (e.g. V AST and visual analytics) or venues
+for specialized interdisciplinary research topics.
+2.2 In the InfoVis Search for Scientiﬁc Insight (Kwan-Liu Ma )
+SciVis and InfoVis have each developed into distinct ﬁelds of study.
+I started my career as a SciVis researcher but I ﬁnd myself nowbe-
+ing actively engaged in both ﬁelds. Why? In the early days,
+for example, my work, and the one of many others, placed a strong
+focus on high-performance rendering of 3D physical phenomena or
+structures. However, if we look at the complete tasks of data un-
+derstanding in the scientiﬁc discovery process, we can ﬁnd m any
+examples showing the need of information visualization. There are
+
+=== PAGE 2 ===
+some inherent InfoVis aspects of the scientiﬁc data analysi s prob-
+lem which were not looked at. We need to either develop new
+InfoVis techniques or make creative use of known techniques for
+addressing these aspects.
+In volume rendering, a critical task is to classify the diffe rent
+materials in a volume according to the purpose of visualizat ion.
+Usually, classiﬁcation is done by deﬁning, through an inter active
+graphics editor, a transfer function mapping voxel values t o color
+and opacity. The conventional 1D transfer function is of lim ited
+effectiveness in performing the actual classiﬁcation. To obtain bet-
+ter classiﬁcation results, higher-dimensional transfer functions that
+take into account more properties of the data, such as gradie nt,
+neighboring texture, and position, are needed. Similar cha llenges
+are found in the feature extraction tasks for 4D volume data f rom
+physics simulations, from which a data set typically consis ts of
+from hundreds to thousands of time steps. A single transfer f unc-
+tion would not be able to accommodate the often varying dynam ic
+range of data values over time. Furthermore, some of the feat ures
+are deﬁned by multiple scalar and vector quantities, suggesting that
+the feature extraction must be done in a high-dimensional sp ace.
+The complexity of the conventional user interface, however , rises
+with the dimensionality of transfer functions. Higher dime nsional
+transfer functions are too confusing, if not impossible, fo r the user
+to deﬁne directly. In this case, we can make use of informatio n
+visualization techniques, many of which have been designed for
+understanding high-dimensional data.
+If we generalize this transfer function problem and consider that
+the user’s task is essentially a search for insightful visua lization
+within a space deﬁned by a set of data properties, visualizat ion
+representing the user’s search pattern can allow the user to easily
+switch back and forth between different points in the search space.
+How to represent this search space is more an InfoVis problem ,
+which appears in many scientiﬁc applications. The solution that
+we derive must be integrated with both the SciVis and quantit ative
+analysis steps through linked or superimposed views of the data.
+The complete data understanding process involves multiplesteps
+including quantitative analyses at different scales, visu alization of
+the analysis results in both the data space and some derived s pace,
+and examining uncertainty inherently in the data or introdu ced in
+the process of visualization. In fact, visualization, if ap propriately
+designed, can also be used to effectively direct the overalldata anal-
+ysis process. These needs demand new information visualiza tion
+capabilities. Furthermore, modern large-scale scientiﬁc investiga-
+tions are collaborative in nature. Next generation visualization tech-
+nologies must help users keep track of their visualization e xperi-
+ence, use it to generate new visualizations, and share it with others.
+An ideal visualization system should be therefore capable o f dis-
+playing not only different aspects of the data but also infor mation
+about how a picture is made and related to other pictures, as w ell
+as the knowledge derived from the pictures [3]. This is again an
+information visualization problem.
+Over the past 15 years, we have made a lot of progress in advanc-
+ing the state of the art in scientiﬁc visualization [4]. To de velop a
+complete visualization solution for large-scale scientiﬁ c investiga-
+tion, however, I anticipate to see even greater exchange bet ween
+researchers in SciVis and InfoVis. This annual meeting prov ides
+the best venue to facilitate such very much needed exchange.
+2.3 Different Data and Different People (Jarke J. van Wijk)
+In my view, there are two major differences between InfoVis a nd
+SciVis. Firstly, the kind of data studied differs. Generali zing, In-
+foVis is concerned with abstract and discrete data, such as m ulti-
+variate data, trees and graphs, whereas SciVis deals with spatial and
+continuous data, such as volume and ﬂow data. Secondly, the s up-
+porting disciplines and the background of the members of the com-
+munities are different. A member from the InfoVis community has
+typically a background in human computer interaction, psychology,
+statistics, or data mining, while an SciVis researcher willoften have
+a background in for instance computer graphics, geometric m odel-
+ing, numerical computing, and parallel processing. Is ther e a prob-
+lem? I do not think so. Both communities are active, ﬂourishi ng,
+and produce many interesting results.
+Nevertheless, real innovation comes from out-of-the-box t hink-
+ing and crossing boundaries, and I think there is much potent ial
+here. As a member of the SciVis community who later joined the
+InfoVis community also, I will focus on what SciVis can contribute
+to InfoVis, using the two differences mentioned as a guide.
+One central problem in visualization is the scale of data set s. If
+really large data sets have to be handled, they have to be tran s-
+formed. One approach is to convert discrete, abstract data i nto
+continuous, spatial data. A prime example is the use of lands cape
+metaphors where discrete objects (articles, news messages, etc.) are
+positioned in 2D or 3D space, and next density distributions are
+generated and shown. Using such conversions, the InfoVis commu-
+nity can take advantage of exisiting SciVis methods and techniques.
+Secondly, all disciplines mentioned that are used in SciVis can
+also be applied for InfoVis. As an example, I have a background in
+computer graphics and geometric modeling, and I used this to pro-
+vide extra cues for the visualization of hierarchical data. This has
+led to for instance the cushion treemaps [9]. I believe that r ealism
+can be used as a means to visualize abstract data more effecti vely,
+and graphics people know how to do this. As another example, I
+have shown how differential geometry can be used to attack zoom-
+ing and panning issues [8].
+In short, I think there are many interesting opportunities f or
+SciVis methods and SciVis researchers to contribute to Info Vis.
+And obviously, also the opposite case can be made.
+2.4 InfoVis is from Venus, SciVis from Mars (Robert Kosara)
+How different are the InfoVis and SciVis communities? Let me
+count the ways:
+Technical soundness. While SciVis papers are usually very tech-
+nical and go into great depth of how a particular method is
+implemented and why, InfoVis papers tend to be light on im-
+plementation details, and consider implementation a minor
+problem. This is of course problematic on the InfoVis side,
+where dataset sizes are growing, and we have little existing
+work that can deal with that. SciVis, on the other hand, easily
+gets lost in implementation issues that sometimes only work
+on a particular (brand of) graphics card, and whose novelty
+and useful life are therefore limited.
+Theory. While building new things is certainly a big part of our
+life as computer scientists, we also need to understand the
+theoretical basics of our ﬁeld. Most model papers have so
+far been published at InfoVis [6], or by truly interdisciplinary
+people at Vis [7]. But in order to become a proper ﬁeld of
+research, we need a foundational theory of visualization, a nd
+a much deeper understanding of the things we do [2].
+Process. Understanding the processes of design and implementa-
+tion of visualizations is extremely important, especially for a
+discipline as young as visualization. InfoVis has a history of
+publishing artistic papers as well as design studies, both o f
+which put a lot of emphasis on how the results were achieved,
+
+=== PAGE 3 ===
+not just on the outcome. This is very valuable especially to be-
+ginners and outsiders, and needs to be emphasized a lot more.
+Abstraction. While scientiﬁc visualization deals with things that
+are real, or that could be seen if they were, InfoVis usually
+does not. What does a bank account look like? How do you
+depict the results of a survey so that you can understand them
+and draw conclusions? The question of coming up with a
+visual representation from nothing in InfoVis demands a dif -
+ferent approach than the quasi-photographic view of SciVis.
+Interdisciplinary work. Visualization is inherently interdisci-
+plinary. People who mostly come from a computer science
+background try to produce images that are perceived easily,
+and that communicate data effectively to the user. We draw
+on perceptual psychology, cognition, illustration, visual com-
+munication, etc. Yet this is hardly acknowledged especiall y
+in SciVis, while InfoVis researchers started conducting us er
+studies and basing their work on literature in other ﬁelds long
+ago. The number of artists and other non-computer scien-
+tists is also much larger than in scientiﬁc visualization, which
+tends to scare them off with the level of technical knowledge
+that is required for entry.
+Women. Look around you, how many women do you see? If there
+are quite a few, you stumbled into InfoVis or an InfoVis ses-
+sion at Vis. If there are mostly men, you’re at Vis. Does this
+bother you? It certainly should, we need a lot more variety
+and color in our ﬁeld, and InfoVis is doing a lot better here.
+Some of the points in the above list are connected, and most ofthem
+present strengths as well as weaknesses. We can certainly ac t as if
+InfoVis and SciVis were the same, and hope that by doing so the
+differences will simply disappear – but that is not going to h elp.
+In fact, we can proﬁt much more from realizing and understanding
+the differences, and trying to leverage them. Who says an Inf oVis
+paper can’t be extremely technical, or a SciVis technique ca n’t be
+documented from start to end and thoroughly evaluated?
+Like it or not, the historical division between InfoVis and SciVis
+is here to stay. But this should be taken as an advantage, as so me-
+thing that can drive innovation, rather than an obstacle.
+2.5 Communities, Divides and Bridges (Helwig Hauser)
+It is not in the nature of panel discussions to signiﬁcantly c hange
+the course of history. If at all, panels can stimulate a broad er dis-
+cussion amongst scientists about relevant issues. But this , at least,
+is very important. And the community divide between SciVis a nd
+InfoVis deﬁnitely is a relevant issue, and even though alrea dy pre-
+viously, e.g., at Vis 2003 [5], panelists discussed this issue, it is still
+necessary to explicitly discuss what possibly divides or in tegrates
+SciVis and InfoVis. Thinking about it and discussing the iss ue, we
+can try to delineate what we just think from what actually is t rue.
+This, hopefully, then leads to a more informed (and a less emo -
+tional) point of view.
+When being open to new points of view, when being ready to
+expand the horizon of our usual considerations, we can ident ify a
+lot of useful input from outside worlds [1]. Many InfoVis sol u-
+tions proof very useful when it comes to the visualization of multi-
+variate, scientiﬁc data (see, for example, Fig. 1 for a InfoVis-SciVis-
+mixed analysis of scientiﬁc data). Increasingly, also resu lts from
+the SciVis world, such as the general-purpose use of GPUs, for ex-
+ample, or the use of semitransparency for visualization, inspire the
+InfoVis world. Also, we have to face the fact that research to p-
+ics change and evolve over time, both also in the ﬁelds of SciV is
+and InfoVis, and we are departing from known grounds and en-
+ter new ones [1]. SciVis data, for example, becomes more vers a-
+tile, i.e., multi-dimensional (e.g., time-dependent and 3 D), multi-
+variate, multi-modal, multi-typed (e.g., also including discrete, cat-
+egorical, nominal data, etc.), aso. InfoVis, on the other ha nd, faces
+new challenges when dealing with really large data, when goi ng
+3D, or when being confronted with dense data distributions w hich
+tightly relate to the scenario of continuous data as in SciVis.
+Another point of view is the one of practitioners. For many of
+those who actually need visualization, it really makes no po int of
+whether something is SciVis or InfoVis – visualization solutions are
+needed – and if they stem from different ﬁelds, that’s just ﬁn e, but
+not really relevant (in the ﬁrst place). In many application cases,
+we anyhow see that the visualization part only makes up a limi ted
+part of the complete solution – other aspects like data acqui sition
+and management, documentation and reporting, ergonomics o f the
+GUI, automation, etc., make up important parts, as well. Fro m this
+point of view, for example, it not really makes a whole lot of sense
+to ﬁnely distinguish between SciVis and InfoVis. A similar p oint
+of view, for example, also is the one of funding organization s – it
+might pay off to sell our technology as Vis (not as SciVis or In -
+foVis). The same also holds for application people. Do the li fe
+sciences need SciVis or InfoVis? They probably need both.
+Finally, there is yet another issue, which shows up when we take
+a step backwards and consider the panel topic from a slightlylarger
+distance: in addition to SciVis and InfoVis, there is a lot more which
+also is visualization, or at least tightly relates to it. Knowledge visu-
+alization, for example, which much more focusses on present ation
+than on exploration and analysis, and cartographic/geographic visu-
+alization, which – in principle – has important aspects in co mmon
+with InfoVis (but with a strong and central relation to geographical,
+i.e., spatial references), make up just two related ﬁelds (a mongst
+others more), which also should be considered. Accordingly , it is
+well possible that in future, we not only talk about SciVis and Info-
+Vis, but about xVis, with x being a lot more, or, dropping the x, just
+about Vis.
+3 S HORT BIOGRAPHIES
+Daniel Weiskopf is an assistant professor of computing science
+and a co-director of the Graphics, Usability, and Visualization Lab
+(GrUVi) at Simon Fraser University. His research interests include
+scientiﬁc visualization, GPU methods, real-time computer graph-
+ics, mixed realities, as well as special and general relativ ity. He
+received a diploma degree (MSc) in physics and a PhD in physic s,
+both from the University of T¨ ubingen, Germany, and he did his Ha-
+bilitation in computer science at the Univ. of Stuttgart, Germany.
+Kwan-Liu Ma is a professor of computer science at the University
+of California at Davis. He has a PhD in computer science from t he
+University of Utah. Before joining UC Davis in 1999, he was wi th
+ICASE/NASA LaRC as a research scientist. His research spans the
+ﬁelds of visualization, user interface design, and high-performance
+computing. Presently, he has projects in terascale visualization, in-
+telligent visualization interfaces, security visualizat ion, and large
+graph visualization. More information about his work can be found
+at http://www.cs.ucdavis.edu/˜ma/.
+Jarke J. van Wijkobtained a MSc degree in Industrial Design En-
+gineering in 1982 and a PhD degree in computer science in 1986
+from Delft University of Technology, both with honors. He ha s
+worked at a software company and at the Netherlands Energy Re -
+search Foundation ECN before he joined the Technische Unive r-
+
+=== PAGE 4 ===
+Figure 1: Visualization of the oxidation during the regener ation of a Diesel particulate ﬁlter (SciVis & InfoVis integr ated). In the scatterplot (a)
+the CO-CO2 distribution of the data is visualized (larger amounts of CO/CO2 have been selected through brushing) and in the histogram (b ) the
+temperature distribution is shown (highest values brushed ). A 3D focus+context visualization (c 1) shows the data according to the selections
+in (a) & (b), i.e., highlighting the oxidation front (at time t = 35s, temperatures color-coded). Dimmed views (c 0), (c 2), and (c 3) show the
+data at time steps t = 30s, t = 40s, and t = 45s after the start of the regeneration, respectively.
+siteit Eindhoven in 1998, where he became a full professor inVisu-
+alization in 2001. He is a member of IEEE, ACM SIGGRAPH, and
+Eurographics. He has been paper cochair for IEEE Visualizat ion
+in 2003 and 2004, and is paper cochair for IEEE InfoVis in 2006 .
+His main research interests are information visualization and ﬂow
+visualization, both with a focus on the development of new vi sual
+representations.
+Robert Kosara is an Assistant Professor of Computer Science at
+the University of North Carolina at Charlotte (UNCC). He received
+his M.Sc. and Ph.D. degrees in Computer Science from Vienna
+University of Technology in Austria. His interest in inform ation
+visualization is based to a large part on the speciﬁc problems he has
+to solve in this ﬁeld, and the way it forces him to work in a trul y
+interdisciplinary way.
+Helwig Hauser graduated in 1995 from Vienna Univ. of Techn.,
+Austria. In 1998, he received the degree of a Dr.techn. (PhD) , also
+from TU Wien. From 1994 until mid-2000, Helwig Hauser worked
+as a Univ.-Ass. (assistant professor) at the Inst. of Computer Graph-
+ics at TU Wien. Since 2000, he works for the VRVis Research
+Center in Vienna, Austria, as a key researcher in the ﬁeld of v isu-
+alization. In 2003, Helwig Hauser became the scientiﬁc dire ctor
+of VRVis (http://www.VRVis.at/). His main interests include
+volume, ﬂow, and information visualization, and the combin ation
+thereof. Helwig Hauser is member of IEEE and E UROGRAPHICS .
+Acknowledgements – Daniel Weiskopf acknowledges support
+from NSERC (Discovery Grant). Helwig Hauser acknowledges the
+Kplus funding of VRVis.
+REFERENCES
+[1] Helwig Hauser. Towards new grounds in visualization. ACM SIG-
+GRAPH Computer Graphics, 39(2):5–8, 2005. VisFiles column.
+[2] T. J. Jankun-Kelly, Robert Kosara, Gordon Kindlmann, Ch ris North,
+Colin Ware, and E. Wes Bethel. Is there science in visualizat ion? In
+IEEE Visualization (Panel Proceedings). IEEE CS Press, 2006.
+[3] Kwan-Liu Ma. Visualizing visualizations: User interfa ces for man-
+agement and exploration of scientiﬁc visualization. IEEE Computer
+Graphics & Applications, 20(5):16–19, 2000.
+[4] Kwan-Liu Ma, Eric Lum, Hongfeng Yu, Hiroshi Akiba, Min-Y u
+Huang, Yue Wang, and Greg Schussman. Scientiﬁc discovery through
+advanced visualization. In Proceedings of the DOE SciDAC 2005
+Conference, pages 491–500, June 2005.
+[5] Theresa-Marie Rhyne, Melanie Tory, Tamara Munzner, Mat thew
+Ward, Chris Johnson, and David H. Laidlaw. Information and s ci-
+entiﬁc visualization: Separate but equal or happy together at last?
+In IEEE Visualization (Panel Proceedings), pages 611–614. IEEE CS
+Press, 2003.
+[6] Melanie Tory and Torsten M¨ oller. Rethinking visualization: A high-
+level taxonomy. InProceedings Information Visualization, pages 151–
+158. IEEE CS Press, 2004.
+[7] Jarke J. van Wijk. The value of visualization. In Proceedings IEEE
+Visualization, pages 79–86. IEEE CS Press, 2005.
+[8] Jarke J. van Wijk and Wim A. A. Nuij. Smooth and efﬁcient zo oming
+and panning. In Proceedings IEEE Information Visualization, pages
+15–22. IEEE CS Press, 2003.
+[9] Jarke J. van Wijk and Huub van de Wetering. Cushion treema ps. In
+Proceedings IEEE Visualization, pages 73–78. IEEE CS Press, 1999.
+[10] Daniel Weiskopf and Gordon Erlebacher. Overview of ﬂow visualiza-
+tion. In Charles D. Hansen and Christopher R. Johnson, edito rs, The
+Visualization Handbook, pages 261–278. Elsevier, Amsterdam, 2005.

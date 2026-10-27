@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Pre-Lab 05 — Read a CSV</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<style>body{font:17px Arial,sans-serif;margin:35px;max-width:850px;color:#213c55}pre{background:#eff5fa;padding:15px;white-space:pre-wrap}</style></head>
+<body><h1>CSV Inspector — Practice Data</h1><p>Open DevTools Console and look at the raw field types.</p><pre id="out">Loading data…</pre>
+<script>
+// These column names are NOT the Johns Hopkins COVID dataset schema.
+d3.csv('./practice_rooms.csv').then(rows=>{
+  console.log('Columns:',rows.columns);
+  console.table(rows);
+  const parsed=rows.map(row=>({
+    name: row.Room,
+    x: Number(row.East),
+    y: Number(row.North),
+    count: Number(row.Visitors)
+  }));
+  const valid=parsed.filter(d=>Number.isFinite(d.x) && Number.isFinite(d.y) && Number.isFinite(d.count)
+                                 && d.count>=0 && d.x>=0 && d.x<=100 && d.y>=0 && d.y<=100);
+  console.table(valid);
+  d3.select('#out').text(`CSV columns: ${rows.columns.join(' | ')}\nRaw rows: ${rows.length}\nValid rows: ${valid.length}\nRejected rows: ${rows.length-valid.length}\nSee Console for details.`);
+}).catch(error=>{console.error(error); d3.select('#out').text('Load error. Start python -m http.server 8000 in examples/ and refresh.');});
+</script></body></html>

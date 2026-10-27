@@ -1,0 +1,355 @@
+
+=== PAGE 1 ===
+MARKS & 
+CHANNELS
+1
+
+=== PAGE 2 ===
+How can I visually represent two 
+numbers
+e.g., 4 and 8
+2
+
+=== PAGE 3 ===
+MARKS & CHANNELS
+Marks: represent items or links
+Channels: change appearance based on attribute
+Channel = visual variable
+3
+
+=== PAGE 4 ===
+MARKS FOR ITEMS
+Basic geometric elements
+0D 1D 2D
+3D mark: Volume, but rarely used
+4
+
+
+=== PAGE 5 ===
+MARKS FOR LINKS
+5
+
+
+=== PAGE 6 ===
+NESTED CONTAINMENT
+6
+
+=== PAGE 7 ===
+CHANNELS
+Change appearance proportional to or based on attributes
+7
+
+
+=== PAGE 8 ===
+JACQUES BERTIN
+French cartographer
+who makes or draws maps
+Theoretical principles for visual encodings
+8
+
+
+=== PAGE 9 ===
+BERTIN’S VISUAL VARIABLES
+9
+Marks: Points        Lines           Areas
+Position
+Size
+(gray)Value
+Texture
+Color
+Orientation
+Shape
+Variables of image
+Variable to distinguish images
+Semiology of Graphics [J. Bertin, 67]
+
+=== PAGE 10 ===
+USING MARKS AND CHANNELS
+10
+Mark: Line
+Channel: 
+Length, Position
+1 quantitative attribute
+1 categorical attribute
+Mark: Point
+Channel: Position
+1 quantitative attr.
+Adding Hue
++1 categorical 
+attr.
+Adding Size
++1 quantitative
+attr.
+
+=== PAGE 11 ===
+REDUNDANT ENCODING
+11
+
+=== PAGE 12 ===
+GOOD BAR CHART?
+12
+Rule: Use channel proportional to data!
+https://twitter.com/ChaseThomason/status/1118478036507164672?s=19
+
+=== PAGE 13 ===
+TYPES OF CHANNELS
+Magnitude channels
+How much? Which 
+rank?
+Position
+Length
+Saturation …
+Ordinal & 
+Quantitative data
+Identity channels
+What?
+Shape
+Color (hue)
+Spatial region...
+Categorical Data
+13
+
+=== PAGE 14 ===
+PRINCIPLES OF EXPRESSIVENESS 
+AND EFFECTIVENESS
+Expressiveness principle
+The visual encoding should express all of, and only, the information in 
+the dataset attributes
+Effectiveness principle: 
+The importance of attribute should match the salience of the channel
+Means: 
+- The most important attributes should be encoded with the most 
+effective channels in order to be most noticeable
+- Then the following important attributes match with less effective 
+channels
+14
+
+=== PAGE 15 ===
+RANK OF CHANNELS
+15
+
+=== PAGE 16 ===
+WHAT VISUAL VARIABLES ARE USED?
+16http://www.nytimes.com/interactive/2013/05/25/sunday-review/corporate-taxes.html
+
+=== PAGE 17 ===
+CHARACTERISTICS OF CHANNELS
+Selective
+- Is a mark distinct from other marks?
+- Can we make out the difference between two marks?
+Associative
+- Does it support grouping?
+Quantitative (Magnitude vs identity channels)
+- Can we quantify the difference between two marks?
+17
+
+
+=== PAGE 18 ===
+CHARACTERISTICS OF CHANNELS
+Order (Magnitude vs Identity)
+Can we see a change in order?
+Length
+How many unique marks can we make?
+18
+
+=== PAGE 19 ===
+POSITION
+Strongest visual 
+variables
+Suitable for all data 
+types
+Problems:
+- Sometimes not 
+available (spatial 
+data, map)
+- Cluttering (many 
+items overlapped)
+Selective: Yes
+Associative: Yes
+Quantitative:Yes
+Order: Yes
+Length: Fairly big
+(options)
+→ Good channel
+19
+
+
+=== PAGE 20 ===
+EXAMPLE: SCATTERPLOT
+20
+
+=== PAGE 21 ===
+POSITION IN 3D? NOT SO GOOD
+21
+
+=== PAGE 22 ===
+LENGTH & SIZE
+Good for 1D, OK for 2D, Bad for 3D
+Easy to see which one is bigger
+Aligned bars use position redundantly
+1D length:
+Selective: yes
+Associative: yes
+Quantitative: yes
+Order: yes
+Length: yes
+22
+
+
+=== PAGE 23 ===
+EXAMPLE 2D SIZE: BUBBLES
+23
+
+=== PAGE 24 ===
+VALUE/LUMINANCE/SATURATION
+OK for quantitative data when length & size are used
+Not very many shades recognizable
+Selective: yes
+Associative: yes
+Quantitative: somewhat
+Order: yes
+Length: limited (around 7 – 8)
+24
+
+
+=== PAGE 25 ===
+EXAMPLE: DIVERGING VALUE-SCALE
+25
+https://www.nytimes.com/interactive/2018/upshot/election-2016-voting-precinct-maps.html#11.08/32.700/-97.197/115304
+
+=== PAGE 26 ===
+COLOR
+Good for qualitative data (identity channel)
+Limited number of classes/length (7-10)
+Do not work for quantitative data
+Lots of pitfalls !
+Good practice: minimize use of color for encoding data
+Selective: yes
+Associative: yes
+Quantitative: no
+Order: no
+Length: limited
+26
+
+
+=== PAGE 27 ===
+COLOR: BAD EXAMPLE
+27
+
+=== PAGE 28 ===
+COLOR: GOOD EXAMPLE
+28
+
+=== PAGE 29 ===
+SHAPE
+Great to recognize many classes
+No grouping, ordering
+Selective: yes
+Associative: limited
+Quantitative: no
+Order: no
+Length: vast
+29
+
+
+=== PAGE 30 ===
+30
+
+
+=== PAGE 31 ===
+Idea: use facial parameters to map quantitative data
+Does it work? Not really
+Critique: https://eagereyes.org/criticism/chernoff-faces
+31
+
+
+=== PAGE 32 ===
+MORE 
+CHANNELS
+32
+https://en.rockcontent.com/blog/2012/07/27/45-
+ways-to-communicate-two-quantities/
+
+=== PAGE 33 ===
+ACCURACY OF CHANNELS
+33
+
+=== PAGE 34 ===
+HOW MUCH LONGER?
+34
+2x
+
+=== PAGE 35 ===
+HOW MUCH LONGER
+35
+4x
+
+=== PAGE 36 ===
+HOW MUCH STEEPER?
+36
+~4x
+
+=== PAGE 37 ===
+HOW MUCH LARGER?
+37
+2x 
+diameter
+4x area
+
+=== PAGE 38 ===
+HOW MUCH LARGER?
+38
+5x
+
+=== PAGE 39 ===
+HOW MUCH LARGER (AREA)?
+39
+3x
+
+=== PAGE 40 ===
+HOW MUCH DARKER?
+40
+2x
+
+=== PAGE 41 ===
+HOW MUCH DARKER?
+41
+3x
+
+=== PAGE 42 ===
+POSITION, LENGTH & ANGLE
+42https://woodgears.ca/eyeball/index.html
+
+=== PAGE 43 ===
+OTHER FACTORS AFFECTING ACCURACY
+Alignment
+Distractors
+Distance
+Common scale
+43
+
+
+=== PAGE 44 ===
+RESEARCH BY CLEVELAND 1984
+44
+
+
+=== PAGE 45 ===
+HEER & BOSTOCK, 2010
+45
+https://www.mturk.com/worker
+
+=== PAGE 46 ===
+
+
+=== PAGE 47 ===
+JOCK MACKINLAY , 1986 
+47
+[Mackinlay, Automating the Design of Graphical Presentations of 
+Relational Information, 1986]
+
+=== PAGE 48 ===
+SEPARABILITY OF ATTRIBUTES
+Can we combine multiple visual variables?
+48
+T. Munzner, Visualization Analysis and Design, 2014

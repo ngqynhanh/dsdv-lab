@@ -1,0 +1,2071 @@
+[
+  [
+    "Ôn tập giữa kỳ DSDV",
+    [
+      [
+        "p",
+        "Data Science and Data Visualization  IT138IU"
+      ],
+      [
+        "p",
+        "Tài liệu học và luyện đề bằng tiếng Việt với thuật ngữ tiếng Anh. Mục tiêu là tự phân tích một biểu đồ, giải thích lựa chọn thiết kế và viết được mã D3 cho biểu đồ cột theo yêu cầu đề."
+      ],
+      [
+        "h",
+        "Cách dùng tài liệu"
+      ],
+      [
+        "bullet",
+        "Lượt 1: học phần kiến thức nền và cách trả lời ở trang 3 đến 11; tự nói lại mỗi khái niệm bằng một ví dụ."
+      ],
+      [
+        "bullet",
+        "Lượt 2: xem bài giải theo ba đề cũ ở trang 12 đến 16; tự vẽ lại hình trước khi đọc phương án gợi ý."
+      ],
+      [
+        "bullet",
+        "Lượt 3: viết lại mã ở trang 17 đến 21, sau đó làm bài tập và hai đề mô phỏng ở trang 22 đến 26."
+      ],
+      [
+        "bullet",
+        "Lượt 4: chấm theo lời giải ở trang 27 đến 30 và ôn bằng bảng kiểm trang 31."
+      ],
+      [
+        "h",
+        "Bố cục"
+      ],
+      [
+        "table",
+        [
+          [
+            "Phần",
+            "Trang"
+          ],
+          [
+            [
+              "Dạng đề và phạm vi",
+              "2"
+            ],
+            [
+              "Kiến thức C1 đến C5 và cách trả lời",
+              "3 đến 11"
+            ],
+            [
+              "Giải và phân tích đề cũ",
+              "12 đến 16"
+            ],
+            [
+              "D3 và mã mẫu",
+              "17 đến 21"
+            ],
+            [
+              "Bài tập và hai đề luyện",
+              "22 đến 26"
+            ],
+            [
+              "Đáp án và thang tự chấm",
+              "27 đến 30"
+            ],
+            [
+              "Ôn nhanh và nguồn tra cứu",
+              "31 đến 32"
+            ]
+          ],
+          [
+            5.5,
+            1.3
+          ]
+        ]
+      ],
+      [
+        "p",
+        "Các câu hỏi luyện tập và thang tự chấm là nội dung biên soạn để tự học. Phần lời giải đề cũ là phương án tham khảo, không phải đáp án chính thức."
+      ]
+    ]
+  ],
+  [
+    "Dạng đề và trọng tâm ôn tập",
+    [
+      [
+        "table",
+        [
+          [
+            "Đề theo tên tệp",
+            "Cấu trúc quan sát được"
+          ],
+          [
+            [
+              "2023 HK1",
+              "90 phút, 100 điểm. Phân tích và sửa biểu đồ methylation 35; thiết kế lớp học 35; D3 cột ngang COVID 30."
+            ],
+            [
+              "2026 HK1",
+              "90 phút, 100 điểm. Ba giới hạn thị giác 30; phân tích sơ đồ ghế máy bay 40; D3 cột dọc cars 30."
+            ],
+            [
+              "2026 HK2",
+              "90 phút, 100 điểm. Ba giới hạn thị giác 30; phân tích tuổi rời gia đình ở châu Âu 40; D3 cột dọc cars 30."
+            ]
+          ],
+          [
+            1.3,
+            5.5
+          ]
+        ]
+      ],
+      [
+        "p",
+        "Tên tệp được giữ để nhận diện nguồn; không dùng tên tệp để suy ra niên khóa hay ngày thi. Hai đề mang tên 2026 dùng cùng dạng D3: lấy 10 xe có Horsepower lớn nhất rồi vẽ Acceleration."
+      ],
+      [
+        "h",
+        "Nội dung cần làm được"
+      ],
+      [
+        "bullet",
+        "Phân loại dataset, items, links, attributes; phân biệt nominal, ordinal, interval, ratio theo ý nghĩa của dữ liệu."
+      ],
+      [
+        "bullet",
+        "Viết ánh xạ rõ ràng thuộc tính nào được mã hóa bằng channel nào trên mark nào."
+      ],
+      [
+        "bullet",
+        "Giải thích giới hạn tri giác bằng cấu trúc định nghĩa, ví dụ, hệ quả thiết kế."
+      ],
+      [
+        "bullet",
+        "Phê bình có căn cứ rồi vẽ phương án mới, có trục, thang, đơn vị, nhãn và chú giải."
+      ],
+      [
+        "bullet",
+        "D3: nạp, chuyển kiểu, lọc, sắp xếp, lấy top k, scales, axes, bars, text labels."
+      ],
+      [
+        "p",
+        "Đề cũ cho biết dạng kỹ năng cần luyện, không bảo đảm nội dung hay tỷ trọng của kỳ thi sắp tới. Các slide được cung cấp có tên thư mục outdated; dùng chúng cùng thông báo phạm vi hiện tại của giảng viên."
+      ]
+    ]
+  ],
+  [
+    "C1 Mục đích của trực quan hóa",
+    [
+      [
+        "h",
+        "Visualization và insight"
+      ],
+      [
+        "p",
+        "Trực quan hóa biến dữ liệu thành biểu diễn đồ họa, thường có tương tác, để khám phá, kiểm chứng hoặc trình bày. Insight là hiểu được cấu trúc, xu hướng, cụm, ngoại lệ hoặc một quan hệ có ý nghĩa để đặt câu hỏi hay hành động tiếp."
+      ],
+      [
+        "table",
+        [
+          [
+            "Mục đích",
+            "Câu hỏi",
+            "Ví dụ"
+          ],
+          [
+            [
+              "Exploration",
+              "Có điều gì đáng chú ý?",
+              "Khám phá cụm khách hàng trên scatterplot."
+            ],
+            [
+              "Confirmation",
+              "Giả thuyết có phù hợp dữ liệu?",
+              "So sánh phân phối điểm của hai lớp."
+            ],
+            [
+              "Presentation",
+              "Người xem cần hiểu điều gì?",
+              "Làm nổi bật mức thay đổi doanh thu."
+            ]
+          ],
+          [
+            1.4,
+            2.1,
+            3.3
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Vì sao cần cả thống kê và biểu đồ"
+      ],
+      [
+        "p",
+        "Hai bộ dữ liệu có thể có mean, variance và correlation gần giống nhau nhưng hình dạng rất khác: quan hệ cong, outlier hay cụm. Anscombe’s quartet minh họa vì sao chỉ nhìn số tóm tắt là chưa đủ. Biểu đồ cũng không tự chứng minh quan hệ nhân quả."
+      ],
+      [
+        "h",
+        "Vai trò của người và máy"
+      ],
+      [
+        "p",
+        "Máy xử lý, tính toán, lọc và vẽ chính xác trên lượng dữ liệu lớn. Con người nhận dạng pattern, dùng kiến thức bối cảnh để giải thích và quyết định câu hỏi tiếp theo. Thiết kế phải tính đến giới hạn chú ý, trí nhớ và khả năng so sánh thị giác."
+      ],
+      [
+        "h",
+        "Khi một con số hoặc tự động hóa phù hợp hơn"
+      ],
+      [
+        "p",
+        "Nếu câu hỏi xác định rõ và chỉ cần một giá trị như tổng số sinh viên, con số trực tiếp có thể đủ. Nếu phải phản ứng tức thì ở tần suất rất cao, hệ thống tự động có thể xử lý trước; biểu đồ vẫn hữu ích cho giám sát và kiểm tra."
+      ],
+      [
+        "p",
+        "Nguồn học: C1, trang PDF 4 đến 7, 13 đến 21 và 31."
+      ]
+    ]
+  ],
+  [
+    "C3 Phân loại thuộc tính dữ liệu",
+    [
+      [
+        "p",
+        "Kiểu dữ liệu trong visualization nói về ý nghĩa và phép so sánh hợp lệ. Nó khác với string, int hay float trong lập trình. Số áo 10 và 20 là nhãn; không thể kết luận người mang áo 20 có giá trị gấp đôi."
+      ],
+      [
+        "table",
+        [
+          [
+            "Loại",
+            "Phép hiểu hợp lệ",
+            "Ví dụ và lưu ý"
+          ],
+          [
+            [
+              "Nominal N",
+              "Giống hay khác",
+              "Ngành học, quốc gia, mã nhóm, seat ID. Nhãn có chữ số vẫn có thể là nominal."
+            ],
+            [
+              "Ordinal O",
+              "Có thứ tự",
+              "Kém, trung bình, tốt; hạng A B C. Không giả định khoảng cách bằng nhau."
+            ],
+            [
+              "Interval Q",
+              "Khoảng chênh lệch có nghĩa",
+              "Nhiệt độ Celsius, năm lịch. Mốc 0 tùy quy ước nên không so tỷ lệ trực tiếp."
+            ],
+            [
+              "Ratio Q",
+              "Khoảng cách và tỷ lệ có nghĩa",
+              "Khối lượng, độ dài, số ca, tuổi, thời gian chạy. Mốc 0 thể hiện không có đại lượng."
+            ]
+          ],
+          [
+            1.25,
+            1.7,
+            3.85
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Các trường hợp dễ mất điểm"
+      ],
+      [
+        "bullet",
+        "GPA: quantitative; có thứ tự và chênh lệch điểm. Trong bối cảnh bài này không diễn giải GPA 80 là năng lực gấp đôi GPA 40. Nếu phải chọn thang đo, nêu giả định interval-like cho điểm số."
+      ],
+      [
+        "bullet",
+        "Seat number: nominal nếu chỉ là mã ghế. Hàng và cột suy ra từ sơ đồ là vị trí không gian, không phải điểm số của ghế."
+      ],
+      [
+        "bullet",
+        "Rating 1 đến 5 sao: thường ordinal; giả định khoảng cách bằng nhau cần được nói rõ nếu tính trung bình."
+      ],
+      [
+        "bullet",
+        "Ngày lịch: temporal và interval khi xét chênh lệch thời gian. Khoảng thời gian đã trôi qua là ratio. Giờ trong ngày còn có tính cyclic."
+      ],
+      [
+        "p",
+        "Nguồn học: C3, trang PDF 5 đến 8 và 27 đến 36. Khi đề chỉ hỏi categorical, ordinal, quantitative, trả lời ở mức này trước rồi mới bổ sung interval hoặc ratio."
+      ]
+    ]
+  ],
+  [
+    "C3 Cấu trúc dataset và ngữ nghĩa",
+    [
+      [
+        "table",
+        [
+          [
+            "Dataset",
+            "Đơn vị và quan hệ",
+            "Ví dụ"
+          ],
+          [
+            [
+              "Table",
+              "Mỗi hàng là item; cột là attribute",
+              "Sinh viên, GPA, ngành và ghế."
+            ],
+            [
+              "Network",
+              "Nodes là items; edges là links",
+              "Sinh viên và quan hệ cùng nhóm."
+            ],
+            [
+              "Tree",
+              "Cấu trúc phân cấp không có chu trình",
+              "Trường rồi khoa rồi lớp. Với cây vô hướng thường yêu cầu liên thông."
+            ],
+            [
+              "Field",
+              "Giá trị lấy mẫu trên miền liên tục",
+              "Nhiệt độ tại các vị trí không gian."
+            ],
+            [
+              "Geometry",
+              "Hình học và vị trí đã có ý nghĩa",
+              "Đường biên, mặt, khối hay sơ đồ ghế."
+            ]
+          ],
+          [
+            1.15,
+            2.95,
+            2.7
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Đơn vị quan sát phải được nói rõ"
+      ],
+      [
+        "p",
+        "Ở ma trận cơ quan × chỉ thị, một quan sát là một cặp cơ quan và chỉ thị với một tỷ lệ methylation. Có thể trình bày dưới dạng bảng dài Organ, Indicator, Percentage hoặc ma trận; nêu rõ cách hiểu mình chọn."
+      ],
+      [
+        "h",
+        "Khóa không đồng nghĩa với đại lượng"
+      ],
+      [
+        "p",
+        "Mã sinh viên dùng để nhận diện item. Một bản ghi COVID trong đề 2023 cần nhãn Province/State cùng Country/Region để phân biệt. Nếu chuyển sang tổng theo quốc gia thì phải aggregate các bản ghi và nói rõ đơn vị đã đổi."
+      ],
+      [
+        "h",
+        "Các cấu trúc bổ sung"
+      ],
+      [
+        "p",
+        "Set không có thứ tự và không lặp; list có thứ tự và có thể lặp; cluster nhóm các item tương tự. Dữ liệu sequential đi từ nhỏ đến lớn; diverging có mốc giữa có nghĩa như độ lệch so với 0; cyclic có điểm đầu và cuối nối nhau như giờ trong ngày."
+      ],
+      [
+        "p",
+        "Ngữ nghĩa quyết định thiết kế: 20 là nhiệt độ, số người hay mã phòng sẽ dẫn tới thang đo và channel khác nhau. Cần metadata gồm đơn vị, thời điểm, định nghĩa và cách thu thập."
+      ],
+      [
+        "p",
+        "Nguồn học: C3, trang PDF 9 đến 22, 26 và 32 đến 36."
+      ]
+    ]
+  ],
+  [
+    "C2 Thị giác chú ý và trí nhớ",
+    [
+      [
+        "table",
+        [
+          [
+            "Giới hạn hoặc hiện tượng",
+            "Ví dụ",
+            "Hệ quả thiết kế"
+          ],
+          [
+            [
+              "Change blindness",
+              "Khó nhận ra một điểm đã đổi khi hai khung hình bị ngắt quãng.",
+              "Đặt hai trạng thái cạnh nhau hoặc đánh dấu vùng thay đổi."
+            ],
+            [
+              "Inattentional blindness",
+              "Chăm chú đếm một nhóm nên bỏ qua đối tượng khác đang hiện diện.",
+              "Hạn chế cạnh tranh chú ý; làm nổi bật cảnh báo quan trọng."
+            ],
+            [
+              "Màu phụ thuộc nền",
+              "Hai ô cùng RGB có thể trông sáng tối khác nhau.",
+              "Dùng nền nhất quán và thang màu có thứ tự rõ."
+            ],
+            [
+              "Ước lượng tuyệt đối yếu",
+              "Khó nói một vòng tròn lớn hơn chính xác bao nhiêu lần.",
+              "Ưu tiên vị trí trên trục chung hoặc chiều dài căn thẳng."
+            ],
+            [
+              "Phân biệt màu hạn chế",
+              "Một số người khó phân biệt đỏ với xanh lá.",
+              "Dùng thêm shape, nhãn hoặc kiểu nét cho cùng thông tin."
+            ]
+          ],
+          [
+            1.45,
+            2.65,
+            2.7
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Popout và preattentive processing"
+      ],
+      [
+        "p",
+        "Một phần tử có thuộc tính đơn lẻ khác biệt như màu hoặc hướng có thể được phát hiện rất nhanh, trước khi tập trung chú ý. Ví dụ một chấm cam giữa nhiều chấm xám. Nếu mục tiêu là hình tròn đỏ giữa các hình tròn xanh và hình vuông đỏ, không có thuộc tính đơn lẻ duy nhất; phải tìm tổ hợp và việc tìm kiếm thường chậm hơn."
+      ],
+      [
+        "h",
+        "Perception và cognition"
+      ],
+      [
+        "p",
+        "Perception tiếp nhận và diễn giải tín hiệu cảm giác; cognition áp dụng tri thức để suy luận, giải quyết vấn đề và ra quyết định. Tri giác chịu ảnh hưởng của kinh nghiệm, kỳ vọng và mục tiêu. Mắt không ghi lại toàn cảnh như máy ảnh: ta nhìn qua fixation và saccade."
+      ],
+      [
+        "p",
+        "Mẫu câu thi: Change blindness is difficulty detecting changes across separate views. For example, a point changes after a blank frame. Therefore, I would show the states side by side and highlight the changed point."
+      ],
+      [
+        "p",
+        "Nguồn học: C2 Color, trang PDF 3 đến 4, 20 đến 21, 41 đến 49; C2 Popout, trang PDF 2, 11, 17 đến 28."
+      ]
+    ]
+  ],
+  [
+    "C2 Màu sắc và thang màu",
+    [
+      [
+        "table",
+        [
+          [
+            "Thành phần",
+            "Ý nghĩa",
+            "Ứng dụng"
+          ],
+          [
+            [
+              "Hue",
+              "Sắc màu như xanh, cam, tím",
+              "Phân biệt nhóm nominal."
+            ],
+            [
+              "Saturation",
+              "Mức bão hòa của màu",
+              "Có thể biểu đạt độ lớn khi có thứ tự dễ nhận."
+            ],
+            [
+              "Value và lightness",
+              "Độ sáng tối trong mô hình tương ứng",
+              "Dãy sáng đến tối cho dữ liệu ordered."
+            ]
+          ],
+          [
+            1.4,
+            2.65,
+            2.75
+          ]
+        ]
+      ],
+      [
+        "p",
+        "HSV Value, perceptual lightness và luminance không hoàn toàn đồng nhất. Trong trả lời thiết kế, hãy nói rõ channel định dùng thay vì gọi mọi thay đổi màu là hue."
+      ],
+      [
+        "table",
+        [
+          [
+            "Colormap",
+            "Dùng khi",
+            "Ví dụ"
+          ],
+          [
+            [
+              "Categorical",
+              "Các nhóm không có thứ tự",
+              "Ngành IT CS DS; dùng sắc màu khác nhau."
+            ],
+            [
+              "Sequential",
+              "Một chiều từ thấp đến cao",
+              "Số ca từ 0 đến lớn; sáng đến tối."
+            ],
+            [
+              "Diverging",
+              "Có mốc trung tâm quan trọng",
+              "Sai lệch so với 0; hai phía khác sắc và giữa trung tính."
+            ],
+            [
+              "Cyclic",
+              "Giá trị có vòng lặp",
+              "Giờ trong ngày; tránh bước nhảy giả ở điểm nối."
+            ]
+          ],
+          [
+            1.35,
+            2.65,
+            2.8
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Những lỗi thường gặp"
+      ],
+      [
+        "bullet",
+        "Rainbow tạo thứ tự và ranh giới cảm nhận không đều; không phải lựa chọn mặc định tốt để đọc độ lớn liên tục."
+      ],
+      [
+        "bullet",
+        "Quá nhiều màu cạnh tranh làm mất highlight. Với ít nhóm, dùng ít màu phân biệt rõ; nếu nhiều nhóm, cân nhắc nhãn trực tiếp hoặc chia panels."
+      ],
+      [
+        "bullet",
+        "Không dùng riêng đỏ và xanh lá cho hai trạng thái quan trọng. Thêm shape, text hoặc line style để truyền đạt dự phòng."
+      ],
+      [
+        "bullet",
+        "Dùng thang diverging khi không có mốc giữa có ý nghĩa có thể gợi ra phân chia giả."
+      ],
+      [
+        "p",
+        "RGB là trộn ánh sáng theo mô hình cộng; CMY/CMYK là trộn mực theo mô hình trừ. Không nhầm mô hình tạo màu với quy tắc chọn colormap cho dữ liệu."
+      ],
+      [
+        "p",
+        "Nguồn học: C2 Color, trang PDF 28 đến 40, 41 đến 55."
+      ]
+    ]
+  ],
+  [
+    "C2 Gestalt và cách thể hiện nhóm",
+    [
+      [
+        "figure",
+        [
+          "gestalt.png",
+          "Hình minh họa tự vẽ về bốn cách tạo nhóm thị giác.",
+          6.8
+        ]
+      ],
+      [
+        "table",
+        [
+          [
+            "Nguyên lý",
+            "Cách hiểu và cách dùng"
+          ],
+          [
+            [
+              "Proximity",
+              "Phần tử gần nhau được xem là cùng nhóm. Dùng khoảng cách để chia nhóm cột hoặc panels."
+            ],
+            [
+              "Similarity",
+              "Phần tử cùng màu hoặc hình dạng được xem là liên quan. Dùng hue nhất quán cho cùng ngành."
+            ],
+            [
+              "Connectedness",
+              "Đường nối tạo liên hệ trực tiếp. Thích hợp thể hiện quan hệ trong network."
+            ],
+            [
+              "Common region",
+              "Được bao trong cùng vùng gợi cùng nhóm. Dùng enclosure cho một cụm có ý nghĩa."
+            ],
+            [
+              "Continuity",
+              "Mắt có xu hướng tiếp tục theo đường liên tục. Hỗ trợ đọc line chart; tránh giao cắt khó theo dõi."
+            ],
+            [
+              "Closure",
+              "Mắt hoàn thiện đường biên còn thiếu để nhận hình. Không đồng nhất closure với việc bao nhóm bằng một khung kín."
+            ],
+            [
+              "Symmetry và figure ground",
+              "Cân xứng hỗ trợ nhận dạng; tương phản tách chủ thể khỏi nền. Dùng nền nhẹ để dữ liệu nổi rõ."
+            ]
+          ],
+          [
+            1.55,
+            5.25
+          ]
+        ]
+      ],
+      [
+        "p",
+        "Các tín hiệu nhóm có thể xung đột. Ví dụ đặt hai ngành sát nhau nhưng cùng một màu cho hai nhóm khác sẽ tạo cách hiểu mâu thuẫn. Nêu quan hệ cần truyền đạt trước rồi chọn proximity, similarity hoặc connection phù hợp."
+      ],
+      [
+        "p",
+        "Nguồn học: C2 Popout, trang PDF 29 đến 58."
+      ]
+    ]
+  ],
+  [
+    "C4 Marks channels và nguyên lý mã hóa",
+    [
+      [
+        "p",
+        "Mark là phần tử hình học dùng biểu diễn item hoặc link: point, line, area và đôi khi volume. Channel là thuộc tính thị giác thay đổi theo dữ liệu: position, length, area, hue, lightness, shape, orientation. Đừng chỉ viết mark là màu: màu là channel."
+      ],
+      [
+        "table",
+        [
+          [
+            "Biểu đồ",
+            "Marks",
+            "Ánh xạ điển hình"
+          ],
+          [
+            [
+              "Bar chart",
+              "Thanh hình chữ nhật hoặc mark dạng line theo mô hình đơn giản",
+              "Danh mục sang vị trí; giá trị sang chiều dài và vị trí đầu thanh."
+            ],
+            [
+              "Scatterplot",
+              "Point",
+              "Hai đại lượng sang x và y; nhóm sang hue hoặc shape."
+            ],
+            [
+              "Heatmap",
+              "Ô chữ nhật",
+              "Hai thuộc tính danh mục sang hàng và cột; giá trị sang lightness."
+            ],
+            [
+              "Node link",
+              "Point và line",
+              "Item sang node; quan hệ sang connection."
+            ],
+            [
+              "Bubble chart",
+              "Point dạng hình tròn",
+              "Giá trị sang diện tích, không phải bán kính tuyến tính."
+            ]
+          ],
+          [
+            1.25,
+            2.0,
+            3.55
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Expressiveness"
+      ],
+      [
+        "p",
+        "Mã hóa phải biểu đạt đúng thông tin có trong dữ liệu. Nominal không có thứ tự, nên kích thước tăng dần theo mã ngành dễ ngụ ý ngành này lớn hơn ngành kia. Với điểm số, hue rời rạc không có thứ tự sẽ không diễn đạt rõ độ lớn."
+      ],
+      [
+        "h",
+        "Effectiveness"
+      ],
+      [
+        "p",
+        "Thuộc tính quan trọng nên dùng channel dễ đọc và nổi bật. Với so sánh định lượng, ưu tiên position trên thang chung, rồi các vị trí không căn thẳng, length, angle, area; depth, luminance và volume thường kém chính xác hơn cho nhiệm vụ này. Thứ hạng phụ thuộc nhiệm vụ, không phải luật tuyệt đối cho mọi loại dữ liệu."
+      ],
+      [
+        "p",
+        "Redundant encoding: mã hóa một thuộc tính bằng nhiều channel, ví dụ ngành bằng hue và shape. Separability: người xem có thể đọc riêng từng channel; tránh phối hợp nhiều biến gây nhiễu hoặc che lấp nhau."
+      ],
+      [
+        "p",
+        "Nguồn học: C4, trang PDF 3 đến 15, 19 đến 29 và 43 đến 48."
+      ]
+    ]
+  ],
+  [
+    "C5 Đánh giá và thiết kế lại biểu đồ",
+    [
+      [
+        "table",
+        [
+          [
+            "Vấn đề",
+            "Hệ quả",
+            "Cách sửa phù hợp"
+          ],
+          [
+            [
+              "Trục cắt trên bar chart",
+              "Chiều dài thanh phóng đại chênh lệch",
+              "Cho baseline 0; nếu cần zoom, dùng dotplot có trục rõ."
+            ],
+            [
+              "3D không cần thiết",
+              "Che khuất và sai lệch do phối cảnh",
+              "Chuyển sang 2D hoặc small multiples."
+            ],
+            [
+              "Nhiều pie tương tự",
+              "Khó so các góc và phần không chung baseline",
+              "Dùng bar chart căn thẳng hoặc dotplot."
+            ],
+            [
+              "Thiếu đơn vị và nhãn",
+              "Không biết giá trị biểu đạt gì",
+              "Ghi tên trục, đơn vị, thời gian và nguồn."
+            ],
+            [
+              "Chỉ có mean",
+              "Ẩn độ phân tán, outlier và đa đỉnh",
+              "Thêm raw points, boxplot hoặc violin theo mục tiêu."
+            ],
+            [
+              "Animation để so trạng thái",
+              "Buộc nhớ khung hình trước",
+              "Small multiples cùng thang và cùng thứ tự."
+            ]
+          ],
+          [
+            1.6,
+            2.3,
+            2.9
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Graphical integrity và lie factor"
+      ],
+      [
+        "p",
+        "Độ lớn thể hiện phải phù hợp độ lớn dữ liệu. Theo cách tính biến thiên tương đối thường dùng: lie factor bằng phần trăm thay đổi thể hiện trên hình chia cho phần trăm thay đổi trong dữ liệu. Luôn ghi rõ baseline và cách đo hiệu ứng."
+      ],
+      [
+        "p",
+        "Ví dụ giá trị 100 lên 110 tăng 10%. Nếu trục thanh bắt đầu ở 90, chiều dài thấy được 10 lên 20 tăng 100%; lie factor là 10. Nếu dữ liệu không đổi, phép chia này không dùng được. Không trộn tỷ số kích thước với phần trăm tăng."
+      ],
+      [
+        "h",
+        "Quy tắc cần hiểu theo ngữ cảnh"
+      ],
+      [
+        "p",
+        "Bar chart thường cần baseline 0 vì length mã hóa độ lớn. Line chart và dotplot có thể dùng miền hẹp được ghi rõ để quan sát biến thiên. Giảm chart junk và tăng data ink không có nghĩa xóa trục, nhãn hoặc ngữ cảnh cần thiết."
+      ],
+      [
+        "p",
+        "Lưu ý khi học C5 trang 31: median không chỉ dành cho phân phối chuẩn. CI cho mean biểu đạt bất định của ước lượng, không phải vùng chứa phần lớn điểm dữ liệu. Muốn thấy phân phối, cần biểu diễn phân phối hoặc dữ liệu gốc. Xem nguồn thống kê ở trang 32."
+      ],
+      [
+        "p",
+        "Nguồn học: C5, trang PDF 9 đến 31, 34 đến 43, 49 đến 73."
+      ]
+    ]
+  ],
+  [
+    "Cách viết câu trả lời phân tích biểu đồ",
+    [
+      [
+        "h",
+        "Bước 1 Nêu mục tiêu"
+      ],
+      [
+        "p",
+        "Viết một câu có đối tượng và phép so sánh: mục tiêu là so sánh tỷ lệ methylation giữa các cơ quan và chỉ thị để tìm các cặp có tỷ lệ cao. Tránh câu chung như để trực quan hóa dữ liệu."
+      ],
+      [
+        "h",
+        "Bước 2 Xác định dữ liệu"
+      ],
+      [
+        "p",
+        "Nêu item hoặc đơn vị quan sát; liệt kê thuộc tính và loại của từng thuộc tính; ghi đơn vị và thời điểm. Với sơ đồ có vị trí thực, phân biệt identifier với spatial position."
+      ],
+      [
+        "h",
+        "Bước 3 Mô tả encoding đang có"
+      ],
+      [
+        "p",
+        "Dùng mẫu: mỗi mark ... biểu diễn ...; channel ... mã hóa thuộc tính ... . Ví dụ mỗi hình tròn biểu diễn một quốc gia; text ghi tên và tuổi; hue biểu diễn nhóm tuổi. Vị trí theo bố cục bản đồ chỉ gần đúng, không dùng để xếp hạng tuổi."
+      ],
+      [
+        "h",
+        "Bước 4 Nêu lỗi và tác động"
+      ],
+      [
+        "p",
+        "Mỗi nhận xét phải gắn với nhiệm vụ: chiều sâu gây che khuất nên khó so sánh các cột phía sau; dùng các sắc màu không có thứ tự khiến khó suy ra quốc gia nào có tuổi trung bình cao hơn."
+      ],
+      [
+        "h",
+        "Bước 5 Vẽ và giải thích phương án mới"
+      ],
+      [
+        "p",
+        "Vẽ đủ marks, axes, ticks, labels, đơn vị và legend nếu cần. Ghi mapping mới; giải thích vì sao nó hỗ trợ nhiệm vụ; nêu đánh đổi. Dotplot xếp hạng tuổi so sánh tốt hơn nhưng giảm thông tin địa lý; có thể thêm bản đồ nhỏ nếu nhiệm vụ cần vị trí."
+      ],
+      [
+        "h",
+        "Khung tiếng Anh có thể tái sử dụng"
+      ],
+      [
+        "p",
+        "The goal is to compare ... . Each item represents ... . The attributes are ... . The author uses ... marks and maps ... to ... . This makes ... difficult because ... . I would redesign it as ... . In the new design, ... encodes ... . This improves ... because ... ."
+      ],
+      [
+        "p",
+        "Tự kiểm: mô tả bản gốc trước, đề xuất bản mới sau. Nếu chỉ nói biểu đồ xấu hoặc dùng bar chart tốt hơn mà không chỉ ra mapping và lý do, câu trả lời còn thiếu."
+      ]
+    ]
+  ],
+  [
+    "Đề 2023 Câu phân tích methylation",
+    [
+      [
+        "p",
+        "Đề gốc: trang PDF 2, câu 1, tổng 35 điểm gồm data 10, encoding 5, problems 10 và redesign 10. Hình dùng nhiều cột 3D để thể hiện tỷ lệ methylation theo cơ quan và chỉ thị."
+      ],
+      [
+        "h",
+        "Phương án trả lời"
+      ],
+      [
+        "bullet",
+        "Data: bảng đa chiều cơ quan × chỉ thị. Mỗi cặp là một quan sát. Organ và indicator là nominal; methylation percentage là quantitative ratio với miền 0 đến 100%."
+      ],
+      [
+        "bullet",
+        "Marks và channels: các cột/khối trụ; hai vị trí trên mặt phẳng nền mã hóa cơ quan và chỉ thị; chiều cao mã hóa phần trăm. Không suy đoán ý nghĩa màu từ bản scan nếu không có legend đọc được."
+      ],
+      [
+        "bullet",
+        "Problems: cột trước che cột sau; phối cảnh làm chiều cao khó so; nhãn nhỏ và nghiêng; lưới dày; nhiều nhóm khó tra cặp; không có baseline so sánh dễ đọc cho mọi cột."
+      ],
+      [
+        "bullet",
+        "Redesign: heatmap để tìm pattern của toàn ma trận. Hàng là cơ quan, cột là chỉ thị, lightness theo tỷ lệ 0 đến 100%; ghi giá trị khi số ô vừa phải. Nếu cần so thật chính xác một chỉ thị, thêm bar/dotplot riêng."
+      ],
+      [
+        "figure",
+        [
+          "heatmap.png",
+          "Minh họa cách vẽ lại bằng số liệu tự tạo, không chép số từ hình scan.",
+          6.8
+        ]
+      ],
+      [
+        "p",
+        "Vì sao hợp lý: heatmap bỏ che khuất và cho phép quét hàng/cột. Đánh đổi: đọc chênh lệch nhỏ qua màu kém chính xác hơn position; nhãn số hoặc một view phụ khắc phục phần này. Ô thiếu dữ liệu cần ký hiệu riêng để không nhầm với 0%."
+      ]
+    ]
+  ],
+  [
+    "Đề 2023 Câu thiết kế lớp học",
+    [
+      [
+        "p",
+        "Đề gốc: trang PDF 2 đến 3, câu 2, tổng 35 điểm. Cần thể hiện GPA, major, group ID, seat number và các liên kết giữa mọi thành viên cùng nhóm theo sơ đồ lớp."
+      ],
+      [
+        "table",
+        [
+          [
+            "Thuộc tính",
+            "Loại",
+            "Encoding đề xuất"
+          ],
+          [
+            [
+              "Seat",
+              "ID nominal và vị trí suy ra",
+              "Position x y giữ đúng sơ đồ ghế."
+            ],
+            [
+              "GPA",
+              "Quantitative",
+              "Mini bar có length theo thang 0 đến 100."
+            ],
+            [
+              "Major",
+              "Nominal",
+              "Hue; thêm ký hiệu IT CS DS nếu cần in xám."
+            ],
+            [
+              "Group ID",
+              "Nominal",
+              "Nhãn G1 đến G6 và đường nối cặp cùng nhóm."
+            ],
+            [
+              "Student index",
+              "Identifier nominal",
+              "Nhãn index trong ghế để đối chiếu item."
+            ]
+          ],
+          [
+            1.15,
+            1.7,
+            3.95
+          ]
+        ]
+      ],
+      [
+        "figure",
+        [
+          "classroom.png",
+          "Minh họa dùng 20 sinh viên và vị trí ghế theo bảng đề 2023. Số nhỏ góc trái là ghế; số trước G là index.",
+          6.8
+        ]
+      ],
+      [
+        "p",
+        "Sơ đồ có 5 hàng, mỗi hàng 8 ghế chia hai dãy 4 ghế. Không dùng force layout vì sẽ mất vị trí ghế thật. Tạo links cho mọi cặp cùng group: nhóm 4 người cần 6 cạnh, nhóm 3 người cần 3 cạnh; dữ liệu đề có tổng 24 cạnh."
+      ],
+      [
+        "p",
+        "Đường nối có thể giao nhau: vẽ dưới node, dùng nét mảnh và ghi group ID trên node; bản tương tác có thể highlight một nhóm. Nếu đề đòi mọi liên kết thì chỉ vẽ cây nối hoặc nối qua một group hub chưa thể hiện đủ quan hệ cặp trực tiếp."
+      ]
+    ]
+  ],
+  [
+    "Đề 2026 HK1 Giới hạn thị giác và ghế máy bay",
+    [
+      [
+        "h",
+        "Câu 1 Ba giới hạn thị giác 30 điểm"
+      ],
+      [
+        "p",
+        "Chọn ba ý khác nhau, mỗi ý có giải thích, ví dụ và hệ quả thiết kế. Một bộ trả lời đủ là change blindness, khó phân biệt một số màu và khó ước lượng diện tích chính xác. Dùng mẫu ở trang 6, không chỉ liệt kê tên hiện tượng."
+      ],
+      [
+        "h",
+        "Câu 2 Phân tích sơ đồ ghế 40 điểm"
+      ],
+      [
+        "p",
+        "Đề gốc trang PDF 2: mục tiêu 5, data và types 15, marks và channels 10, redesign 10. Mục tiêu của hình là thể hiện xác suất tiếp xúc gần người bệnh theo ghế và vai trò của một số người trên máy bay."
+      ],
+      [
+        "bullet",
+        "Items: ghế hoặc người tại ghế nếu dữ liệu một người một ghế; cần nói rõ. Attributes: row và seat ID; spatial position; probability quantitative ratio 0 đến 100%; role nominal như người bệnh hoặc tiếp viên khi legend có mã hóa."
+      ],
+      [
+        "bullet",
+        "Marks: hình chữ nhật cho ghế, glyph/text cho trạng thái hoặc vai trò. Position giữ hàng và phía lối đi; màu/thang sáng tối có legend theo xác suất. Bản scan không cho phép khẳng định chính xác từng sắc màu."
+      ],
+      [
+        "bullet",
+        "Problems: ghế và chữ nhỏ; khó tra legend; dễ lẫn ô trống, xác suất thấp và trạng thái đặc biệt; màu không có thứ tự rõ sẽ làm sai việc so độ lớn. Chỉ kết luận lỗi nào có bằng chứng từ hình hoặc nêu điều kiện nếu bản màu không đọc được."
+      ],
+      [
+        "h",
+        "Phương án vẽ lại"
+      ],
+      [
+        "p",
+        "Giữ sơ đồ ghế vì vị trí gần người bệnh là ngữ nghĩa quan trọng. Dùng sequential lightness cho xác suất; dấu X cho người bệnh; chữ C hoặc ký hiệu khác cho tiếp viên và giải thích bằng legend riêng. Ghi hàng, cột ghế, lối đi và mũi hướng đầu máy bay. Ô không có dữ liệu dùng họa tiết hoặc ký hiệu khác 0%."
+      ],
+      [
+        "p",
+        "Nên vẽ legend 0%, 25%, 50%, 75%, 100% và một hàng ghế mẫu để chứng minh mapping. Đây là phương án giữ spatial context; bar chart xếp theo xác suất có thể là view phụ nếu cần tra thứ hạng."
+      ]
+    ]
+  ],
+  [
+    "Đề 2026 HK2 Tuổi rời gia đình",
+    [
+      [
+        "p",
+        "Đề gốc trang PDF 2: data 15, marks/channels 10, redesign có hình và giải thích 15. Dữ liệu là tuổi trung bình rời gia đình cha mẹ năm 2022 theo quốc gia; có mục EU 27 là tổng hợp, không phải một quốc gia riêng."
+      ],
+      [
+        "table",
+        [
+          [
+            "Thành phần",
+            "Phân tích"
+          ],
+          [
+            [
+              "Items",
+              "Các quốc gia; nếu có EU 27, coi là bản ghi tổng hợp và phân biệt rõ."
+            ],
+            [
+              "Attributes",
+              "Country nominal; mean age quantitative ratio, đơn vị năm; age band là ordinal được suy ra từ tuổi; năm 2022 là metadata thời gian."
+            ],
+            [
+              "Marks/channels",
+              "Hình tròn kích thước gần như cố định; text cho tên và tuổi; hue/lightness theo các dải tuổi; vị trí gợi bố cục địa lý."
+            ],
+            [
+              "Vấn đề",
+              "Màu theo bin làm mất chi tiết so sánh; thứ tự không theo tuổi; chữ trên nền có thể khó đọc; kích thước tròn không giúp đọc tuổi."
+            ]
+          ],
+          [
+            1.4,
+            5.4
+          ]
+        ]
+      ],
+      [
+        "figure",
+        [
+          "dotplot.png",
+          "Một phần số đọc được từ đề dùng minh họa dotplot đã sắp theo tuổi. Không phải toàn bộ dataset.",
+          6.8
+        ]
+      ],
+      [
+        "p",
+        "Redesign: dotplot ngang, quốc gia trên y và mean age trên x, cùng một trục; sắp tăng dần, thêm nhãn 1 chữ số thập phân. Tách EU 27 thành đường tham chiếu 26.4 năm nếu dùng toàn bộ dữ liệu; không tính trung bình EU bằng cách lấy trung bình đơn giản các quốc gia."
+      ],
+      [
+        "p",
+        "Justification: position trên thang chung giúp đọc chênh lệch tốt hơn hue. Có thể giữ màu để đánh dấu một nhóm cụ thể, nhưng không cần mỗi quốc gia một màu. Trục x thu hẹp được nếu miền và ticks rõ vì dotplot mã hóa bằng vị trí."
+      ]
+    ]
+  ],
+  [
+    "Đề cũ Phần lập trình và những điểm cần sửa",
+    [
+      [
+        "h",
+        "Cars ở hai đề mang tên 2026"
+      ],
+      [
+        "p",
+        "Phải xếp giảm dần Horsepower, lấy 10 bản ghi, nhưng chiều cao cột biểu diễn Acceleration. Dùng Name làm nhãn x theo yêu cầu đề. Không sắp theo Acceleration và không lấy Horsepower làm chiều cao."
+      ],
+      [
+        "p",
+        "Đề có 5 điểm cho visualization và R1 đến R5 mỗi mục 5 điểm: fixed SVG và margins/scales, hai axes và title, nhãn Name, xử lý top 10, value labels. Học cách kiểm từng yêu cầu thay vì chỉ vẽ ra hình."
+      ],
+      [
+        "h",
+        "CSV COVID ở đề 2023"
+      ],
+      [
+        "p",
+        "Mỗi hàng giữ Province/State và Country/Region làm key/label. Chọn đúng cột ngày, lọc số ca khác 0, vẽ cột ngang với thang x tuyến tính và y band, có trục và giá trị trên thanh. Tổng theo quốc gia là bài khác nếu không được yêu cầu."
+      ],
+      [
+        "h",
+        "Hai bẫy trong gợi ý cũ"
+      ],
+      [
+        "bullet",
+        "d3.csv có row converter; d3.json không có tham số row converter tương tự. Với JSON, nạp xong rồi dùng map(convertRow). Gợi ý mẫu ở trang 4 của các đề cars cũng minh họa cách map này."
+      ],
+      [
+        "bullet",
+        "Tên cột ngày phải khớp chính xác header. Ngày 03/03/2023 thường có thể là 3/3/23 trong dạng CSV minh họa; dòng hint cuối đề còn ghi 03/03/2022. Chọn theo yêu cầu ngày trong câu hỏi và kiểm tra header, không sao chép hint mâu thuẫn."
+      ],
+      [
+        "h",
+        "Một lưu ý về ngữ nghĩa cars"
+      ],
+      [
+        "p",
+        "Trong dataset cars kiểu Vega, Acceleration được mô tả bằng thời gian tăng tốc tính bằng giây, dù tên trường là Acceleration. Giữ tên trường theo đề và ghi đơn vị khi đã xác nhận metadata; không tự đổi sang m/s². Name cũng có thể lặp trong dữ liệu thực, nên dùng key nội bộ riêng; trục vẫn hiển thị Name."
+      ],
+      [
+        "p",
+        "Phần mã sau dùng D3 v7. Các bộ dữ liệu dùng để luyện có thể giản lược; điều quan trọng khi thi là trình bày đúng chuỗi xử lý và mapping."
+      ]
+    ]
+  ],
+  [
+    "D3 Quy trình và hình học cần nhớ",
+    [
+      [
+        "table",
+        [
+          [
+            "Bước",
+            "Ý nghĩa",
+            "Hàm hoặc cú pháp"
+          ],
+          [
+            [
+              "Load",
+              "Nạp dữ liệu bất đồng bộ",
+              "await d3.json hoặc d3.csv"
+            ],
+            [
+              "Parse",
+              "Đổi số; bảo toàn null",
+              "map, row converter, Number"
+            ],
+            [
+              "Filter",
+              "Bỏ hàng thiếu trường cần dùng",
+              "filter, Number.isFinite"
+            ],
+            [
+              "Sort và slice",
+              "Chọn top k theo trường đề yêu cầu",
+              "sort rồi slice"
+            ],
+            [
+              "Layout",
+              "SVG cố định và vùng vẽ bên trong",
+              "margins, translate"
+            ],
+            [
+              "Scales",
+              "Dữ liệu sang tọa độ",
+              "scaleBand, scaleLinear"
+            ],
+            [
+              "Draw",
+              "Nối dữ liệu với marks",
+              "data, join, attr"
+            ],
+            [
+              "Annotate",
+              "Trục và nhãn đủ nghĩa",
+              "axisBottom, axisLeft, text"
+            ]
+          ],
+          [
+            1.1,
+            2.6,
+            3.1
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Cột dọc"
+      ],
+      [
+        "p",
+        "x là scaleBand cho danh mục; y là scaleLinear từ 0 đến max. Trong SVG, y tăng theo hướng xuống nên range của y là [innerHeight, 0]. Đầu cột ở y(value); height là innerHeight trừ y(value); width là x.bandwidth()."
+      ],
+      [
+        "h",
+        "Cột ngang"
+      ],
+      [
+        "p",
+        "x là scaleLinear từ 0 đến max với range [0, innerWidth]; y là scaleBand. x của thanh bằng 0; width là x(value); y là y(key); height là y.bandwidth()."
+      ],
+      [
+        "h",
+        "Kiểm tra trước khi bind data"
+      ],
+      [
+        "bullet",
+        "Không biến null hay chuỗi rỗng thành số 0 bằng ép kiểu thiếu kiểm soát. Loại hoặc xử lý missing theo ý nghĩa dữ liệu."
+      ],
+      [
+        "bullet",
+        "Sort số cần comparator, ví dụ (a,b) => b.Horsepower - a.Horsepower. Sort chuỗi mặc định có thể cho thứ tự sai."
+      ],
+      [
+        "bullet",
+        "Nếu không có dữ liệu hợp lệ, hiện thông báo và kết thúc; không tạo scale có domain undefined."
+      ],
+      [
+        "p",
+        "Mã mẫu tiếp theo được chia theo trang để dễ viết tay. Khi chạy, nối nguyên các đoạn theo thứ tự vào cùng một file HTML."
+      ]
+    ]
+  ],
+  [
+    "D3 Cars Mã mẫu phần một",
+    [
+      [
+        "code",
+        "<!doctype html>\n<html lang=\"en\"><meta charset=\"utf-8\">\n<title>Midterm Challenge</title>\n<script src=\"https://cdn.jsdelivr.net/npm/d3@7\"></script>\n<body><h1>Acceleration of top 10 horsepower cars</h1>\n<div id=\"chart\"></div>\n<script>\nasync function main() {\n  const raw = await d3.json(\"cars.json\");\n  const numberOrNaN = v =>\n    v == null || String(v).trim() === \"\" ? NaN : +v;\n  const data = raw.map((d, i) => ({\n    ...d, key: String(i),\n    Horsepower: numberOrNaN(d.Horsepower),\n    Acceleration: numberOrNaN(d.Acceleration)\n  })).filter(d => d.Name &&\n    Number.isFinite(d.Horsepower) &&\n    Number.isFinite(d.Acceleration) &&\n    d.Horsepower >= 0 && d.Acceleration >= 0)\n    .sort((a, b) => b.Horsepower - a.Horsepower)\n    .slice(0, 10);\n  if (!data.length) {\n    d3.select(\"#chart\").text(\"No valid data\");\n    return;\n  }\n  const W = 800, H = 500;\n  const m = {top: 45, right: 25, bottom: 180, left: 65};\n  const w = W - m.left - m.right;\n  const h = H - m.top - m.bottom;\n  const svg = d3.select(\"#chart\").append(\"svg\")\n    .attr(\"width\", W).attr(\"height\", H);\n  const g = svg.append(\"g\")\n    .attr(\"transform\", `translate(${m.left},${m.top})`);\n  const names = new Map(data.map(d => [d.key, d.Name]));\n  const x = d3.scaleBand().domain(data.map(d => d.key))\n    .range([0, w]).padding(0.2);\n  const maxY = d3.max(data, d => d.Acceleration) || 1;\n  const y = d3.scaleLinear().domain([0, maxY]).nice()\n    .range([h, 0]);"
+      ],
+      [
+        "p",
+        "Mỗi key là chỉ số bản ghi trước khi sort, giúp tránh gộp các Name trùng. Các giá trị Acceleration thiếu được loại trước khi chọn top 10; nếu đề quy định cách xử lý missing khác thì phải ghi rõ."
+      ]
+    ]
+  ],
+  [
+    "D3 Cars Mã mẫu phần hai",
+    [
+      [
+        "code",
+        "  g.append(\"g\").attr(\"transform\", `translate(0,${h})`)\n    .call(d3.axisBottom(x).tickFormat(k => names.get(k)))\n    .selectAll(\"text\").attr(\"transform\", \"rotate(-55)\")\n    .attr(\"text-anchor\", \"end\").attr(\"dx\", \"-.6em\")\n    .attr(\"dy\", \".2em\");\n  g.append(\"g\").call(d3.axisLeft(y));\n  g.append(\"text\").attr(\"x\", 0).attr(\"y\", -15)\n    .text(\"Acceleration (seconds)\");\n  svg.append(\"text\").attr(\"x\", m.left + w / 2)\n    .attr(\"y\", H - 12).attr(\"text-anchor\", \"middle\")\n    .text(\"Car name - ordered by Horsepower\");\n  g.selectAll(\"rect.bar\").data(data, d => d.key)\n    .join(\"rect\").attr(\"class\", \"bar\")\n    .attr(\"x\", d => x(d.key))\n    .attr(\"y\", d => y(d.Acceleration))\n    .attr(\"width\", x.bandwidth())\n    .attr(\"height\", d => h - y(d.Acceleration))\n    .attr(\"fill\", \"#2166ac\");\n  g.selectAll(\"text.value\").data(data, d => d.key)\n    .join(\"text\").attr(\"class\", \"value\")\n    .attr(\"x\", d => x(d.key) + x.bandwidth() / 2)\n    .attr(\"y\", d => y(d.Acceleration) - 6)\n    .attr(\"text-anchor\", \"middle\")\n    .text(d => d.Acceleration);\n}\nmain().catch(error => {\n  console.error(error);\n  d3.select(\"#chart\").text(\"Cannot load cars.json\");\n});\n</script></body></html>"
+      ],
+      [
+        "h",
+        "Đối chiếu yêu cầu"
+      ],
+      [
+        "p",
+        "SVG 800 × 500 và translate theo margin; x band và y linear; đủ hai axes; Name hiển thị ở ticks; top 10 theo Horsepower; chiều cao và nhãn số theo Acceleration. Margin dưới lớn để chứa tên xe dài."
+      ],
+      [
+        "p",
+        "Khi thi, bản dùng Name trực tiếp làm domain có thể ngắn hơn nếu đề giả định Name duy nhất. Trong dữ liệu thật, dùng key riêng vẫn giữ nguyên yêu cầu hiển thị Name."
+      ]
+    ]
+  ],
+  [
+    "D3 COVID Mã mẫu phần một",
+    [
+      [
+        "code",
+        "<!doctype html>\n<html lang=\"en\"><meta charset=\"utf-8\">\n<title>Midterm</title>\n<script src=\"https://cdn.jsdelivr.net/npm/d3@7\"></script>\n<body><h1>Confirmed cases on 3 March 2023</h1>\n<div id=\"chart\"></div><script>\nasync function main() {\n  const raw = await d3.csv(\"covid_global.csv\");\n  const parse = d3.timeParse(\"%m/%d/%y\");\n  const target = new Date(2023, 2, 3);\n  const dateKey = raw.columns.find(k => {\n    const dt = parse(k);\n    return dt && +dt === +target;\n  });\n  if (!dateKey) throw new Error(\"Date column missing\");\n  const data = raw.map((d, i) => ({\n    key: String(i),\n    label: [d[\"Province/State\"], d[\"Country/Region\"]]\n      .filter(Boolean).join(\" / \"),\n    value: d[dateKey]?.trim() ? +d[dateKey] : NaN\n  })).filter(d => Number.isFinite(d.value) && d.value > 0);\n  if (!data.length) throw new Error(\"No non-zero rows\");\n  const W = 1000, H = 650;\n  const m = {top: 40, right: 95, bottom: 55, left: 260};\n  const w = W - m.left - m.right;\n  const h = H - m.top - m.bottom;\n  const svg = d3.select(\"#chart\").append(\"svg\")\n    .attr(\"width\", W).attr(\"height\", H);\n  const g = svg.append(\"g\")\n    .attr(\"transform\", `translate(${m.left},${m.top})`);\n  const label = new Map(data.map(d => [d.key, d.label]));\n  const x = d3.scaleLinear()\n    .domain([0, d3.max(data, d => d.value)]).nice()\n    .range([0, w]);\n  const y = d3.scaleBand().domain(data.map(d => d.key))\n    .range([0, h]).padding(0.15);"
+      ],
+      [
+        "p",
+        "Mã tìm cột theo ngày đã parse, không mặc định một chuỗi header. Không cộng các tỉnh thành về quốc gia vì đề gốc cần nhãn của từng hàng."
+      ]
+    ]
+  ],
+  [
+    "D3 COVID Mã mẫu phần hai",
+    [
+      [
+        "code",
+        "  g.append(\"g\").attr(\"transform\", `translate(0,${h})`)\n    .call(d3.axisBottom(x).ticks(6));\n  g.append(\"g\")\n    .call(d3.axisLeft(y).tickFormat(k => label.get(k)));\n  svg.append(\"text\").attr(\"x\", m.left + w / 2)\n    .attr(\"y\", H - 10).attr(\"text-anchor\", \"middle\")\n    .text(\"Confirmed cases\");\n  g.selectAll(\"rect.bar\").data(data, d => d.key)\n    .join(\"rect\").attr(\"class\", \"bar\")\n    .attr(\"x\", 0).attr(\"y\", d => y(d.key))\n    .attr(\"width\", d => x(d.value))\n    .attr(\"height\", y.bandwidth())\n    .attr(\"fill\", \"#2166ac\");\n  g.selectAll(\"text.value\").data(data, d => d.key)\n    .join(\"text\").attr(\"class\", \"value\")\n    .attr(\"x\", d => Math.max(0, x(d.value) - 4))\n    .attr(\"y\", d => y(d.key) + y.bandwidth() / 2)\n    .attr(\"dy\", \".35em\").attr(\"text-anchor\", \"end\")\n    .attr(\"fill\", \"white\").attr(\"font-size\", 10)\n    .text(d => d3.format(\",\")(d.value));\n}\nmain().catch(error => {\n  console.error(error);\n  d3.select(\"#chart\").text(error.message);\n});\n</script></body></html>"
+      ],
+      [
+        "h",
+        "Giới hạn khi chạy toàn bộ dataset"
+      ],
+      [
+        "p",
+        "Đây là khung đáp ứng dạng viết mã của đề: SVG cố định, scale, trục, nhãn, filter và số trên thanh. Với hàng trăm dòng và giá trị chênh lệch lớn, fixed height khiến nhãn quá dày và một số số không vừa trong thanh. Không tự bỏ bớt hàng hoặc lấy top 10 nếu đề không cho phép."
+      ],
+      [
+        "p",
+        "Trong sản phẩm thực, cần thống nhất thêm yêu cầu phân trang, vùng cuộn, chọn nhóm hoặc chiều cao theo số dòng. Với thanh quá ngắn, chuyển số ra ngoài và đổi màu chữ; nếu đề bắt buộc số nằm trong thanh, nêu rõ xung đột đọc được này."
+      ],
+      [
+        "p",
+        "Chạy các file mã bằng HTTP server tại thư mục có HTML và dữ liệu. Mở bằng file:// có thể làm fetch bị chặn. Thư viện D3 nạp từ CDN nên cần mạng; đặt bản D3 cục bộ nếu muốn dùng hoàn toàn offline."
+      ]
+    ]
+  ],
+  [
+    "Bài tập tự luyện phân loại và giải thích",
+    [
+      [
+        "h",
+        "Bài 1 Phân loại thuộc tính"
+      ],
+      [
+        "p",
+        "Với mỗi mục, ghi N, O, interval hoặc ratio và một câu giải thích. a Mã sinh viên; b ngành; c hạng nhất nhì ba; d nhiệt độ Celsius; e tuổi; f thời gian chạy 100 m; g số ca; h năm lịch; i rating 1 đến 5; j số ghế; k nhóm máu; l khoảng cách di chuyển."
+      ],
+      [
+        "h",
+        "Bài 2 Chọn channel"
+      ],
+      [
+        "p",
+        "a So sánh chính xác điểm của 12 lớp. b Phân biệt 3 ngành trên scatterplot. c Tìm vùng nhiệt cao trên ma trận. d Thể hiện độ lệch âm dương so với mục tiêu. Nêu mark, channel và lý do."
+      ],
+      [
+        "h",
+        "Bài 3 Giới hạn thị giác"
+      ],
+      [
+        "p",
+        "Viết ba đoạn ngắn theo cấu trúc hiện tượng, ví dụ, implication. Chọn trong change blindness, color vision deficiency, area judgment, inattentional blindness. Không dùng cùng một ví dụ cho ba ý."
+      ],
+      [
+        "h",
+        "Bài 4 Kiểm tra hiểu đúng"
+      ],
+      [
+        "p",
+        "Đánh dấu đúng/sai rồi sửa câu sai. a Mọi số nguyên đều quantitative. b Hue có thứ tự tự nhiên để đọc chính xác độ lớn. c D3 y tăng xuống dưới. d Cột dọc có height bằng y(value). e JSON có thể chuyển kiểu bằng map sau khi nạp. f Top 10 Horsepower thì chiều cao bắt buộc là Horsepower. g Mọi biểu đồ đều phải có trục từ 0. h CI cho mean chứa 95% các quan sát."
+      ],
+      [
+        "h",
+        "Bài 5 Suy luận hình học"
+      ],
+      [
+        "p",
+        "a Giá trị 4 và 16 được mã hóa bằng diện tích hình tròn. Tỷ lệ bán kính phải là bao nhiêu? b y có domain [0,100], range [300,0]. Với value 40, tìm y, height của thanh và vị trí y của nhãn trên cột 6 px. c Giá trị 50 lên 60 nhưng cột có baseline 40. Tính lie factor theo phần trăm thay đổi."
+      ],
+      [
+        "p",
+        "Làm trước khi đọc đáp án trang 27. Dành khoảng 30 phút, ưu tiên giải thích ngắn gọn hơn là chỉ ghi đáp số."
+      ]
+    ]
+  ],
+  [
+    "Bài tập tự luyện phê bình và D3",
+    [
+      [
+        "h",
+        "Bài 6 Phân tích hình"
+      ],
+      [
+        "figure",
+        [
+          "critique.png",
+          "Hình luyện tập dùng số liệu tự tạo; trục cột bắt đầu ở 70.",
+          6.8
+        ]
+      ],
+      [
+        "p",
+        "a Nêu mục tiêu, items và types. b Chỉ ra marks/channels. c Tính mức tăng thật từ IT đến DS và mức tăng chiều dài thấy được. d Vẽ hai phương án sửa phù hợp. e Cho biết không thể suy ra điều gì về phân phối điểm từ ba mean này."
+      ],
+      [
+        "h",
+        "Bài 7 Sửa mã"
+      ],
+      [
+        "code",
+        "const data = raw.slice(0, 10)\n  .sort((a, b) => a.Horsepower - b.Horsepower);\nconst y = d3.scaleLinear().domain([0, max]).range([0, h]);\nbars.attr(\"y\", d => y(d.Acceleration))\n  .attr(\"height\", d => y(d.Acceleration));"
+      ],
+      [
+        "p",
+        "Nêu ít nhất bốn lỗi hoặc chỗ chưa đúng yêu cầu top 10 Horsepower rồi vẽ Acceleration. Sửa bằng 5 đến 10 dòng. Giả định số đã parse và max là Acceleration lớn nhất."
+      ],
+      [
+        "h",
+        "Bài 8 Thiết kế dữ liệu nhiều thuộc tính"
+      ],
+      [
+        "p",
+        "Có 15 sinh viên với ID, GPA, ngành, nhóm và vị trí bàn thực. Vẽ một mẫu cho 6 người để thể hiện tất cả thuộc tính và mọi quan hệ cùng nhóm. Ghi mapping và một cách giảm clutter mà vẫn giữ vị trí bàn."
+      ],
+      [
+        "p",
+        "Đáp án ở trang 28."
+      ]
+    ]
+  ],
+  [
+    "Đề mô phỏng A Phần lý thuyết và phân tích",
+    [
+      [
+        "p",
+        "90 phút  100 điểm  Làm cả ba câu ở trang 24 và 25. Gợi ý phân bổ 20 phút, 35 phút, 30 phút và 5 phút kiểm tra."
+      ],
+      [
+        "h",
+        "Câu 1 Giới hạn thị giác 30 điểm"
+      ],
+      [
+        "p",
+        "List three limitations of the human visual system. For each limitation, explain it, give one example, and describe its implication for visualization design. Có thể trả lời bằng tiếng Việt và giữ thuật ngữ chính bằng tiếng Anh."
+      ],
+      [
+        "h",
+        "Câu 2 Phân tích và thiết kế lại 40 điểm"
+      ],
+      [
+        "p",
+        "Một báo cáo so sánh thời gian trung bình hoàn thành bài thực hành của 4 lớp. Biểu đồ gốc là 3D pie chart, một miếng cho mỗi lớp, kích thước/góc theo thời gian; mỗi lớp một màu và có nhãn số."
+      ],
+      [
+        "table",
+        [
+          [
+            "Lớp",
+            "Thời gian trung bình phút"
+          ],
+          [
+            [
+              "A",
+              "42"
+            ],
+            [
+              "B",
+              "38"
+            ],
+            [
+              "C",
+              "47"
+            ],
+            [
+              "D",
+              "40"
+            ]
+          ],
+          [
+            2.0,
+            4.8
+          ]
+        ]
+      ],
+      [
+        "p",
+        "a Nêu mục tiêu của visualization 5 điểm. b Xác định items, attributes và types 15 điểm. c Phân tích marks/channels của bản gốc 10 điểm. d Chỉ ra vấn đề rồi vẽ redesign có mapping và justification 10 điểm."
+      ],
+      [
+        "h",
+        "Yêu cầu với hình vẽ"
+      ],
+      [
+        "p",
+        "Hình phải có tên lớp, đơn vị phút, thang đo và đủ bốn giá trị. Lựa chọn biểu đồ cần hỗ trợ so sánh lớp nhanh nhất và chênh lệch giữa hai lớp. Nếu dùng dotplot với trục hẹp, ghi miền và ticks rõ."
+      ],
+      [
+        "p",
+        "Không đọc lời giải trước khi làm. Thang điểm tự chấm cho phần này ở trang 29."
+      ]
+    ]
+  ],
+  [
+    "Đề mô phỏng A Phần D3",
+    [
+      [
+        "h",
+        "Câu 3 D3 Cars 30 điểm"
+      ],
+      [
+        "p",
+        "Create an HTML page titled Midterm Challenge. Load cars.json. Each row has Name, Horsepower, Acceleration and Origin. Draw a vertical bar chart of Acceleration for the ten cars with the highest Horsepower."
+      ],
+      [
+        "table",
+        [
+          [
+            "Yêu cầu",
+            "Điểm"
+          ],
+          [
+            [
+              "Đúng bar chart và đúng biến được vẽ",
+              "5"
+            ],
+            [
+              "SVG 800 × 500, margins, scaleBand và scaleLinear",
+              "5"
+            ],
+            [
+              "Hai axes, ticks và title trục y",
+              "5"
+            ],
+            [
+              "Name làm nhãn các cột",
+              "5"
+            ],
+            [
+              "Parse số, bỏ missing cần thiết, sort giảm Horsepower rồi lấy 10",
+              "5"
+            ],
+            [
+              "Giá trị Acceleration ở phía trên từng cột",
+              "5"
+            ]
+          ],
+          [
+            5.9,
+            0.9
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Dữ liệu nhỏ để kiểm tra logic"
+      ],
+      [
+        "table",
+        [
+          [
+            "Name",
+            "Horsepower",
+            "Acceleration"
+          ],
+          [
+            [
+              "A",
+              "90",
+              "14"
+            ],
+            [
+              "B",
+              "150",
+              "11"
+            ],
+            [
+              "C",
+              "120",
+              "13"
+            ],
+            [
+              "D",
+              "200",
+              "10"
+            ],
+            [
+              "E",
+              "null",
+              "12"
+            ],
+            [
+              "F",
+              "180",
+              "15"
+            ]
+          ],
+          [
+            2.8,
+            2,
+            2
+          ]
+        ]
+      ],
+      [
+        "p",
+        "Nếu thử với bảng nhỏ này, yêu cầu top 10 trả về tất cả 5 bản ghi hợp lệ, theo thứ tự D, F, B, C, A. Chiều cao lần lượt 10, 15, 11, 13, 14. Đây là bảng kiểm logic, không thay thế dữ liệu cars.json trong đề."
+      ],
+      [
+        "h",
+        "Tự kiểm trước khi nộp"
+      ],
+      [
+        "bullet",
+        "Sort và slice đúng thứ tự; so số thay vì chuỗi; giá trị null không biến thành 0."
+      ],
+      [
+        "bullet",
+        "y range đảo chiều; height là h trừ y(value); nhãn text không bị join với phần tử trục."
+      ],
+      [
+        "bullet",
+        "Mỗi cột có Name ở x, giá trị ở trên và số thuộc Acceleration."
+      ],
+      [
+        "p",
+        "Mã lời giải đầy đủ ở trang 18 đến 19. Hướng dẫn tự chấm ở trang 29."
+      ]
+    ]
+  ],
+  [
+    "Đề mô phỏng B Thiết kế và cột ngang",
+    [
+      [
+        "p",
+        "90 phút  100 điểm  Phân bổ gợi ý 30 phút, 30 phút, 25 phút và 5 phút kiểm tra."
+      ],
+      [
+        "h",
+        "Câu 1 Phân tích biểu đồ 35 điểm"
+      ],
+      [
+        "p",
+        "Một bảng gồm Region, Month, Revenue được vẽ thành cột trụ 3D trên hai trục nền Region và Month; chiều cao là Revenue, mỗi tháng một màu."
+      ],
+      [
+        "table",
+        [
+          [
+            "Region",
+            "Jan",
+            "Feb",
+            "Mar"
+          ],
+          [
+            [
+              "North",
+              "120",
+              "150",
+              "130"
+            ],
+            [
+              "Central",
+              "80",
+              "90",
+              "100"
+            ],
+            [
+              "South",
+              "160",
+              "140",
+              "180"
+            ]
+          ],
+          [
+            2.3,
+            1.5,
+            1.5,
+            1.5
+          ]
+        ]
+      ],
+      [
+        "p",
+        "Đơn vị triệu đồng. a Data/types 10 điểm. b Marks/channels 5 điểm. c Problems 10 điểm. d Vẽ và giải thích redesign 10 điểm. Nêu rõ chọn ưu tiên so sánh độ lớn hay theo dõi xu hướng."
+      ],
+      [
+        "h",
+        "Câu 2 Thiết kế lớp học 35 điểm"
+      ],
+      [
+        "table",
+        [
+          [
+            "ID",
+            "GPA",
+            "Major",
+            "Group",
+            "Seat"
+          ],
+          [
+            [
+              "S1",
+              "80",
+              "IT",
+              "G1",
+              "1"
+            ],
+            [
+              "S2",
+              "65",
+              "CS",
+              "G1",
+              "2"
+            ],
+            [
+              "S3",
+              "90",
+              "DS",
+              "G2",
+              "3"
+            ],
+            [
+              "S4",
+              "75",
+              "IT",
+              "G2",
+              "4"
+            ],
+            [
+              "S5",
+              "85",
+              "CS",
+              "G2",
+              "5"
+            ],
+            [
+              "S6",
+              "70",
+              "DS",
+              "G1",
+              "6"
+            ]
+          ],
+          [
+            1.2,
+            1.1,
+            1.5,
+            1.5,
+            1.5
+          ]
+        ]
+      ],
+      [
+        "p",
+        "Sơ đồ gồm hai hàng: hàng trước 1 2 3 và hàng sau 4 5 6. Giữ đúng vị trí ghế, thể hiện GPA, ngành và group ID, nối mọi cặp cùng group. Chấm: vị trí 5; GPA 10; major 10; nhóm và links 10."
+      ],
+      [
+        "h",
+        "Câu 3 D3 cột ngang 30 điểm"
+      ],
+      [
+        "p",
+        "Load cases.csv có Province, Country, Cases. Viết HTML title Midterm; parse Cases, giữ hàng Cases > 0; dùng nhãn Province / Country; SVG 900 × 600 và margins; x linear, y band; có axes, title và giá trị ở cuối thanh. Mỗi yêu cầu chính: load/parse/filter, SVG/scales, axes/title, nhãn, bars, values được 5 điểm."
+      ],
+      [
+        "p",
+        "Lời giải và mapping ở trang 30."
+      ]
+    ]
+  ],
+  [
+    "Đáp án bài tập từ một đến năm",
+    [
+      [
+        "h",
+        "Bài 1"
+      ],
+      [
+        "p",
+        "a N; b N; c O; d interval; e ratio; f ratio; g ratio; h interval; i O; j N; k N; l ratio. Lý do chung: identifier chỉ xác định danh tính; rank chỉ có thứ tự; mốc 0 Celsius và năm lịch tùy quy ước; tuổi, số lượng, khoảng cách và duration có mốc 0 mang nghĩa không có đại lượng."
+      ],
+      [
+        "h",
+        "Bài 2"
+      ],
+      [
+        "p",
+        "a Bar chart hoặc dotplot, position/length trên cùng thang giúp so sánh. b Point với hue hoặc shape cho nominal, có legend. c Ô heatmap với lightness tăng theo nhiệt; giữ trục không gian hoặc hàng/cột đúng ngữ nghĩa. d Diverging scale với 0 ở màu trung tính và hai phía đối lập; không dùng categorical hue ngẫu nhiên."
+      ],
+      [
+        "h",
+        "Bài 3"
+      ],
+      [
+        "p",
+        "Ví dụ đáp án: change blindness khiến khó so hai khung animation, dùng small multiples; khó phân biệt đỏ xanh khiến trạng thái tốt/xấu bị nhầm, thêm icon và label; diện tích khó ước lượng khiến bubble 40 và 60 khó so, đổi sang dotplot chung trục. Mỗi ý cần đủ hiện tượng, ví dụ cụ thể, quyết định thiết kế."
+      ],
+      [
+        "h",
+        "Bài 4"
+      ],
+      [
+        "p",
+        "a Sai, số áo và mã ghế là nominal. b Sai, hue chủ yếu phân biệt identity. c Đúng. d Sai, height bằng h trừ y(value). e Đúng. f Sai, biến xếp hạng khác biến được vẽ; trong đề chiều cao là Acceleration. g Sai, phụ thuộc mark và nhiệm vụ; bar length thường cần 0. h Sai, CI cho mean thể hiện bất định của mean, không phải khoảng chứa 95% quan sát."
+      ],
+      [
+        "h",
+        "Bài 5"
+      ],
+      [
+        "p",
+        "a Diện tích gấp 4 thì bán kính gấp 2. Lấy bán kính tỷ lệ trực tiếp với giá trị sẽ khiến diện tích tăng theo bình phương và làm sai encoding."
+      ],
+      [
+        "p",
+        "b y(40) là 180 px; height là 120 px; nhãn nằm ở y bằng 174 px. Đây là tọa độ trong vùng g đã translate, chưa cộng margin của SVG."
+      ],
+      [
+        "p",
+        "c Dữ liệu tăng 20%; chiều dài thấy được từ 10 lên 20 tăng 100%; lie factor bằng 5. Phải ghi rõ đang dùng biến thiên tương đối so với mốc ban đầu."
+      ]
+    ]
+  ],
+  [
+    "Đáp án bài tập từ sáu đến tám",
+    [
+      [
+        "h",
+        "Bài 6"
+      ],
+      [
+        "p",
+        "Items là ba ngành/khoa IT CS DS; department nominal; mean satisfaction quantitative theo thang điểm 0 đến 100, không mặc định tỷ lệ năng lực hay cảm xúc. Marks là rect; x position theo department; bar length từ baseline 70 theo score trừ 70; hue cũng theo department; text ghi số."
+      ],
+      [
+        "p",
+        "IT đến DS tăng 6 điểm, tương đương 6/78 xấp xỉ 7.69%. Thanh thấy được từ 8 đến 14 tăng 75%; lie factor xấp xỉ 9.75. Sửa 1: bar chart với y từ 0 đến 100. Sửa 2: dotplot cùng trục 70 đến 90 với ticks rõ, sắp 78, 82, 84. Không kết luận độ phân tán, cỡ mẫu hay khác biệt có ý nghĩa thống kê khi chỉ có mean."
+      ],
+      [
+        "h",
+        "Bài 7"
+      ],
+      [
+        "code",
+        "const data = raw\n  .sort((a, b) => b.Horsepower - a.Horsepower)\n  .slice(0, 10);\nconst y = d3.scaleLinear()\n  .domain([0, max]).range([h, 0]);\nbars.attr(\"y\", d => y(d.Acceleration))\n  .attr(\"height\", d => h - y(d.Acceleration));"
+      ],
+      [
+        "p",
+        "Bốn lỗi chính: slice quá sớm; sort tăng thay vì giảm; y range chưa đảo; height sai. Nếu cần giữ raw nguyên vẹn, dùng [...raw].sort(...). Dữ liệu thực còn phải parse và loại missing trước đoạn này."
+      ],
+      [
+        "h",
+        "Bài 8"
+      ],
+      [
+        "p",
+        "Giữ tọa độ bàn; node theo student ID; GPA bằng mini bar, ngành bằng hue cộng chữ ngành, nhóm bằng nhãn và links. Với n người trong nhóm cần n nhân (n trừ 1) chia 2 links nếu mọi cặp được nối. Nét mảnh dưới node và highlight theo nhóm giúp giảm clutter mà không đổi sơ đồ bàn."
+      ],
+      [
+        "p",
+        "Phương án khác vẫn đúng nếu đủ thuộc tính, không tạo thứ tự giả cho nominal và giải thích được tradeoff. Không nhất thiết phải dùng nhiều màu hoặc nhiều kích thước đồng thời."
+      ]
+    ]
+  ],
+  [
+    "Lời giải đề mô phỏng A",
+    [
+      [
+        "h",
+        "Câu 1 Tự chấm 30 điểm"
+      ],
+      [
+        "p",
+        "Mỗi giới hạn tối đa 10 điểm: giải thích hiện tượng 3, ví dụ đúng 3, hệ quả thiết kế có liên hệ 4. Ví dụ bộ ba change blindness, color vision deficiency và area judgment ở trang 6. Ba tên không có diễn giải chưa đủ điểm của một câu hoàn chỉnh."
+      ],
+      [
+        "h",
+        "Câu 2 Tự chấm 40 điểm"
+      ],
+      [
+        "p",
+        "Mục tiêu 5: so sánh thời gian trung bình của bốn lớp và tìm lớp nhanh nhất. Data 15: item là lớp; class N; duration Q ratio, đơn vị phút; mean là thống kê tổng hợp, không phải thời gian của mỗi sinh viên."
+      ],
+      [
+        "p",
+        "Encoding 10: các miếng pie dạng area, angle/area theo duration, hue theo class, text theo class và số; chiều sâu tạo phối cảnh nhưng không mã hóa biến dữ liệu hữu ích."
+      ],
+      [
+        "p",
+        "Redesign 10: bar ngang sắp B 38, D 40, A 42, C 47, trục x từ 0 có đơn vị phút; hoặc dotplot cùng thang. Giải thích: các thời gian trung bình không phải các phần của một tổng có ngữ nghĩa; 3D còn làm lệch cảm nhận, trong khi vị trí/length chung trục hỗ trợ so trực tiếp. B nhanh nhất, chậm hơn B nhiều nhất là C với 9 phút."
+      ],
+      [
+        "h",
+        "Câu 3 Tự chấm 30 điểm"
+      ],
+      [
+        "p",
+        "Dùng mã mẫu trang 18 và 19. Đánh dấu sáu tiêu chí trang 25, mỗi tiêu chí 5. Với phần code chưa hoàn chỉnh, chấm dựa trên phần thể hiện đúng; đừng tự cho đủ chỉ vì có gọi tên một hàm."
+      ],
+      [
+        "table",
+        [
+          [
+            "Lỗi cần nhận ra",
+            "Cách kiểm"
+          ],
+          [
+            [
+              "Nhầm trường",
+              "Chiều cao và value label đều là Acceleration."
+            ],
+            [
+              "Sai top k",
+              "Thứ tự bảng nhỏ phải D F B C A."
+            ],
+            [
+              "Sai hình học",
+              "y giảm khi value tăng; height tăng khi value tăng."
+            ],
+            [
+              "Nhãn mất hoặc trùng",
+              "Domain key riêng, tickFormat hiển thị Name."
+            ]
+          ],
+          [
+            2.0,
+            4.8
+          ]
+        ]
+      ],
+      [
+        "p",
+        "Đây là thang tự chấm đề mô phỏng. Khi học nhóm, nhờ người khác đọc hình redesign mà không nghe giải thích trước để kiểm khả năng truyền đạt."
+      ]
+    ]
+  ],
+  [
+    "Lời giải đề mô phỏng B",
+    [
+      [
+        "h",
+        "Câu 1 35 điểm"
+      ],
+      [
+        "p",
+        "Data 10: mỗi cặp Region và Month là một observation; Region nominal; Month temporal/ordinal trong ba tháng đã cho; Revenue quantitative ratio, triệu đồng. Encoding 5: cột trụ; x và depth position cho Region/Month; height cho Revenue; hue theo Month."
+      ],
+      [
+        "p",
+        "Problems 10: occlusion, perspective, khó căn thẳng giữa các dãy, màu lặp cho thời gian không giúp đọc trend nhiều bằng thứ tự trục. Redesign 10: grouped bars chung baseline 0 nếu so các mức; x là Region, các bar trong nhóm theo Month, height là Revenue. Hoặc line chart theo Jan Feb Mar, một line mỗi Region, y cùng thang để so xu hướng. Cần hình và legend đủ ba region nếu chọn line."
+      ],
+      [
+        "h",
+        "Câu 2 35 điểm"
+      ],
+      [
+        "p",
+        "Vẽ hai hàng đúng 1 2 3 và 4 5 6 được 5. GPA qua length trên thang cố định được 10. Major qua hue kèm label được 10. Group qua nhãn G1 G2 và đủ links được 10. G1: S1 S2 S6; G2: S3 S4 S5. Mỗi nhóm ba người có ba cạnh; tổng sáu cạnh."
+      ],
+      [
+        "h",
+        "Câu 3 30 điểm"
+      ],
+      [
+        "p",
+        "Áp dụng khung COVID trang 20 đến 21, thay W 900 và H 600; bỏ đoạn tìm ngày; dùng loader dưới đây. Nên đặt nhãn số bên ngoài cuối thanh để không mất chữ trên thanh nhỏ."
+      ],
+      [
+        "code",
+        "const raw = await d3.csv(\"cases.csv\");\nconst data = raw.map((d, i) => ({\n  key: String(i),\n  label: [d.Province, d.Country].filter(Boolean).join(\" / \"),\n  value: d.Cases?.trim() ? +d.Cases : NaN\n})).filter(d => Number.isFinite(d.value) && d.value > 0);\n// In the value-label selection:\n// x: d => x(d.value) + 5\n// text-anchor: start; fill: black\n// Reserve enough right margin for the largest label."
+      ],
+      [
+        "p",
+        "Chấm sáu mục × 5 như đề. Công thức bar ngang: x 0, y y(key), width x(value), height y.bandwidth(). Nếu data rỗng cần thông báo; label trên trục phải giữ cả Province và Country."
+      ]
+    ]
+  ],
+  [
+    "Ôn nhanh trước khi làm bài",
+    [
+      [
+        "h",
+        "Mười câu hỏi tự kiểm"
+      ],
+      [
+        "bullet",
+        "Item là gì, một hàng hoặc mark đại diện cho đơn vị nào?"
+      ],
+      [
+        "bullet",
+        "Nominal, ordinal và quantitative đã phân biệt theo nghĩa thay vì kiểu số/chữ chưa?"
+      ],
+      [
+        "bullet",
+        "Mỗi attribute có một mapping cụ thể sang channel nào?"
+      ],
+      [
+        "bullet",
+        "Thiết kế có expressiveness và effectiveness phù hợp nhiệm vụ không?"
+      ],
+      [
+        "bullet",
+        "Giới hạn thị giác đã có ví dụ và implication chưa?"
+      ],
+      [
+        "bullet",
+        "Redesign có hình, scale, units, labels, legend và justification chưa?"
+      ],
+      [
+        "bullet",
+        "Dữ liệu thiếu, số 0 và trạng thái đặc biệt có bị trộn lẫn không?"
+      ],
+      [
+        "bullet",
+        "D3 đã parse trước khi sort và filter chưa?"
+      ],
+      [
+        "bullet",
+        "Sort theo trường nào và vẽ trường nào; có bị tráo không?"
+      ],
+      [
+        "bullet",
+        "Bar dọc có y đảo chiều và height bằng h trừ y(value) không?"
+      ],
+      [
+        "h",
+        "Kế hoạch học gợi ý trong ba buổi"
+      ],
+      [
+        "table",
+        [
+          [
+            "Buổi",
+            "Nội dung",
+            "Kết quả cần tự làm"
+          ],
+          [
+            [
+              "1",
+              "Trang 3 đến 11 và bài 1 đến 5",
+              "Phân loại và giải thích không nhìn tài liệu."
+            ],
+            [
+              "2",
+              "Trang 12 đến 21 và bài 6 đến 8",
+              "Vẽ lại một hình và viết code bar dọc/ngang."
+            ],
+            [
+              "3",
+              "Hai đề mô phỏng, mỗi đề 90 phút",
+              "Chấm lỗi rồi viết lại phần yếu nhất."
+            ]
+          ],
+          [
+            0.8,
+            2.8,
+            3.2
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Từ vựng dễ cần dùng trong bài thi"
+      ],
+      [
+        "p",
+        "Items = đối tượng; attributes = thuộc tính; encoding = mã hóa; marks = phần tử hình học; channels = kênh thị giác; common scale = thang chung; occlusion = che khuất; baseline = mốc gốc; salience = độ nổi bật; clutter = rối; small multiples = nhiều biểu đồ nhỏ; justification = giải thích căn cứ lựa chọn."
+      ]
+    ]
+  ],
+  [
+    "Nguồn học và đối chiếu",
+    [
+      [
+        "p",
+        "Số trang dưới đây là trang PDF đếm từ 1, không phải số in trên slide. Riêng tập C2 Popout có số in bắt đầu khoảng 60 nên hai hệ đánh số khác nhau."
+      ],
+      [
+        "table",
+        [
+          [
+            "Nguồn do người học cung cấp",
+            "Vị trí sử dụng chính"
+          ],
+          [
+            [
+              "C1-Data Science and Visualization.pdf",
+              "Khái niệm 4 đến 7; lựa chọn visualization 13 đến 21; human 31."
+            ],
+            [
+              "C2-Perception-Color.pdf",
+              "Perception 3 đến 4; thị giác 20 đến 21; HSV 28; colormap 35 đến 40; màu tương đối 49."
+            ],
+            [
+              "C2-Perception-Popout-Change blindness-gestalt.pdf",
+              "Popout 2 và 11; change blindness 19 đến 28; Gestalt 29 đến 58."
+            ],
+            [
+              "C3-Data.pdf",
+              "Data và dataset types 5 đến 22; attribute scales 27 đến 36."
+            ],
+            [
+              "C4-Marks-Channels.pdf",
+              "Marks và channels 3 đến 15; channel accuracy 19 đến 48."
+            ],
+            [
+              "C5-Design guideline.pdf",
+              "Integrity 9 đến 31; alternatives 34 đến 43; design 49 đến 73."
+            ],
+            [
+              "it138iu_2023_HK1_midterm.pdf",
+              "Câu 1 và 2 trang 2 đến 3; D3 trang 3 đến 4."
+            ],
+            [
+              "it138iu_2026_HK1_midterm.pdf",
+              "Giới hạn và phân tích trang 2; cars trang 2 đến 4."
+            ],
+            [
+              "it138iu_2026_HK2_midterm.pdf",
+              "Giới hạn và phân tích trang 2; cars trang 2 đến 4."
+            ]
+          ],
+          [
+            3.5,
+            3.3
+          ]
+        ]
+      ],
+      [
+        "h",
+        "Tài liệu kỹ thuật và thống kê bổ sung"
+      ],
+      [
+        "p",
+        "D3 fetch và parsing: https://d3js.org/d3-fetch"
+      ],
+      [
+        "p",
+        "Band scales: https://d3js.org/d3-scale/band"
+      ],
+      [
+        "p",
+        "Data join: https://d3js.org/d3-selection/joining"
+      ],
+      [
+        "p",
+        "CI cho mean: NIST Engineering Statistics Handbook, mục 1.3.5.2, https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+      ],
+      [
+        "p",
+        "Các hình Gestalt, heatmap và bài tập điểm số được tự vẽ. Hình lớp học lấy vị trí và dữ liệu từ đề 2023; dotplot chỉ trích các giá trị đọc rõ trong đề HK2. Các phương án thiết kế là lời giải tham khảo để luyện tư duy."
+      ]
+    ]
+  ]
+]

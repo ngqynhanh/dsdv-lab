@@ -1,0 +1,111 @@
+{
+  "counts": {
+    "loaded": 289,
+    "valid": 287,
+    "excluded": 2,
+    "zeroCases": 27
+  },
+  "excluded": [
+    {
+      "country": "Canada",
+      "province": "Repatriated Travellers",
+      "lat": "",
+      "long": "",
+      "value": "0"
+    },
+    {
+      "country": "China",
+      "province": "Unknown",
+      "lat": "",
+      "long": "",
+      "value": "1873"
+    }
+  ],
+  "examples": [
+    {
+      "country": "Afghanistan",
+      "province": "",
+      "lat": 33.93911,
+      "long": 67.709953,
+      "value": 299
+    },
+    {
+      "country": "Albania",
+      "province": "",
+      "lat": 41.1533,
+      "long": 20.1683,
+      "value": 361
+    },
+    {
+      "country": "Algeria",
+      "province": "",
+      "lat": 28.0339,
+      "long": 1.6596,
+      "value": 1320
+    }
+  ],
+  "scales": {
+    "center": 345,
+    "north": 150,
+    "south": 450,
+    "zeroRadius": 0,
+    "maxRadius": 60
+  },
+  "validationTests": [
+    {
+      "name": "zero",
+      "accepted": true
+    },
+    {
+      "name": "blank latitude",
+      "accepted": false
+    },
+    {
+      "name": "blank cases",
+      "accepted": false
+    },
+    {
+      "name": "not numeric",
+      "accepted": false
+    },
+    {
+      "name": "latitude range",
+      "accepted": false
+    },
+    {
+      "name": "longitude range",
+      "accepted": false
+    },
+    {
+      "name": "negative cases",
+      "accepted": false
+    },
+    {
+      "name": "nonfinite",
+      "accepted": false
+    }
+  ],
+  "hoverTests": [
+    {
+      "country": "Afghanistan",
+      "shown": true,
+      "moved": true,
+      "hidden": true,
+      "strokeReset": true
+    },
+    {
+      "country": "Albania",
+      "shown": true,
+      "moved": true,
+      "hidden": true,
+      "strokeReset": true
+    },
+    {
+      "country": "Algeria",
+      "shown": true,
+      "moved": true,
+      "hidden": true,
+      "strokeReset": true
+    }
+  ]
+}

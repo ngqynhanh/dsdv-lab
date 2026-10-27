@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>Midterm Challenge</title>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<body><h1>Acceleration of top 10 horsepower cars</h1>
+<div id="chart"></div>
+<script>
+async function main() {
+  const raw = await d3.json("cars.json");
+  const numberOrNaN = v =>
+    v == null || String(v).trim() === "" ? NaN : +v;
+  const data = raw.map((d, i) => ({
+    ...d, key: String(i),
+    Horsepower: numberOrNaN(d.Horsepower),
+    Acceleration: numberOrNaN(d.Acceleration)
+  })).filter(d => d.Name &&
+    Number.isFinite(d.Horsepower) &&
+    Number.isFinite(d.Acceleration) &&
+    d.Horsepower >= 0 && d.Acceleration >= 0)
+    .sort((a, b) => b.Horsepower - a.Horsepower)
+    .slice(0, 10);
+  if (!data.length) {
+    d3.select("#chart").text("No valid data");
+    return;
+  }
+  const W = 800, H = 500;
+  const m = {top: 45, right: 25, bottom: 180, left: 65};
+  const w = W - m.left - m.right;
+  const h = H - m.top - m.bottom;
+  const svg = d3.select("#chart").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${m.left},${m.top})`);
+  const names = new Map(data.map(d => [d.key, d.Name]));
+  const x = d3.scaleBand().domain(data.map(d => d.key))
+    .range([0, w]).padding(0.2);
+  const maxY = d3.max(data, d => d.Acceleration) || 1;
+  const y = d3.scaleLinear().domain([0, maxY]).nice()
+    .range([h, 0]);
+  g.append("g").attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).tickFormat(k => names.get(k)))
+    .selectAll("text").attr("transform", "rotate(-55)")
+    .attr("text-anchor", "end").attr("dx", "-.6em")
+    .attr("dy", ".2em");
+  g.append("g").call(d3.axisLeft(y));
+  g.append("text").attr("x", 0).attr("y", -15)
+    .text("Acceleration (seconds)");
+  svg.append("text").attr("x", m.left + w / 2)
+    .attr("y", H - 12).attr("text-anchor", "middle")
+    .text("Car name - ordered by Horsepower");
+  g.selectAll("rect.bar").data(data, d => d.key)
+    .join("rect").attr("class", "bar")
+    .attr("x", d => x(d.key))
+    .attr("y", d => y(d.Acceleration))
+    .attr("width", x.bandwidth())
+    .attr("height", d => h - y(d.Acceleration))
+    .attr("fill", "#2166ac");
+  g.selectAll("text.value").data(data, d => d.key)
+    .join("text").attr("class", "value")
+    .attr("x", d => x(d.key) + x.bandwidth() / 2)
+    .attr("y", d => y(d.Acceleration) - 6)
+    .attr("text-anchor", "middle")
+    .text(d => d.Acceleration);
+}
+main().catch(error => {
+  console.error(error);
+  d3.select("#chart").text("Cannot load cars.json");
+});
+</script></body></html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Pre-lab 06 | Stacked area</title>
+		<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+		<style>
+			body {
+				font:
+					15px/1.5 Arial,
+					sans-serif;
+				max-width: 920px;
+				margin: 25px auto;
+				padding: 0 16px;
+				color: #17324c;
+			}
+			h1 {
+				margin: 0;
+				font-size: 25px;
+			}
+			p {
+				color: #526779;
+				margin: 5px 0 15px;
+			}
+			svg {
+				max-width: 100%;
+				height: auto;
+				border: 1px solid #dce7ef;
+				background: #fff;
+				border-radius: 9px;
+			}
+			button {
+				padding: 8px 14px;
+				border: 0;
+				border-radius: 6px;
+				background: #177ca4;
+				color: #fff;
+				cursor: pointer;
+			}
+			#status {
+				background: #eff6fa;
+				padding: 12px;
+				border-radius: 6px;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Campus Activity — Stacked Area</h1>
+		<p>
+			Read the y-axis as the <b>combined total</b>, not a separate value for the
+			upper band. Toggle an area to inspect the sum.
+		</p>
+		<div id="chart"></div>
+		<button id="toggle">Hide / show Workshops</button>
+		<div id="status">Both categories are shown.</div>
+		<script>
+			// STEP 1 — Rows by date; columns are categories that will be stacked.
+			const parse = d3.timeParse("%Y-%m-%d")
+			const rows = [
+				{ date: "2020-04-01", Lectures: 18, Workshops: 8 },
+				{ date: "2020-04-02", Lectures: 22, Workshops: 12 },
+				{ date: "2020-04-03", Lectures: 19, Workshops: 14 },
+				{ date: "2020-04-04", Lectures: 28, Workshops: 10 },
+				{ date: "2020-04-05", Lectures: 31, Workshops: 17 },
+			].map((d) => ({
+				date: parse(d.date),
+				Lectures: d.Lectures,
+				Workshops: d.Workshops,
+			}))
+			const keys = ["Lectures", "Workshops"]
+			let showWorkshops = true
+			const width = 850,
+				height = 390,
+				m = { top: 25, right: 24, bottom: 52, left: 65 }
+			const w = width - m.left - m.right,
+				h = height - m.top - m.bottom
+			const svg = d3
+				.select("#chart")
+				.append("svg")
+				.attr("viewBox", `0 0 ${width} ${height}`)
+			const g = svg
+				.append("g")
+				.attr("transform", `translate(${m.left},${m.top})`)
+			const x = d3
+				.scaleTime()
+				.domain(d3.extent(rows, (d) => d.date))
+				.range([0, w])
+			const y = d3.scaleLinear().range([h, 0])
+			const colors = d3
+				.scaleOrdinal()
+				.domain(keys)
+				.range(["#177ca4", "#e28b37"])
+			const xAxis = g
+				.append("g")
+				.attr("transform", `translate(0,${h})`)
+				.call(
+					d3
+						.axisBottom(x)
+						.ticks(d3.timeDay.every(1))
+						.tickFormat(d3.timeFormat("%d %b")),
+				)
+			const yAxis = g.append("g")
+			g.append("text")
+				.attr("x", w / 2)
+				.attr("y", h + 42)
+				.attr("text-anchor", "middle")
+				.text("Date")
+			g.append("text")
+				.attr("transform", "rotate(-90)")
+				.attr("x", -h / 2)
+				.attr("y", -45)
+				.attr("text-anchor", "middle")
+				.text("Total activity count")
+
+			// STEP 2 — stack converts each value into [bottom, top] coordinates.
+			const area = d3
+				.area()
+				.x((d) => x(d.data.date))
+				.y0((d) => y(d[0]))
+				.y1((d) => y(d[1]))
+			function render() {
+				const safeRows = rows.map((d) => ({
+					...d,
+					Workshops: showWorkshops ? d.Workshops : 0,
+				}))
+				const layers = d3.stack().keys(keys)(safeRows)
+				y.domain([0, d3.max(layers.at(-1), (d) => d[1])]).nice()
+				yAxis.transition().duration(350).call(d3.axisLeft(y).ticks(5))
+				g.selectAll("path.layer")
+					.data(layers, (d) => d.key)
+					.join("path")
+					.attr("class", "layer")
+					.attr("fill", (d) => colors(d.key))
+					.attr("opacity", 0.83)
+					.transition()
+					.duration(350)
+					.attr("d", area)
+				d3.select("#status").text(
+					showWorkshops
+						? "Both shown: top boundary = Lectures + Workshops."
+						: "Workshops hidden: top boundary = Lectures only.",
+				)
+			}
+			render()
+			// STEP 3 — Compare the total before and after removing the category.
+			d3.select("#toggle").on("click", () => {
+				showWorkshops = !showWorkshops
+				render()
+			})
+			console.table(
+				rows.map((d) => ({
+					date: d3.timeFormat("%d %b")(d.date),
+					total: d.Lectures + d.Workshops,
+				})),
+			)
+		</script>
+	</body>
+</html>

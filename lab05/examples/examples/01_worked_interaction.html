@@ -120,6 +120,7 @@
 			const xScale = d3.scaleLinear().domain([0, 100]).range([0, plotWidth])
 			const yScale = d3.scaleLinear().domain([0, 100]).range([plotHeight, 0])
 			const size = d3.scaleSqrt().domain([0, 60]).range([5, 29])
+			
 			plot
 				.append("g")
 				.attr("class", "axis")

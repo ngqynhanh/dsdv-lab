@@ -20,12 +20,13 @@
   <div class="layout">
     <svg id="chart" width="450" height="900" role="img" aria-labelledby="chart-title chart-desc">
       <title id="chart-title">Population and GRDP per person by province</title>
-      <desc id="chart-desc">Population increases rightward and GRDP increases upward. Circle area represents land area and color represents density. A selected density band is emphasized with a dark outline; other marks are faded.</desc>
+      <desc id="chart-desc">Population increases rightward and GRDP increases upward. Circle area represents land area. Blue circles are above mean GRDP, orange circles are below it, and gray circles equal it. A labeled dashed line marks mean GRDP. A selected density band is emphasized with a dark outline; other marks are faded.</desc>
     </svg>
     <aside>
-      <h2>Density legend</h2>
+      <h2>GRDP mean comparison</h2>
       <ul id="legend"></ul>
-      <p>Fixed design thresholds: 100, 500 and 1,000 people/km². Exact boundary values enter the higher band.</p>
+      <p>The dashed line marks the arithmetic mean GRDP per person across all valid provinces, in million VND/person/year. Each province has equal weight. The mean and colors stay fixed when highlighting a density band.</p>
+      <p>Density highlighting uses fixed thresholds: 100, 500 and 1,000 people/km². Exact boundary values enter the higher band.</p>
       <p>Highlighted circles have a dark outline. Other circles remain visible but faded. Selecting “All provinces” restores the overview.</p>
       <h2>Limitation</h2>
       <p>Overlapping circles can still conceal provinces, especially where many selected provinces cluster. Fading other categories helps but does not separate overlapping marks.</p>

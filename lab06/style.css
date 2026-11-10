@@ -1,0 +1,173 @@
+body {
+	font: 15px/1.5 Arial, sans-serif;
+	max-width: 960px;
+	margin: 24px auto;
+	padding: 0 16px;
+	color: #1d5589;
+	background: #fff;
+}
+h1 {
+	font-size: 25px;
+	margin: 0 0 2px;
+}
+h2 {
+	font-size: 18px;
+	margin: 26px 0 2px;
+}
+.course,
+.meta,
+.hint {
+	margin: 2px 0 10px;
+	color: #526779;
+}
+.course {
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border: 1px solid #dce7ef;
+	border-radius: 9px;
+	background: #fff;
+}
+.axis text {
+	font-size: 12px;
+}
+.axis-label {
+	font-size: 13px;
+	fill: #17324c;
+}
+.grid line {
+	stroke: #e9edf2;
+}
+.grid path {
+	stroke: none;
+}
+
+/* One path per country. "dim" is only a visual state: data stays bound. */
+.series {
+	fill: none;
+	stroke-width: 2.5;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	transition: opacity 0.15s, stroke-width 0.15s;
+}
+.series.dim {
+	opacity: 0.12;
+}
+.series.focus {
+	stroke-width: 4;
+}
+.dot {
+	stroke: #fff;
+	stroke-width: 1.5;
+	pointer-events: none;
+	transition: opacity 0.15s;
+}
+.dot.dim {
+	opacity: 0.15;
+}
+.guide {
+	stroke: #64748b;
+	stroke-dasharray: 4 4;
+	pointer-events: none;
+}
+.layer {
+	opacity: 0.85;
+}
+
+/* Legend = real buttons, so click-to-lock also works from the keyboard. */
+.legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 10px;
+}
+.legend button {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	font: inherit;
+	color: inherit;
+	padding: 5px 12px;
+	border: 1px solid #c9d7e2;
+	border-radius: 999px;
+	background: #fff;
+	cursor: pointer;
+}
+.legend button:hover {
+	background: #eff6fa;
+}
+.legend button:focus-visible {
+	outline: 2px solid #177ca4;
+	outline-offset: 2px;
+}
+.legend button.locked {
+	border-color: #17324c;
+	background: #e3eef5;
+	font-weight: bold;
+}
+.legend button.dim {
+	opacity: 0.5;
+}
+.legend button:disabled {
+	opacity: 0.45;
+	cursor: default;
+}
+.swatch {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+}
+.lock-state {
+	font-size: 12px;
+}
+
+.readout {
+	background: #eff6fa;
+	padding: 12px 16px;
+	min-height: 46px;
+	border-radius: 7px;
+	margin-top: 12px;
+	font-variant-numeric: tabular-nums;
+}
+.readout .values {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 22px;
+	margin-top: 4px;
+}
+.readout .value {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+.readout .value.dim {
+	opacity: 0.45;
+}
+.readout.error {
+	background: #fdecec;
+	color: #8a1c1c;
+}
+.note {
+	font-size: 13px;
+	color: #526779;
+	margin-top: 8px;
+}
+code {
+	color: #166a8c;
+}
+footer {
+	margin-top: 28px;
+	padding-top: 12px;
+	border-top: 1px solid #dce7ef;
+	font-size: 13px;
+	color: #526779;
+}
+.statement {
+	font-style: italic;
+}

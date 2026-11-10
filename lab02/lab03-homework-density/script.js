@@ -1,12 +1,12 @@
 "use strict"
 
-// STEP 1: One category rule is shared by colors, the legend and highlighting.
+// STEP 1: Density bands control the selector and highlighting.
 const thresholds = [100, 500, 1000]
 const categories = [
-	{ label: "< 100", color: "#4477AA" },
-	{ label: "100 to < 500", color: "#228833" },
-	{ label: "500 to < 1,000", color: "#EEAA33" },
-	{ label: "≥ 1,000", color: "#AA3377" },
+	{ label: "< 100" },
+	{ label: "100 to < 500" },
+	{ label: "500 to < 1,000" },
+	{ label: "≥ 1,000" },
 ]
 // bisectRight counts thresholds <= density: 499 -> band 1, 500 -> band 2.
 function densityBand(density) {
@@ -58,7 +58,16 @@ async function start() {
 }
 
 function draw(data, rejectedCount) {
-	// STEP 3: Preserve the original encodings and the Section 10 dimensions.
+	// STEP 3: Calculate the unweighted mean GRDP of the valid provinces.
+	const meanGRDP = d3.mean(data, (d) => d.grdp)
+	const meanCategories = [
+		{ label: "Above mean GRDP", color: "#4477AA" },
+		{ label: "Below mean GRDP", color: "#EEAA33" },
+		{ label: "Equal to mean GRDP", color: "#777777" },
+	]
+	const meanCategory = (grdp) =>
+		grdp > meanGRDP ? 0 : grdp < meanGRDP ? 1 : 2
+	// Preserve position, area encodings and the Section 10 dimensions.
 	const width = 450,
 		height = 900
 	const margin = { top: 24, right: 18, bottom: 62, left: 64 }
@@ -94,7 +103,32 @@ function draw(data, rejectedCount) {
 		.attr("cx", (d) => xScale(d.population))
 		.attr("cy", (d) => yScale(d.grdp))
 		.attr("r", (d) => areaScale(d.area))
-		.attr("fill", (d) => categories[densityBand(d.density)].color)
+		.attr("fill", (d) => meanCategories[meanCategory(d.grdp)].color)
+
+	// Use the same y-scale as the circles to locate the mean reference line.
+	const meanY = yScale(meanGRDP)
+	plot
+		.append("line")
+		.attr("class", "mean-line")
+		.attr("x1", xScale(0))
+		.attr("x2", innerWidth)
+		.attr("y1", meanY)
+		.attr("y2", meanY)
+		.attr("stroke", "#333")
+		.attr("stroke-width", 1.5)
+		.attr("stroke-dasharray", "6,4")
+	plot
+		.append("text")
+		.attr("class", "mean-label")
+		.attr("x", innerWidth - 4)
+		.attr("y", meanY - 8)
+		.attr("text-anchor", "end")
+		.attr("font-size", 12)
+		.attr("fill", "#333")
+		.attr("stroke", "white")
+		.attr("stroke-width", 3)
+		.attr("paint-order", "stroke")
+		.text(`Mean GRDP: ${d3.format(",.2f")(meanGRDP)}`)
 
 	plot
 		.append("g")
@@ -128,11 +162,11 @@ function draw(data, rejectedCount) {
 		.attr("y", -44)
 		.text("GRDP per person (million VND / year)")
 
-	// STEP 4: Build the legend and selector from the same category definitions.
+	// STEP 4: Explain the GRDP colors and build the density selector.
 	const legend = d3
 		.select("#legend")
 		.selectAll("li")
-		.data(categories)
+		.data(meanCategories)
 		.join("li")
 	legend
 		.append("span")

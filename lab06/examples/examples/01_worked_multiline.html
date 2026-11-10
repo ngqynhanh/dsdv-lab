@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Pre-lab 06 | Two-city daily visitors</title>
+		<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+		<style>
+			body {
+				font:
+					15px/1.5 Arial,
+					sans-serif;
+				max-width: 950px;
+				margin: 25px auto;
+				color: #17324c;
+				padding: 0 16px;
+			}
+			h1 {
+				font-size: 25px;
+				margin: 0 0 3px;
+			}
+			p {
+				margin: 4px 0 15px;
+				color: #526779;
+			}
+			svg {
+				max-width: 100%;
+				height: auto;
+				border: 1px solid #dce7ef;
+				background: #fff;
+				border-radius: 9px;
+			}
+			.axis text {
+				font-size: 12px;
+			}
+			.grid line {
+				stroke: #e9edf2;
+			}
+			.series {
+				fill: none;
+				stroke-width: 3;
+			}
+			.legend-item {
+				cursor: pointer;
+			}
+			.legend-item text {
+				font-size: 13px;
+			}
+			#readout {
+				font-size: 15px;
+				background: #eff6fa;
+				padding: 12px 16px;
+				min-height: 46px;
+				border-radius: 7px;
+				margin-top: 12px;
+			}
+			code {
+				color: #166a8c;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Daily Visitors — Two Cities</h1>
+		<p>
+			Move the pointer <b>inside the chart</b> to read <b>both</b> series on the
+			same date. Hover a legend name to focus one line.
+		</p>
+		<div id="chart"></div>
+		<div id="readout" aria-live="polite">
+			Move over the chart to see values.
+		</div>
+		<script>
+			// STEP 1 — A small, fully known dataset (not the COVID lab solution).
+			// Each record describes one CITY and one DATE, rather than one column per date.
+			const parseDate = d3.timeParse("%Y-%m-%d")
+			const tidy = [
+				{ city: "North", date: "2020-04-01", visitors: 16 },
+				{ city: "North", date: "2020-04-02", visitors: 21 },
+				{ city: "North", date: "2020-04-03", visitors: 24 },
+				{ city: "North", date: "2020-04-04", visitors: 28 },
+				{ city: "North", date: "2020-04-05", visitors: 31 },
+				{ city: "South", date: "2020-04-01", visitors: 12 },
+				{ city: "South", date: "2020-04-02", visitors: 18 },
+				{ city: "South", date: "2020-04-03", visitors: 14 },
+				{ city: "South", date: "2020-04-04", visitors: 25 },
+				{ city: "South", date: "2020-04-05", visitors: 29 },
+			].map((d) => ({
+				...d,
+				date: parseDate(d.date),
+				visitors: Number(d.visitors),
+			}))
+			console.table(tidy)
+
+			// STEP 2 — Group into series; sorted dates are essential for a path.
+			const series = Array.from(
+				d3.group(tidy, (d) => d.city),
+				([name, values]) => ({
+					name,
+					values: values.sort((a, b) => a.date - b.date),
+				}),
+			)
+			console.log("Series count:", series.length, series)
+
+			// STEP 3 — SVG, scales, axes. A line is ONE SVG path for MANY observations.
+			const width = 850,
+				height = 410,
+				margin = { top: 25, right: 26, bottom: 52, left: 70 }
+			const innerW = width - margin.left - margin.right,
+				innerH = height - margin.top - margin.bottom
+			const svg = d3
+				.select("#chart")
+				.append("svg")
+				.attr("viewBox", `0 0 ${width} ${height}`)
+			const g = svg
+				.append("g")
+				.attr("transform", `translate(${margin.left},${margin.top})`)
+			const x = d3
+				.scaleTime()
+				.domain(d3.extent(tidy, (d) => d.date))
+				.range([0, innerW])
+			const y = d3
+				.scaleLinear()
+				.domain([0, d3.max(tidy, (d) => d.visitors)])
+				.nice()
+				.range([innerH, 0])
+			const colors = d3
+				.scaleOrdinal()
+				.domain(series.map((d) => d.name))
+				.range(["#177ca4", "#e28b37"])
+			const fmtDate = d3.timeFormat("%d %b")
+			g.append("g")
+				.attr("class", "grid")
+				.call(d3.axisLeft(y).tickSize(-innerW).tickFormat(""))
+			g.append("g")
+				.attr("class", "axis")
+				.attr("transform", `translate(0,${innerH})`)
+				.call(d3.axisBottom(x).ticks(d3.timeDay.every(1)).tickFormat(fmtDate))
+			g.append("g").attr("class", "axis").call(d3.axisLeft(y).ticks(5))
+			g.append("text")
+				.attr("x", innerW / 2)
+				.attr("y", innerH + 44)
+				.attr("text-anchor", "middle")
+				.text("Date")
+			g.append("text")
+				.attr("transform", "rotate(-90)")
+				.attr("x", -innerH / 2)
+				.attr("y", -49)
+				.attr("text-anchor", "middle")
+				.text("Visitors")
+
+			// STEP 4 — d3.line() computes an SVG "d" path; .datum() binds one array to a path.
+			const line = d3
+				.line()
+				.x((d) => x(d.date))
+				.y((d) => y(d.visitors))
+			const paths = g
+				.selectAll(".series")
+				.data(series, (d) => d.name)
+				.join("path")
+				.attr("class", "series")
+				.attr("stroke", (d) => colors(d.name))
+				.attr("d", (d) => line(d.values))
+
+			// STEP 5 — Legend: pointerenter dims other series, pointerleave restores them.
+			const legend = svg
+				.append("g")
+				.attr("transform", `translate(${width - 220},20)`)
+			const items = legend
+				.selectAll("g.legend-item")
+				.data(series)
+				.join("g")
+				.attr("class", "legend-item")
+				.attr("transform", (d, i) => `translate(${i * 100},0)`)
+			items
+				.append("circle")
+				.attr("r", 6)
+				.attr("fill", (d) => colors(d.name))
+			items
+				.append("text")
+				.attr("x", 12)
+				.attr("y", 4)
+				.text((d) => d.name)
+			items
+				.on("pointerenter", (event, d) =>
+					paths.attr("opacity", (s) => (s.name === d.name ? 1 : 0.12)),
+				)
+				.on("pointerleave", () => paths.attr("opacity", 1))
+
+			// STEP 6 — Shared readout: invert the pointer's X pixel into a Date.
+			const bisect = d3.bisector((d) => d.date).center
+			const cursor = g
+				.append("line")
+				.attr("stroke", "#64748b")
+				.attr("stroke-dasharray", "4,4")
+				.attr("y1", 0)
+				.attr("y2", innerH)
+				.style("display", "none")
+			const readout = d3.select("#readout")
+			g.append("rect")
+				.attr("width", innerW)
+				.attr("height", innerH)
+				.attr("fill", "transparent")
+				.style("cursor", "crosshair")
+				.on("pointermove", function (event) {
+					const [px] = d3.pointer(event, this)
+					const date = x.invert(Math.max(0, Math.min(innerW, px)))
+					const ix = bisect(series[0].values, date)
+					const nearest = series[0].values[ix].date
+					cursor
+						.style("display", null)
+						.attr("x1", x(nearest))
+						.attr("x2", x(nearest))
+					const parts = series.map(
+						(s) => `${s.name}: <strong>${s.values[ix].visitors}</strong>`,
+					)
+					readout.html(
+						`<strong>${fmtDate(nearest)}</strong> — ${parts.join(" · ")}`,
+					)
+				})
+				.on("pointerleave", () => {
+					cursor.style("display", "none")
+					readout.text("Move over the chart to see values.")
+				})
+		</script>
+	</body>
+</html>

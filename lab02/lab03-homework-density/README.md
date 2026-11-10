@@ -12,10 +12,10 @@ When served over HTTP, the page uses `d3.csv("vn-provinces-data.csv")`. When ope
 
 Read the numbered comments in `script.js` in this order:
 
-1. **Define density bands once.** Thresholds `[100, 500, 1000]` produce four categories: <100, 100–<500, 500–<1000 and ≥1000 people/km². These are explicit chart-design categories. `densityBand()` uses `d3.bisectRight()` to return the category index. Exactly 500 returns index 2, putting it in the higher band.
+1. **Define density bands once.** Thresholds `[100, 500, 1000]` produce four highlighting categories: <100, 100–<500, 500–<1000 and ≥1000 people/km². `densityBand()` uses `d3.bisectRight()` to return the category index. Exactly 500 returns index 2, putting it in the higher band. Density controls highlighting; fill colors compare GRDP to its mean.
 2. **Load and convert data.** Inspect headers and two records in the console. Convert population, GRDP, area and density to numbers. Replace the GRDP decimal comma before conversion. Invalid rows are logged and excluded.
-3. **Draw the original encodings.** Population uses a linear x-scale; GRDP uses a linear, reversed y-scale; land area uses a square-root radius scale; density determines the fill color. Axes use zero baselines and data-derived upper limits. The canvas remains 450 × 900 from Section 10.
-4. **Create the control and legend.** Both use the shared `categories` array. The selector starts with “All provinces” and then lists the four density bands. The option values `0`, `1`, `2`, `3` are category indexes, not density values.
+3. **Draw the chart and mean.** Population uses a linear x-scale; GRDP uses a linear, reversed y-scale; land area uses a square-root radius scale. `d3.mean(data, d => d.grdp)` computes the unweighted mean GRDP across valid provinces. Blue means above the mean, orange below it, and gray exactly equal. A dashed SVG line and text label use `yScale(meanGRDP)`. The supplied data has mean GRDP 56.74 million VND/person/year, with 20 provinces above and 43 below. Axes use zero baselines and data-derived upper limits. The canvas remains 450 × 900 from Section 10.
+4. **Create the control and legend.** The legend uses `meanCategories` to explain GRDP colors. The selector uses `categories`, starting with “All provinces” and then listing the four density bands. The option values `0`, `1`, `2`, `3` are category indexes, not density values.
 5. **React to a selection.** The change event calls `highlightCategory()`. `matches(d)` checks whether a province's category equals the selected category. `Number(selected)` converts the HTML option's string into a number before comparing indexes.
 6. **Apply highlighting.** Matches get opacity 0.8 and a dark outline. Other circles get opacity 0.12 and a faint outline. The update never changes `cx`, `cy`, `r` or `fill`, and never removes a circle. It updates the count in the status paragraph.
 
@@ -32,6 +32,8 @@ circles.attr("fill-opacity", d => matches(d) ? 0.8 : 0.12);
 The full function also changes outlines and displays the matching count. To understand the feature, follow one row (for example Đồng Tháp with density 500) through `densityBand()`, `matches()` and the opacity assignment.
 
 ## Tests performed on 17 October 2026
+
+These historical browser checks describe the density-color version before the GRDP mean comparison was added.
 
 Expected counts were calculated from the supplied CSV separately from the browser interactions. The selector was changed through the browser UI, and the actual SVG attributes were inspected after each change.
 
